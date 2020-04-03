@@ -1,0 +1,2053 @@
+{
+  "tasks": [
+      {
+      "id": 58,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": false,
+      "title": "Practice Keyboard Home Row",
+      "instructions": "You will be shown the keys of the keyboard home row. Type them as fast as you can and see how many you got right.",
+      "content": ["fj","fjk","fjkl","fjkl;","fjkl;a","fjkl;as","fjkl;asd","fjkl;asdf","fg","asdfg","sdfg","dfg","jh",";lkjh","lkjh","kjh","asdfghjkl;"],
+      "ordered": true,
+      "isPassFail": false,
+      "showUserAnswerWithBackground": true,
+      "isBackspaceAllowed": false,
+      "isKeyboardRequired": true,
+      "tags": ["typing"]
+    },
+    {
+      "id": 59,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": false,
+      "title": "Practice Keyboard Top Row",
+      "instructions": "You will be shown the keys of the keyboard top row. Type them as fast as you can and see how many you got right.",
+      "content": ["qwert","yuiop","qwertyuiop"],
+      "ordered": true,
+      "isPassFail": false,
+      "showUserAnswerWithBackground": true,
+      "isBackspaceAllowed": false,
+      "isKeyboardRequired": true,
+      "tags": ["typing"]
+    },
+    {
+      "id": 60,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": false,
+      "title": "Practice Keyboard Bottom Row",
+      "instructions": "You will be shown the keys of the keyboard bottom row. Type them as fast as you can and see how many you got right.",
+      "content": ["zxcv","nm,.","zxcvb","zxcvbnm,."],
+      "ordered": true,
+      "isPassFail": false,
+      "showUserAnswerWithBackground": true,
+      "isBackspaceAllowed": false,
+      "isKeyboardRequired": true,
+      "tags": ["typing"]
+    },
+    {
+      "id": 12,
+      "visible": false,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 3,
+      "title": "Keyboard Test",
+      "instructions": "Connect a USB keyboard and press any key to know more about your keyboard",
+      "isKeyboardRequired": true
+    },
+    {
+      "id": 11,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "Tap and swipe",
+      "instructions": "You will be shown 2 words. Tap when you see the word tap. Swipe when you see the word swipe.",
+      "tap": ["Tap"],
+      "swipe": ["Swipe"],
+      "ordered": false,
+      "tags": ["just_fun"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 62,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "timed": false,
+      "title": "Multiplication Tables - 2",
+      "instructions": "You will be shown the numbers 1 to 12. Tap if it is divisible by 2, else swipe.",
+      "content": [
+        {
+          "id": 1,
+          "question": "1",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "1 is an odd number"
+        },
+        {
+          "id": 2,
+          "question": "2",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "2 is an even number"
+        },
+        {
+          "id": 3,
+          "question": "3",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "3 is an odd number"
+        },
+        {
+          "id": 4,
+          "question": "4",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "4 is an even number"
+        },
+        {
+          "id": 5,
+          "question": "5",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "5 is an odd number"
+        },
+        {
+          "id": 6,
+          "question": "6",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "6 is an even number"
+        },
+        {
+          "id": 7,
+          "question": "7",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "7 is an odd number"
+        },
+        {
+          "id": 8,
+          "question": "8",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "8 is an even number"
+        },
+        {
+          "id": 9,
+          "question": "9",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "9 is an odd number"
+        },
+        {
+          "id": 10,
+          "question": "10",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "10 is an even number"
+        },
+        {
+          "id": 11,
+          "question": "11",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "11 is an odd number"
+        },
+        {
+          "id": 12,
+          "question": "12",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "12 is an even number"
+        }
+      ],
+      "ordered": true,
+      "isPassFail": false,
+      "showUserAnswerWithBackground": false,
+      "isKeyboardRequired": false,
+      "tags": ["mathematics"]
+    },
+    {
+      "id": 63,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "timed": false,
+      "title": "Multiplication Tables - 3",
+      "instructions": "You will be shown the numbers 1 to 12. Tap if it is divisible by 3, else swipe.",
+      "content": [
+        {
+          "id": 1,
+          "question": "1",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 2,
+          "question": "2",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 3,
+          "question": "3",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 4,
+          "question": "4",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 5,
+          "question": "5",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 6,
+          "question": "6",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 7,
+          "question": "7",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 8,
+          "question": "8",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 9,
+          "question": "9",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 10,
+          "question": "10",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 11,
+          "question": "11",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": null
+        },
+        {
+          "id": 12,
+          "question": "12",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "1 + 2 = 3, which is divisble by 3."
+        }
+      ],
+      "ordered": true,
+      "isPassFail": false,
+      "showUserAnswerWithBackground": false,
+      "isKeyboardRequired": false,
+      "tags": ["mathematics"]
+    },
+    {
+      "id": 64,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "timed": false,
+      "title": "Multiplication Tables - 5",
+      "instructions": "You will be shown the numbers 1 to 12. Tap if it is divisible by 5, else swipe.",
+      "content": [
+        {
+          "id": 1,
+          "question": "1",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 2,
+          "question": "2",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 3,
+          "question": "3",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 4,
+          "question": "4",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 5,
+          "question": "5",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "Number ends in 5"
+        },
+        {
+          "id": 6,
+          "question": "6",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 7,
+          "question": "7",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 8,
+          "question": "8",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 9,
+          "question": "9",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 10,
+          "question": "10",
+          "isTapSwipe": true,
+          "isTrue": true,
+          "expectedAnswerExplanation": "Number ends in 0"
+        },
+        {
+          "id": 11,
+          "question": "11",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        },
+        {
+          "id": 12,
+          "question": "12",
+          "isTapSwipe": true,
+          "isTrue": false,
+          "expectedAnswerExplanation": "Number does not end in 0 or 5"
+        }
+      ],
+      "ordered": true,
+      "isPassFail": false,
+      "showUserAnswerWithBackground": false,
+      "isKeyboardRequired": false,
+      "tags": ["mathematics"]
+    },
+    {
+      "id": 28,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 5,
+      "timed": false,
+      "isTextVisibleOnStart": false,
+      "submitOnReturnTapped": true,
+      "ordered": true,
+      "title": "Months of the year",
+      "instructions": "Tap the screen to hear the word. Then try to spell it. Once you have finished spelling the word, press enter",
+      "content": [
+                  {
+                    "id": 1,
+                    "question": "January",
+                    "hintAudio": "January as in New Year is celebrated on January 1"
+                  },
+                  {
+                    "id": 2,
+                    "question": "February",
+                    "hintAudio": "February as in February is the shortest month of the year"
+                  },
+                  {
+                    "id": 3,
+                    "question": "March",
+                    "hintAudio": "March as in March is the third month of the year"
+                  },
+                  {
+                    "id": 4,
+                    "question": "April",
+                    "hintAudio": "April as in April is the fourth month of the year"
+                  },
+                  {
+                    "id": 5,
+                    "question": "May",
+                    "hintAudio": "May as in May is the fifth month of the year"
+                  },
+                  {
+                    "id": 6,
+                    "question": "June",
+                    "hintAudio": "June as in June is a very hot month"
+                  },
+                  {
+                    "id": 7,
+                    "question": "July",
+                    "hintAudio": "July as in July is the month of a big tennis tournament"
+                  },
+                  {
+                    "id": 8,
+                    "question": "August",
+                    "hintAudio": "August as in India's independence day is on 15th August"
+                  },
+                  {
+                    "id": 9,
+                    "question": "September",
+                    "hintAudio": "September as in September is the ninth month of the year"
+                  },
+                  {
+                    "id": 10,
+                    "question": "October",
+                    "hintAudio": "October as in October is the tenth month of the year"
+                  },
+                  {
+                    "id": 11,
+                    "question": "November",
+                    "hintAudio": "November as in November is the eleventh month of the year"
+                  },
+                  {
+                    "id": 12,
+                    "question": "December",
+                    "hintAudio": "December as in Christmas is celebrated on 25th December"
+                  }
+      ],
+      "isKeyboardRequired": true,
+      "tags": ["english", "spelling"]
+    },
+    {
+      "id": 35,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 5,
+      "timed": false,
+      "isTextVisibleOnStart": false,
+      "submitOnReturnTapped": true,
+      "ordered": true,
+      "title": "Countries in Asia",
+      "instructions": "Tap the screen to hear the word. Then try to spell it. Once you have finished spelling the word, press enter",
+      "content": [
+                  {
+                    "id": 1,
+                    "question": "India",
+                    "hintAudio": "India as in India is the largest democracy in the world"
+                  },
+                  {
+                    "id": 2,
+                    "question": "Pakistan",
+                    "hintAudio": "Pakistan as in Pakistan is a neightbour of India"
+                  },
+                  {
+                    "id": 3,
+                    "question": "Afghanistan",
+                    "hintAudio": "Afghanistan as in Afghanistan is a country that has seen lots of war for many years"
+                  },
+                  {
+                    "id": 4,
+                    "question": "Bangladesh",
+                    "hintAudio": "Bangladesh as in Bangladesh is a neighbouring of India"
+                  },
+                  {
+                    "id": 5,
+                    "question": "Nepal",
+                    "hintAudio": "Nepal as in Nepal is a small country just north of India"
+                  },
+                  {
+                    "id": 6,
+                    "question": "Myanmar",
+                    "hintAudio": "Myanmar as in Myanmar is a country that is close to Thailand"
+                  },
+                  {
+                    "id": 7,
+                    "question": "China",
+                    "hintAudio": "China as in China is a very big country in central Asia"
+                  },
+                  {
+                    "id": 8,
+                    "question": "Russia",
+                    "hintAudio": "Russia as in Russia was formerly known as the Soviet Union"
+                  },
+                  {
+                    "id": 9,
+                    "question": "Japan",
+                    "hintAudio": "Japan as in there is lots of nice technology in Japan"
+                  },
+                  {
+                    "id": 10,
+                    "question": "North Korea",
+                    "hintAudio": "North Korea as in many countries are not friends with North Korea"
+                  },
+                  {
+                    "id": 11,
+                    "question": "South Korea",
+                    "hintAudio": "South Korea as in South Korea is a neighbour of North Korea"
+                  },
+                  {
+                    "id": 12,
+                    "question": "Taiwan",
+                    "hintAudio": "Taiwan as in Taiwan is a small country that is close to China"
+                  },
+                  {
+                    "id": 13,
+                    "question": "Hong Kong",
+                    "hintAudio": "Hong Kong as in Hong Kong is a small island in South China"
+                  },
+                  {
+                    "id": 14,
+                    "question": "Maldives",
+                    "hintAudio": "Maldives as in Maldives is a nice place for holidays"
+                  },
+                  {
+                    "id": 15,
+                    "question": "Indonesia",
+                    "hintAudio": "Indonesia as in people like to go to Indonesia for shopping"
+                  },
+                  {
+                    "id": 16,
+                    "question": "Thailand",
+                    "hintAudio": "Thailand as in Thailand is a country with wonderful holiday destinations"
+                  },
+                  {
+                    "id": 17,
+                    "question": "Philippines",
+                    "hintAudio": "Philippines as in Philippines is a country in Southeast Asia"
+                  }
+      ],
+      "isKeyboardRequired": true,
+      "tags": ["english", "spelling"]
+    },
+    {
+      "id": 36,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 5,
+      "timed": false,
+      "isTextVisibleOnStart": false,
+      "submitOnReturnTapped": true,
+      "ordered": true,
+      "title": "Parts of the human body",
+      "instructions": "Tap the screen to hear the word. Then try to spell it. Once you have finished spelling the word, press enter",
+      "content": [
+                  {
+                    "id": 1,
+                    "question": "Eyes",
+                    "hintAudio": "Eyes as in People see with their eyes"
+                  },
+                  {
+                    "id": 2,
+                    "question": "Nose",
+                    "hintAudio": "Nose as in We breathe through our nose"
+                  },
+                  {
+                    "id": 3,
+                    "question": "Ears",
+                    "hintAudio": "Ears as in People listen with their ears"
+                  },
+                  {
+                    "id": 4,
+                    "question": "Mouth",
+                    "hintAudio": "Mouth as in We eat with our mouth"
+                  },
+                  {
+                    "id": 5,
+                    "question": "Teeth",
+                    "hintAudio": "Teeth as in We chew with our teeth"
+                  },
+                  {
+                    "id": 6,
+                    "question": "Tongue",
+                    "hintAudio": "Tongue as in We lick ice cream with our tongue"
+                  },
+                  {
+                    "id": 7,
+                    "question": "Nostrils",
+                    "hintAudio": "Nostrils as in We breathe through our nostrils"
+                  },
+                  {
+                    "id": 8,
+                    "question": "Pupils",
+                    "hintAudio": "Pupils as in The pupil is part of the eyes"
+                  },
+                  {
+                    "id": 9,
+                    "question": "Neck",
+                    "hintAudio": "Neck as in We turn our neck to look left and right"
+                  },
+                  {
+                    "id": 10,
+                    "question": "Arms",
+                    "hintAudio": "Arms as in We pick things up with our arms"
+                  },
+                  {
+                    "id": 11,
+                    "question": "Hands",
+                    "hintAudio": "Hands as in We touch objects with our hands"
+                  },
+                  {
+                    "id": 12,
+                    "question": "Fingers",
+                    "hintAudio": "Fingers as in We type on a keyboard with our fingers"
+                  },
+                  {
+                    "id": 13,
+                    "question": "Elbow",
+                    "hintAudio": "Elbow as in He fell on the ground and hurt his elbow"
+                  },
+                  {
+                    "id": 14,
+                    "question": "Heart",
+                    "hintAudio": "Heart as in The heart pumps blood through the body"
+                  },
+                  {
+                    "id": 15,
+                    "question": "Lungs",
+                    "hintAudio": "Lungs as in The air we breathe goes into our lungs"
+                  },
+                  {
+                    "id": 16,
+                    "question": "Stomach",
+                    "hintAudio": "Stomach as in The food we eat goes into our stomach"
+                  },
+                  {
+                    "id": 17,
+                    "question": "Legs",
+                    "hintAudio": "Legs as in We walk with our legs"
+                  },
+                  {
+                    "id": 18,
+                    "question": "Knees",
+                    "hintAudio": "Knees as in We bend our knees when we sit"
+                  },
+                  {
+                    "id": 19,
+                    "question": "Feet",
+                    "hintAudio": "Feet as in We stand on two feet"
+                  },
+                  {
+                    "id": 20,
+                    "question": "Toes",
+                    "hintAudio": "Toes as in We have ten toes on our feet"
+                  }
+                ],
+      "isKeyboardRequired": true,
+      "tags": ["english","spelling"]
+    },
+    {
+      "id": 37,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 5,
+      "timed": false,
+      "isTextVisibleOnStart": false,
+      "submitOnReturnTapped": true,
+      "ordered": true,
+      "title": "Major cities in the world",
+      "instructions": "Tap the screen to hear the word. Then try to spell it. Once you have finished spelling the word, press enter",
+      "content": [
+                  {
+                    "id": 1,
+                    "question": "New Delhi",
+                    "hintAudio": "New Delhi as in New Delhi is the capital city of India"
+                  },
+                  {
+                    "id": 2,
+                    "question": "Mumbai",
+                    "hintAudio": "Mumbai as in Mumbai was formerly known as Bombay"
+                  },
+                  {
+                    "id": 3,
+                    "question": "Bangalore",
+                    "hintAudio": "Bangalore as in Bangalore is known as the garden city"
+                  },
+                  {
+                    "id": 4,
+                    "question": "Goa",
+                    "hintAudio": "Goa as in Goa is known as a nice holiday destination"
+                  },
+                  {
+                    "id": 5,
+                    "question": "Ahmedebad",
+                    "hintAudio": "Ahmedebad as in Ahmedebad is known as a nice place to live"
+                  },
+                  {
+                    "id": 6,
+                    "question": "Chennai",
+                    "hintAudio": "Chennai as in Chennai is a city in South India"
+                  },
+                  {
+                    "id": 7,
+                    "question": "Hyderabad",
+                    "hintAudio": "Hyderebad as in Hyderabad is a city in South India"
+                  },
+                  {
+                    "id": 8,
+                    "question": "Jaipur",
+                    "hintAudio": "Jaipur as in Jaipur is a popular tourist destination"
+                  },
+                  {
+                    "id": 9,
+                    "question": "Dhaka",
+                    "hintAudio": "Dhaka as in Dhaka is the capital city of Bangladesh"
+                  },
+                  {
+                    "id": 10,
+                    "question": "Colombo",
+                    "hintAudio": "Colombo as in Colombo is the capital city of Sri Lanka"
+                  },
+                  {
+                    "id": 11,
+                    "question": "Kabul",
+                    "hintAudio": "Kabul as in Kabul is the capital city of Afghanistan"
+                  },
+                  {
+                    "id": 12,
+                    "question": "Beijing",
+                    "hintAudio": "Beijing as in Beijing is the capital city of China"
+                  },
+                  {
+                    "id": 13,
+                    "question": "Shanghai",
+                    "hintAudio": "Shanghai as in Shanghai is a big city in China"
+                  },
+                  {
+                    "id": 14,
+                    "question": "Tokyo",
+                    "hintAudio": "Tokyo as in Tokyo is the capital city of Japan"
+                  },
+                  {
+                    "id": 15,
+                    "question": "Seoul",
+                    "hintAudio": "Seoul as in Seoul is the capital city of South Korea"
+                  },
+                  {
+                    "id": 16,
+                    "question": "Moscow",
+                    "hintAudio": "Moscow as in the capital city of Russia is Moscow"
+                  },
+                  {
+                    "id": 17,
+                    "question": "Manila",
+                    "hintAudio": "Manila as in Manila is the capital city of Phillippines"
+                  },
+                  {
+                    "id": 18,
+                    "question": "Jakarta",
+                    "hintAudio": "Jakarta as in Jakarta is the capital city of Indonesia"
+                  },
+                  {
+                    "id": 19,
+                    "question": "Bangkok",
+                    "hintAudio": "Bangkok as in Bangkok is the capital city of Thailand"
+                  },
+                  {
+                    "id": 20,
+                    "question": "Bali",
+                    "hintAudio": "Bali as in Bali is known as a famous holiday destination"
+                  }
+      ],
+      "isKeyboardRequired": true,
+      "tags": ["english", "spelling"]
+    },
+    {
+      "id": 5,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": true,
+      "durationMillis": 61000,
+      "title": "small letters",
+      "instructions": "You will be shown some letters. Type them quickly",
+      "content": ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
+      "ordered": false,
+      "tags": ["english","alphabet"],
+      "showUserAnswerWithBackground": true,
+      "isBackspaceAllowed": false,
+      "isKeyboardRequired": true,
+      "isGame": true,
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 6,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": true,
+      "durationMillis": 61000,
+      "title": "capital letters",
+      "instructions": "You will be shown some capital letters.Type them quickly",
+      "content": ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"],
+      "ordered": false,
+      "tags": ["english","alphabet"],
+      "showUserAnswerWithBackground": true,
+      "isBackspaceAllowed": false,
+      "isGame": true,
+      "isKeyboardRequired": true,
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 32,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": true,
+      "durationMillis": 61000,
+      "title": "numbers game: single digits",
+      "instructions": "You will be shown some numbers. Type them quickly",
+      "content": ["1","2","3","4","5","6","7","8","9","0"],
+      "ordered": false,
+      "tags": ["mathematics", "numbers"],
+      "showUserAnswerWithBackground": true,
+      "isBackspaceAllowed": false,
+      "isKeyboardRequired": true,
+      "isExitOnInterruption": true,
+      "isGame": true
+    },
+
+
+    {
+      "id": 13,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "Positive Numbers: Greater than and less than",
+      "instructions": "You will be shown some statements comparing positive numbers. Decide if the statements are true or false",
+      "tap": ["1 < 2","1 < 3","1 < 4","1 < 5","1 < 6","1 < 7","1 < 8","1 < 9","2 < 3","2 < 4","2 < 5","2 < 6","2 < 7","2 < 8","2 < 9","3 < 4","3 < 5","3 < 6","3 < 7","3 < 8","3 < 9","4 < 5","4 < 6","4 < 7","4 < 8","4 < 9","5 < 6","5 < 7","5 < 8","5 < 9","6 < 7","6 < 8","6 < 9","7 < 8","7 < 9","8 < 9",
+        "9 > 8","9 > 7","9 > 6","9 > 5","9 > 4","9 > 3","9 > 2","9 > 1","8 > 7","8 > 6","8 > 5","8 > 4","8 > 3","8 > 2","8 > 1","7 > 6","7 > 5","7 > 4","7 > 3","7 > 2","7 > 1","6 > 5","6 > 4","6 > 3","6 > 2","6 > 1","5 > 4","5 > 3","5 > 2","5 > 1","4 > 3","4 > 2","4 > 1","3 > 2","3 > 1","2 > 1"
+      ],
+      "swipe": ["1 > 2","1 > 3","1 > 4","1 > 5","1 > 6","1 > 7","1 > 8","1 > 9","2 > 3","2 > 4","2 > 5","2 > 6","2 > 7","2 > 8","2 > 9","3 > 4","3 > 5","3 > 6","3 > 7","3 > 8","3 > 9","4 > 5","4 > 6","4 > 7","4 > 8","4 > 9","5 > 6","5 > 7","5 > 8","5 > 9","6 > 7","6 > 8","6 > 9","7 > 8","7 > 9","8 > 9",
+        "9 < 8","9 < 7","9 < 6","9 < 5","9 < 4","9 < 3","9 < 2","9 < 1","8 < 7","8 < 6","8 < 5","8 < 4","8 < 3","8 < 2","8 < 1","7 < 6","7 < 5","7 < 4","7 < 3","7 < 2","7 < 1","6 < 5","6 < 4","6 < 3","6 < 2","6 < 1","5 < 4","5 < 3","5 < 2","5 < 1","4 < 3","4 < 2","4 < 1","3 < 2","3 < 1","2 < 1"
+      ],
+      "ordered": false,
+      "tags": ["mathematics", "numbers"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 15,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "Negative Numbers: Greater than and less than",
+      "instructions": "You will be shown some statements comparing negative numbers. Decide if the statements are true or false",
+      "tap": ["-1 > -2","-1 > -3","-1 > -4","-1 > -5","-1 > -6","-1 > -7","-1 > -8","-1 > -9","-2 > -3","-2 > -4","-2 > -5","-2 > -6","-2 > -7","-2 > -8","-2 > -9","-3 > -4","-3 > -5","-3 > -6","-3 > -7","-3 > -8","-3 > -9","-4 > -5","-4 > -6","-4 > -7","-4 > -8","-4 > -9","-5 > -6","-5 > -7","-5 > -8","-5 > -9","-6 > -7","-6 > -8","-6 > -9","-7 > -8","-7 > -9","-8 > -9",
+        "-9 < -8","-9 < -7","-9 < -6","-9 < -5","-9 < -4","-9 < -3","-9 < -2","-9 < -1","-8 < -7","-8 < -6","-8 < -5","-8 < -4","-8 < -3","-8 < -2","-8 < -1","-7 < -6","-7 < -5","-7 < -4","-7 < -3","-7 < -2","-7 < -1","-6 < -5","-6 < -4","-6 < -3","-6 < -2","-6 < -1","-5 < -4","-5 < -3","-5 < -2","-5 < -1","-4 < -3","-4 < -2","-4 < -1","-3 < -2","-3 < -1","-2 < -1"
+      ],
+      "swipe": ["-1 < -2","-1 < -3","-1 < -4","-1 < -5","-1 < -6","-1 < -7","-1 < -8","-1 < -9","-2 < -3","-2 < -4","-2 < -5","-2 < -6","-2 < -7","-2 < -8","-2 < -9","-3 < -4","-3 < -5","-3 < -6","-3 < -7","-3 < -8","-3 < -9","-4 < -5","-4 < -6","-4 < -7","-4 < -8","-4 < -9","-5 < -6","-5 < -7","-5 < -8","-5 < -9","-6 < -7","-6 < -8","-6 < -9","-7 < -8","-7 < -9","-8 < -9",
+        "-9 > -8","-9 > -7","-9 > -6","-9 > -5","-9 > -4","-9 > -3","-9 > -2","-9 > -1","-8 > -7","-8 > -6","-8 > -5","-8 > -4","-8 > -3","-8 > -2","-8 > -1","-7 > -6","-7 > -5","-7 > -4","-7 > -3","-7 > -2","-7 > -1","-6 > -5","-6 > -4","-6 > -3","-6 > -2","-6 > -1","-5 > -4","-5 > -3","-5 > -2","-5 > -1","-4 > -3","-4 > -2","-4 > -1","-3 > -2","-3 > -1","-2 > -1"
+      ],
+      "ordered": false,
+      "tags": ["mathematics", "numbers"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 22,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "addition/subtraction 1",
+      "instructions": "You will be shown some statements where 2 numbers are being added. True is when result = 0. False is when result is not = 0",
+      "tap": ["-9 + 9","-8 + 8","-7 + 7","-6 + 6","-5 + 5","-4 + 4","-3 + 3","-2 + 2","-1 + 1",
+        "9 + -9","8 + -8","7 + -7","6 + -6","5 + -5","4 + -4","3 + -3","2 + -2","1 + -1"
+      ],
+      "swipe": ["-9 + 1","-9 + 2","-9 + 3","-9 + 4","-9 + 5","-9 + 6","-9 + 7","-9 + 8","-8 + 1","-8 + 2","-8 + 3","-8 + 4","-8 + 5","-8 + 6","-8 + 7","-8 + 9","-7 + 1","-7 + 2","-7 + 3","-7 + 4","-7 + 5","-7 + 6","-7 + 8","-7 + 9","-6 + 1","-6 + 2","-6 + 3","-6 + 4","-6 + 5","-6 + 7","-6 + 8","-6 + 9","-5 + 1","-5 + 2","-5 + 3","-5 + 4","-5 + 6","-5 + 7","-5 + 8","-5 + 9","-4 + 1","-4 + 2","-4 + 3","-4 + 5","-4 + 6","-4 + 7","-4 + 8","-4 + 9","-3 + 1","-3 + 2","-3 + 4","-3 + 5","-3 + 6","-3 + 7","-3 + 8","-3 + 9","-2 + 1","-2 + 3","-2 + 4","-2 + 5","-2 + 6","-2 + 7","-2 + 8","-2 + 9","-1 + 2","-1 + 3","-1 + 4","-1 + 5","-1 + 6","-1 + 7","-1 + 8","-1 + 9",
+        "1 + -9","2 + -9","3 + -9","4 + -9","5 + -9","6 + -9","7 + -9","8 + -9","1 + -8","2 + -8","3 + -8","4 + -8","5 + -8","6 + -8","7 + -8","9 + -8","1 + -7","2 + -7","3 + -7","4 + -7","5 + -7","6 + -7","8 + -7","9 + -7","1 + -6","2 + -6","3 + -6","4 + -6","5 + -6","7 + -6","8 + -6","9 + -6","1 + -5","2 + -5","3 + -5","4 + -5","6 + -5","7 + -5","8 + -5","9 + -5","1 + -4","2 + -4","3 + -4","5 + -4","6 + -4","7 + -4","8 + -4","9 + -4","1 + -3","2 + -3","4 + -3","5 + -3","6 + -3","7 + -3","8 + -3","9 + -3","1 + -2","3 + -2","4 + -2","5 + -2","6 + -2","7 + -2","8 + -2","9 + -2","2 + -1","3 + -1","4 + -1","5 + -1","6 + -1","7 + -1","8 + -1","9 + -1"
+      ],
+      "ordered": false,
+      "tags": ["mathematics","addition","subtraction"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 19,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "addition/subtraction 2",
+      "instructions": "You will be shown some statements where 2 numbers are being added. True is when result > 0. False is when result is <= 0",
+      "tap": ["-8 + 9","-7 + 8","-7 + 9","-6 + 7","-6 + 8","-6 + 9","-5 + 6","-5 + 7","-5 + 8","-5 + 9","-4 + 5","-4 + 6","-4 + 7","-4 + 8","-4 + 9","-3 + 4","-3 + 5","-3 + 6","-3 + 7","-3 + 8","-3 + 9","-2 + 3","-2 + 4","-2 + 5","-2 + 6","-2 + 7","-2 + 8","-2 + 9","-1 + 2","-1 + 3","-1 + 4","-1 + 5","-1 + 6","-1 + 7","-1 + 8","-1 + 9",
+        "9 + -8","8 + -7","9 + -7","7 + -6","8 + -6","9 + -6","6 + -5","7 + -5","8 + -5","9 + -5","5 + -4","6 + -4","7 + -4","8 + -4","9 + -4","4 + -3","5 + -3","6 + -3","7 + -3","8 + -3","9 + -3","3 + -2","4 + -2","5 + -2","6 + -2","7 + -2","8 + -2","9 + -2","2 + -1","3 + -1","4 + -1","5 + -1","6 + -1","7 + -1","8 + -1","9 + -1"
+      ],
+      "swipe": ["-9 + 1","-9 + 2","-9 + 3","-9 + 4","-9 + 5","-9 + 6","-9 + 7","-9 + 8","-8 + 1","-8 + 2","-8 + 3","-8 + 4","-8 + 5","-8 + 6","-8 + 7","-7 + 1","-7 + 2","-7 + 3","-7 + 4","-7 + 5","-7 + 6","-6 + 1","-6 + 2","-6 + 3","-6 + 4","-6 + 5","-5 + 1","-5 + 2","-5 + 3","-5 + 4","-4 + 1","-4 + 2","-4 + 3","-3 + 1","-3 + 2","-2 + 1",
+        "1 + -9","2 + -9","3 + -9","4 + -9","5 + -9","6 + -9","7 + -9","8 + -9","1 + -8","2 + -8","3 + -8","4 + -8","5 + -8","6 + -8","7 + -8","1 + -7","2 + -7","3 + -7","4 + -7","5 + -7","6 + -7","1 + -6","2 + -6","3 + -6","4 + -6","5 + -6","1 + -5","2 + -5","3 + -5","4 + -5","1 + -4","2 + -4","3 + -4","1 + -3","2 + -3","1 + -2"
+      ],
+      "ordered": false,
+      "tags": ["mathematics","addition","subtraction"],
+      "isExitOnInterription": true
+    },
+    {
+      "id": 8,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "visible": false,
+      "type": 1,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "planets - in order",
+      "instructions": "You will be shown the names of planets, in order of how far they are from the Sun. Type them out quickly",
+      "content": ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto"],
+      "ordered": true,
+      "tags": ["english","spelling"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 9,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "visible": false,
+      "type": 1,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "planets - not in order",
+      "instructions": "You will be shown the names of planets, in random order. Type them out as quickly",
+      "content": ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto"],
+      "ordered": false,
+      "tags": ["science","spelling"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 17,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "clock face 180",
+      "instructions": "You will be shown some times. Tap if the time forms a 180 degree angle on a clock face. Otherwise swipe.",
+      "tap": ["12:30","1:35","2:40","3:45","4:50","5:55","6:00","7:05","8:10","9:15","10:20","11:25"],
+      "swipe": [
+        "1:00","1:05","1:10","1:15","1:20","1:25","1:30","1:40","1:45","1:50","1:55",
+        "2:00","2:05","2:10","2:15","2:20","2:25","2:30","2:35","2:45","2:50","2:55",
+        "3:00","3:05","3:10","3:15","3:20","3:25","3:30","3:35","3:40","3:50","3:55",
+        "4:00","4:05","4:10","4:15","4:20","4:25","4:30","4:35","4:40","4:45","4:55",
+        "5:00","5:05","5:10","5:15","5:20","5:25","5:30","5:35","5:40","5:45","5:50",
+        "6:05","6:10","6:15","6:20","6:25","6:30","6:35","6:40","6:45","6:50","6:55",
+        "7:00","7:10","7:15","7:20","7:25","7:30","7:35","7:40","7:45","7:50","7:55",
+        "8:00","8:05","8:15","8:20","8:25","8:30","8:35","8:40","8:45","8:50","8:55",
+        "9:00","9:05","9:10","9:20","9:25","9:30","9:35","9:40","9:45","9:50","9:55",
+        "10:00","10:05","10:10","10:15","10:25","10:30","10:35","10:40","10:45","10:50","10:55",
+        "11:00","11:05","11:10","11:15","11:20","11:30","11:35","11:40","11:45","11:50","11:55",
+        "12:00","12:05","12:10","12:15","12:20","12:25","12:35","12:40","12:45","12:50","12:55"
+      ],
+      "ordered": false,
+      "tags": ["mathematics","geometry","angles"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 18,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "clock face 0",
+      "instructions": "You will be shown some times. Tap if the time forms a 0 degree angle on a clock face. Otherwise swipe.",
+      "tap": ["12:00","1:05","2:10","3:15","4:20","5:25","6:30","7:35","8:40","9:45","10:50","11:55"],
+      "swipe": [
+        "1:00","1:10","1:15","1:20","1:25","1:30","1:35","1:40","1:45","1:50","1:55",
+        "2:00","2:05","2:15","2:20","2:25","2:30","2:35","2:40","2:45","2:50","2:55",
+        "3:00","3:05","3:10","3:20","3:25","3:30","3:35","3:40","3:45","3:50","3:55",
+        "4:00","4:05","4:10","4:15","4:25","4:30","4:35","4:40","4:45","4:50","4:55",
+        "5:00","5:05","5:10","5:15","5:20","5:30","5:35","5:40","5:45","5:50","5:50",
+        "6:00","6:05","6:10","6:15","6:20","6:25","6:35","6:40","6:45","6:50","6:55",
+        "7:00","7:05","7:10","7:15","7:20","7:25","7:30","7:40","7:45","7:50","7:55",
+        "8:00","8:05","8:10","8:15","8:20","8:25","8:30","8:35","8:45","8:50","8:55",
+        "9:00","9:05","9:10","9:15","9:20","9:25","9:30","9:35","9:40","9:50","9:55",
+        "10:00","10:05","10:10","10:15","10:20","10:25","10:30","10:35","10:40","10:45","10:55",
+        "11:00","11:05","11:10","11:15","11:20","11:25","11:30","11:35","11:40","11:45","11:50",
+        "12:05","12:10","12:15","12:20","12:25","12:30","12:35","12:40","12:45","12:50","12:55"
+      ],
+      "ordered": false,
+      "tags": ["mathematics","geometry","angles"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 16,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "subType": "SPELL CHECK",
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "months of the year",
+      "instructions": "You will be shown the months of the year. True = spelling is correct. False = the spelling is not correct",
+      "tap": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      "swipe": ["Janaury","Jaunary","Jauanry","Jaanury","Jaaunry",
+        "Febraury","Feburary","Febuarry","Febarury","Febaurry",
+        "Macrh","Mrach","Mrcah","Mcarh","Mcrah",
+        "Apirl", "Jnue","Jluy","Augsut","Septmeber","Spetember","Spetmeber","Octoebr","Ocotber",
+        "Novmeber","Noevmber","Noemvber","Nomveber","Nomevber","Nvoember","Nvomeber","Nveomber","Nvemober","Nvmoeber","Nvmeober","Neovmber","Neomvber","Nevomber","Nevmober","Nemovber","Nemvober","Nmoveber","Nmoevber","Nmvoeber","Nmveober","Nmeovber","Nmevober",
+        "Decmeber","Deecmber","Deemcber","Demceber","Demecber","Dceember","Dcemeber","Dceember","Dcemeber","Dcmeeber","Dcmeeber","Deecmber","Deemcber","December","Decmeber","Demecber","Demceber","Dmeceber","Dmeecber","Dmceeber","Dmceeber","Dmeecber","Dmeceber"
+      ],
+      "tags": ["english","spelling"],
+      "isExitOnInterruption": true
+    },
+
+    {
+      "id": 20,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "division 1",
+      "instructions": "You will be shown some statements. Tap if the result is greater than 1. Else swipe.",
+      "tap": ["6 ÷ 1","7 ÷ 1","8 ÷ 1","9 ÷ 1","10 ÷ 1","6 ÷ 2","7 ÷ 2","8 ÷ 2","9 ÷ 2","10 ÷ 2","6 ÷ 3","7 ÷ 3","8 ÷ 3","9 ÷ 3","10 ÷ 3","6 ÷ 4","7 ÷ 4","8 ÷ 4","9 ÷ 4","10 ÷ 4","6 ÷ 5","7 ÷ 5","8 ÷ 5","9 ÷ 5","10 ÷ 5"],
+      "swipe": ["1 ÷ 6","1 ÷ 7","1 ÷ 8","1 ÷ 9","1 ÷ 10","2 ÷ 6","2 ÷ 7","2 ÷ 8","2 ÷ 9","2 ÷ 10","3 ÷ 6","3 ÷ 7","3 ÷ 8","3 ÷ 9","3 ÷ 10","4 ÷ 6","4 ÷ 7","4 ÷ 8","4 ÷ 9","4 ÷ 10","5 ÷ 6","5 ÷ 7","5 ÷ 8","5 ÷ 9","5 ÷ 10"],
+      "ordered": false,
+      "tags": ["mathematics","division"],
+      "isExitOnInterruption": true
+    },
+    {
+      "id": 14,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "Prime Numbers",
+      "instructions": "You will be shown some numbers between 2 and 50. Tap if it is a prime number. Swipe if it is not a prime number.",
+      "tap": ["2","3","5","7","11","13","17","19","23","29","31","37","41","43","47"],
+      "swipe": ["4","6","8","9","10","12","14","15","16","18","20","21","22","24","25","26","27","28","30","32","33","34","35","36","38","39","40","42","44","45","46","48","49","50"],
+      "ordered": false,
+      "tags": ["mathematics", "numbers"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "id": 65,
+      "type": 1,
+      "timed": false,
+      "isKeyboardRequired": true,
+      "isGame": false,
+      "title": "Months of the year",
+      "instructions": "You will be shown the months of the year in the right order. Try to type them out correctly.",
+      "content": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      "ordered": true,
+      "tags": ["typing", "english","spelling"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "id": 1,
+      "type": 1,
+      "timed": true,
+      "durationMillis": 61000,
+      "isKeyboardRequired": true,
+      "isGame": true,
+      "title": "Months of the year",
+      "instructions": "You will be shown the months of the year in the right order. Type them out as quickly as you can.",
+      "content": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      "ordered": true,
+      "tags": ["typing", "english","spelling"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "id": 2,
+      "type": 1,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "Months of the year",
+      "instructions": "You will be shown the months of the year in random order. Type them quickly",
+      "content": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      "ordered": false,
+      "isKeyboardRequired": true,
+      "tags": ["typing", "english","spelling"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "id": 7,
+      "type": 4,
+      "isOwnerWantingAds": true,
+      "timed": true,
+      "durationMillis": 61000,
+      "isGame": true,
+      "title": "vowels",
+      "instructions": "You will be shown some letters. Tap if it is a vowel. Swipe if it is not a vowel.",
+      "tap": ["a","e","i","o","u"],
+      "swipe": ["b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"],
+      "ordered": false,
+      "tags": ["english"],
+      "isExitOnInterruption": true
+    },
+
+    {
+      "id": 61,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": false,
+      "title": "Months of the year",
+      "instructions": "You will be shown sentences about months of the year. Type them out correctly",
+      "content": ["January is the first month","February is the second month","March is the third month","April is the fourth month",
+                  "May is the fifth month", "June is the sixth month", "July is the seventh month", "August is the eighth month",
+                  "September is the ninth month", "October is the tenth month", "November is the eleventh month", "December is the twelfth month"],
+      "ordered": true,
+      "isPassFail": false,
+      "showUserAnswerWithBackground": true,
+      "isBackspaceAllowed": false,
+      "isKeyboardRequired": true,
+      "tags": ["typing", "english", "spelling"]
+    },
+    {
+      "visible": true,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "id": 66,
+      "type": 1,
+      "timed": false,
+      "isKeyboardRequired": true,
+      "isGame": false,
+      "title": "Singular pronouns",
+      "instructions": "These pronouns are singular and take singular verbs. Type them out correctly.",
+      "content": ["no one","someone","everyone","anyone","none","nobody","somebody","everybody","anybody","each","nothing","something", "everything", "anything"],
+      "ordered": true,
+      "tags": ["typing", "english","spelling"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "id": 67,
+      "type": 4,
+      "timed": true,
+      "durationMillis": 61000,
+      "isKeyboardRequired": false,
+      "isGame": true,
+      "title": "Subject-Verb Agreement: is/are",
+      "instructions": "You will be shown some sentences. Tap if the subject-verb agreement is correct. Else swipe.",
+      "tap": [
+        {
+          "id": 1,
+          "question": "Earth is a planet",
+          "expectedAnswerExplanation": "Subject is Earth, which is singular. Therefore verb should be 'is', which is singular."
+        },
+        {
+          "id": 2,
+          "question": "The cars are parked in the garage",
+          "expectedAnswerExplanation": "Subject is cars, which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 3,
+          "question": "The fact that it rained so much today is bad.",
+          "expectedAnswerExplanation": "Subject is 'The fact', which is singular. Therefore verb should be 'is', which is singular."
+        },
+        {
+          "id": 4,
+          "question": "Skies are clear.",
+          "expectedAnswerExplanation": "Subject is 'skies', which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 5,
+          "question": "John and Tom are going to school.",
+          "expectedAnswerExplanation": "There are 2 subjects: 'John' and 'Tom'. This is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 6,
+          "question": "The computers are for sale.",
+          "expectedAnswerExplanation": "Subject is 'computers', which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 7,
+          "question": "Tom's family is moving.",
+          "expectedAnswerExplanation": "Subject is 'family', which is singular. Therefore verb should be 'is', which is singular."
+        },
+        {
+          "id": 8,
+          "question": "People are waiting for the leader to arrive.",
+          "expectedAnswerExplanation": "Subject is 'people', which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 9,
+          "question": "Airplanes are fast",
+          "expectedAnswerExplanation": "Subject is 'airplanes', which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 10,
+          "question": "Cows are grazing in the field.",
+          "expectedAnswerExplanation": "Subject is 'cows', which is plural. Therefore verb should be 'are', which is plural."
+        }
+      ],
+      "swipe": [
+        {
+          "id": 11,
+          "question": "Earth are a planet",
+          "expectedAnswerExplanation": "Subject is Earth, which is singular. Therefore verb should be 'is', which is singular."
+        },
+        {
+          "id": 12,
+          "question": "The car are parked in the garage",
+          "expectedAnswerExplanation": "Subject is car, which is singular. Therefore verb should be 'is', which is singular."
+        },
+        {
+          "id": 13,
+          "question": "The cars is parked in the garage",
+          "expectedAnswerExplanation": "Subject is 'cars', which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 14,
+          "question": "The fact that it rained so much today are bad.",
+          "expectedAnswerExplanation": "Subject is 'The fact', which is singular. Therefore verb should be 'is', which is singular."
+        },
+        {
+          "id": 15,
+          "question": "John and Tom is going to school.",
+          "expectedAnswerExplanation": "There are 2 subjects: 'John' and 'Tom'. This is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 16,
+          "question": "The computers is for sale.",
+          "expectedAnswerExplanation": "Subject is 'computers', which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 17,
+          "question": "Tom are moving.",
+          "expectedAnswerExplanation": "Subject is 'Tom', which is singular. Therefore verb should be 'is', which is singular."
+        },
+        {
+          "id": 18,
+          "question": "People is waiting for the leader to arrive.",
+          "expectedAnswerExplanation": "Subject is 'people', which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 19,
+          "question": "Airplanes is fast.",
+          "expectedAnswerExplanation": "Subject is 'airplanes', which is plural. Therefore verb should be 'are', which is plural."
+        },
+        {
+          "id": 20,
+          "question": "Cows is grazing in the field.",
+          "expectedAnswerExplanation": "Subject is 'cows', which is plural. Therefore verb should be 'are', which is plural."
+        }
+      ],
+      "ordered": false,
+      "tags": ["english"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "id": 68,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": false,
+      "isKeyboardRequired": true,
+      "isGame": false,
+      "title": "Periodic table group 1",
+      "instructions": "You will be shown the elements of group 1. Try to type them out correctly.",
+      "content": ["Hydrogen","Lithium","Sodium","Potassium","Rubidium","Caesium","Francium"],
+      "ordered": true,
+      "tags": ["typing", "spelling", "science", "chemistry"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "id": 69,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": false,
+      "isKeyboardRequired": true,
+      "isGame": false,
+      "title": "Periodic table group 2",
+      "instructions": "You will be shown the elements of group 2. Try to type them out correctly.",
+      "content": ["Beryllium","Magnesium","Calcium","Strontium","Barium","Radium"],
+      "ordered": true,
+      "tags": ["typing", "spelling", "science", "chemistry"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "id": 70,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": false,
+      "isKeyboardRequired": true,
+      "isGame": false,
+      "title": "Periodic table halogens",
+      "instructions": "You will be shown the halogens. Try to type them out correctly.",
+      "content": ["Fluorine","Chlorine","Bromine","Iodine","Astatine","Caesium","Francium"],
+      "ordered": true,
+      "tags": ["typing", "spelling", "science", "chemistry"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "id": 71,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 1,
+      "timed": false,
+      "isKeyboardRequired": true,
+      "isGame": false,
+      "title": "Periodic table noble gasses",
+      "instructions": "You will be shown the list of noble gasses. Try to type them out correctly.",
+      "content": ["Helium","Neon","Argon","Krypton","Xenon","Radon"],
+      "ordered": true,
+      "tags": ["typing", "spelling", "science", "chemistry"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "id": 72,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "timed": true,
+      "durationMillis": 61000,
+      "isKeyboardRequired": false,
+      "isGame": true,
+      "title": "Independent Clauses",
+      "instructions": "You will be shown some sentences. Tap if the sentence is an independent clause. Else swipe.",
+      "tap": [
+        {
+          "id": 1,
+          "question": "John likes football.",
+          "expectedAnswerExplanation": "Subject is John, verb is likes. This is an independent clause."
+        },
+        {
+          "id": 2,
+          "question": "Fish like the water.",
+          "expectedAnswerExplanation": "Subject is fish, verb is like. This is an independent clause."
+        },
+        {
+          "id": 3,
+          "question": "Airplanes go fast.",
+          "expectedAnswerExplanation": "Subject is airplanes, verb is go. This is an independent clause."
+        },
+        {
+          "id": 4,
+          "question": "He sang a song.",
+          "expectedAnswerExplanation": "Subject is he, verb is sang. This is an independent clause."
+        },
+        {
+          "id": 5,
+          "question": "They played games.",
+          "expectedAnswerExplanation": "Subject is they, verb is played. This is an independent clause."
+        },
+        {
+          "id": 6,
+          "question": "He threw the ball",
+          "expectedAnswerExplanation": "Subject is he, verb is threw. This is an independent clause."
+        },
+        {
+          "id": 7,
+          "question": "They went to the park.",
+          "expectedAnswerExplanation": "Subject is they, verb is went. This is an independent clause."
+        },
+        {
+          "id": 8,
+          "question": "He can go home.",
+          "expectedAnswerExplanation": "Subject is he, verb is can. This is an independent clause."
+        },
+        {
+          "id": 9,
+          "question": "She travelled by car.",
+          "expectedAnswerExplanation": "Subject is she, verb is travelled. This is an independent clause."
+        },
+        {
+          "id": 10,
+          "question": "Clouds appeared in the sky.",
+          "expectedAnswerExplanation": "Subject is clouds, verb is appeared. This is an independent clause."
+        }
+      ],
+      "swipe": [
+        {
+          "id": 11,
+          "question": "He a song.",
+          "expectedAnswerExplanation": "Subject is he. There is no verb. This is not an independent clause."
+        },
+        {
+          "id": 12,
+          "question": "Sang a song.",
+          "expectedAnswerExplanation": "Verb is Sang. There is no subject. This is not an independent clause."
+        },
+        {
+          "id": 13,
+          "question": "Fish water.",
+          "expectedAnswerExplanation": "Subject is fish. There is no verb. This is not an independent clause."
+        },
+        {
+          "id": 14,
+          "question": "Like water.",
+          "expectedAnswerExplanation": "Verb is Like. There is no subject. This is not an independent clause."
+        },
+        {
+          "id": 15,
+          "question": "Airplanes fast.",
+          "expectedAnswerExplanation": "Subject is airplanes. There is no verb. This is not an independent clause."
+        },
+        {
+          "id": 16,
+          "question": "John football.",
+          "expectedAnswerExplanation": "Subject is John. There is no verb. This is not an independent clause."
+        },
+        {
+          "id": 17,
+          "question": "Likes football.",
+          "expectedAnswerExplanation": "Verb is likes. There is no subject. This is not an independent clause."
+        },
+        {
+          "id": 18,
+          "question": "They the park.",
+          "expectedAnswerExplanation": "Subject is they. There is no verb. This is not an independent clause."
+        },
+        {
+          "id": 19,
+          "question": "Went to the park.",
+          "expectedAnswerExplanation": "Verb is went. There is no subject. This is not an independent clause."
+        },
+        {
+          "id": 20,
+          "question": "He the ball.",
+          "expectedAnswerExplanation": "Subject is he. There is no verb. This is not an independent clause."
+        }
+      ],
+      "ordered": false,
+      "tags": ["english"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "id": 73,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 4,
+      "timed": true,
+      "durationMillis": 61000,
+      "isKeyboardRequired": false,
+      "isGame": true,
+      "title": "Present Tense",
+      "instructions": "You will be shown some sentences. Tap if it is written in present tense. Else swipe.",
+      "tap": [
+        {
+          "id": 1,
+          "question": "John has a car.",
+          "expectedAnswerExplanation": "The verb here is has, which is the present tense of 'to have'. Therefore this is in the present tense."
+        },
+        {
+          "id": 2,
+          "question": "He drinks a glass of milk.",
+          "expectedAnswerExplanation": "The verb here is drinks, which is the present tense of 'to drink'. Therefore this is in the present tense."
+        },
+        {
+          "id": 3,
+          "question": "She plays the violin.",
+          "expectedAnswerExplanation": "The verb here is plays, which is the present tense of 'to play'. Therefore this is in the present tense."
+        },
+        {
+          "id": 4,
+          "question": "He enjoys football.",
+          "expectedAnswerExplanation": "The verb here is enjoys, which is the present tense of 'to enjoy'. Therefore this is in the present tense."
+        },
+        {
+          "id": 5,
+          "question": "He takes the bus in the morning.",
+          "expectedAnswerExplanation": "The verb here is takes, which is the present tense of 'to take'. Therefore this is in the present tense."
+        },
+        {
+          "id": 6,
+          "question": "She looks at the blue sky.",
+          "expectedAnswerExplanation": "The verb here is looks, which is the present tense of 'to look'. Therefore this is in the present tense."
+        },
+        {
+          "id": 7,
+          "question": "He goes to office everyday.",
+          "expectedAnswerExplanation": "The verb here is goes, which is the present tense of 'to go'. Therefore this is in the present tense."
+        },
+        {
+          "id": 8,
+          "question": "The flight arrives in the city now.",
+          "expectedAnswerExplanation": "The verb here is arrives, which is the present tense of 'to arrive'. Therefore this is in the present tense."
+        },
+        {
+          "id": 9,
+          "question": "The machine washes the clothes.",
+          "expectedAnswerExplanation": "The verb here is washes, which is the present tense of 'to wash'. Therefore this is in the present tense."
+        },
+        {
+          "id": 10,
+          "question": "She does her homework every evening.",
+          "expectedAnswerExplanation": "The verb here is does, which is the present tense of 'to do'. Therefore this is in the present tense."
+        }
+      ],
+      "swipe": [
+        {
+          "id": 11,
+          "question": "John had a car.",
+          "expectedAnswerExplanation": "The verb here is had, which is the past tense of 'to have'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 12,
+          "question": "He will drink a glass of milk.",
+          "expectedAnswerExplanation": "The verb here is will drink, which is the future tense of 'to drink'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 13,
+          "question": "He drank a glass a water.",
+          "expectedAnswerExplanation": "The verb here is drank, which is the past tense of 'to drink'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 14,
+          "question": "She played the violin.",
+          "expectedAnswerExplanation": "The verb here is played, which is the present tense of 'to play'. Therefore this is in the present tense."
+        },
+        {
+          "id": 15,
+          "question": "She will play the violin tomorrow.",
+          "expectedAnswerExplanation": "The verb here is will play, which is the future tense of 'to play'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 16,
+          "question": "He will take the bus in the morning.",
+          "expectedAnswerExplanation": "The verb here is will take, which is the future tense of 'to take'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 17,
+          "question": "He will go to office everyday.",
+          "expectedAnswerExplanation": "The verb here is will go, which is the future tense of 'to go'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 18,
+          "question": "The flight arrived in the city yesterday.",
+          "expectedAnswerExplanation": "The verb here is arrived, which is the past tense of 'to arrive'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 19,
+          "question": "The flight will arrive in the city tomorrow.",
+          "expectedAnswerExplanation": "The verb here is will arrive, which is the future tense of 'to arrive'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 20,
+          "question": "She did her homework last night.",
+          "expectedAnswerExplanation": "The verb here is did, which is the past tense of 'to do'. Therefore this is NOT in the present tense."
+        },
+        {
+          "id": 21,
+          "question": "She will do her homework tomorrow morning.",
+          "expectedAnswerExplanation": "The verb here is will do, which is the future tense of 'to do'. Therefore this is NOT in the present tense."
+        }
+      ],
+      "ordered": false,
+      "tags": ["english"],
+      "isExitOnInterruption": true
+    },
+    {
+      "visible": true,
+      "id": 74,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "type": 6,
+      "ordered": true,
+      "title": "Autism story",
+      "content": [
+                  {
+                    "id": 741,
+                    "title": "The secret in education lies in respecting the student",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 74100,
+                    "hasImage": true
+                  },
+                  {
+                    "id": 742,
+                    "title": "If a child can't learn the way we teach, maybe we should teach the way they learn",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 743,
+                    "title": "When you judge someone based on a diagnosis, you miss out on their abilities, beauty, and uniqueness",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 744,
+                    "hasImage": true
+                  },
+                  {
+                    "id": 745,
+                    "title": "The difference between well-trained and well-formed minds is",
+                    "textLine1": "If you have a well-trained mind then you can do your daily activities without any problem at all. This includes being Toilet Trained.",
+                    "textLine2": "If you have a well-formed mind then you do exactly the best way to do everything for your own sake.",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 747,
+                    "title": "They think different",
+                    "textLine1": "Life can be much broader once you discover one simple fact, and that is - everything around you that you call life, was made up by people that were no smarter than you. And you can change it, you can influence it",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 748,
+                    "title": "They are Differently Wired",
+                    "textLine1": "Get Out of Isolation and Connect. Stop Fighting Who Your Child Is and Lean In.",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 749,
+                    "title": "Because they are worth it",
+                    "textLine1": "If people want something to be wrong about you they are going to make things wrong about you.",
+                    "textLine2": "That is why it is my belief to never try and prove anything to anyone.",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7412,
+                    "title": "Revolution with imagination",
+                    "textLine1": "Imagination",
+                    "textLine2": "There is no finish line",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7413,
+                    "title": "Why education….. Every little helps",
+                    "textLine1": "Knowledge is power",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7414,
+                    "title": "The best a child can get",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7415,
+                    "title": "Imagination at work… teach an autistic child",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7416,
+                    "title": "The last place you want to go",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7417,
+                    "title": "The Ultimate Driving machine",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7418,
+                    "title": "Your in good hands",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7419,
+                    "title": "Learning Program",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7420,
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7421,
+                    "title": "Adapted methods of learning",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7422,
+                    "title": "Multiple intelligence; multiple learning styles",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7423,
+                    "title": "Induce structural brain plasticity",
+                    "hasImage": true
+                  },
+                  {
+                    "id": 7424,
+                    "title": "Stages of mental mapping",
+                    "textLine1": "depends on how much sensory channels are open",
+                    "textLine2": "anxiety, worries, memory, obsessions, take a front stage and affect performance",
+                    "hasImage": true
+                  },
+                  {
+                    "id": "74_25",
+                    "title": "Obsession becomes too difficult a cycle to break",
+                    "textLine1": "Obsession gets called as BEHAVIOUR",
+                    "hasImage": true
+                  }
+      ],
+      "instructions": "You will be shown a story. Swipe to go through the cards",
+      "isGame": false,
+      "tags": ["autism"]
+    },
+    {
+      "visible": true,
+      "id": 75,
+      "creator": "0jLuro6wfcSCMtsYkdj8AaiMkgW2",
+      "type": 6,
+      "ordered": true,
+      "title": "Effective Parenting",
+      "content": [
+        {
+          "id": 751,
+          "title": "Effective Parenting is to take daily efforts to connect with children on a meaningful and personal level."
+        },
+        {
+          "id": 75100,
+          "title": "How to discipline child without yelling?",
+          "textLine1": "1. Establish Clear Rules\n2. Discuss negatives beforehand\n3. Provide positive reinforcement\n4. Offer warnings when appropriate and follow through with consequences\n5. Praise your child for good behavior\n\nRemember: Children learn by watching what parents do",
+          "hasImage": true
+        },
+        {
+          "id": 752,
+          "title": "How does a parent reward a child?",
+          "textLine1": "1. Plan a trip to a park.\n2. Pick a movie for the weekend\n3. Allow them to decide dinner menu\n4. A family activity\n5. 30 mins of extra screen time",
+          "hasImage": true
+        },
+        {
+          "id": 753,
+          "title": "How to punish children for bad behavior",
+          "textLine1": "1. Do not hit them\n2. Do not yell or shout at them\n3. Rather turn the punishment into problem solving\n4. Give them tasks to finish the bad behavior\n5. Cut short the perks(eg: 30 mins less screen time)",
+          "hasImage": true
+        },
+        {
+          "id": 754,
+          "title": "How to discipline a toddler?",
+          "textLine1": "1. Avoid stressful situations\n2. You must think like a toddler\n3. Practice the art of distraction\n4. Give the child a break\n5. Stay Calm\n6. Know when to give in\n7. Be consistent",
+          "hasImage": true
+        },
+        {
+          "id": 755,
+          "title": "Lastly, try to be an authoritative parent",
+          "textLine2": "Allow autonomy and encourage independence\nReason with children instead of demanding blind obedience\nSet clear limit on behavior",
+          "hasImage": true
+        }
+      ],
+      "instructions": "Parent's behavior influences their child's social and emotional skills directly and indirectly. Parent's interactions influence their child's future behavior.",
+      "isGame": false
+    }
+  ],
+
+  "courses": [
+    {
+      "visible": false,
+      "id": 38,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "title": "Learn Keyboard Middle Row",
+      "isOwnerWantingAds": true,
+      "description": "Middle row is located at the center of the keyboard, third row from the bottom. We will now practice typing with the middle row.",
+      "hasKeyboardTest": true,
+      "createdBy": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "tags": ["typing"],
+      "checkpoints": {
+        "44": {
+          "id": 45,
+          "title": "LEFT TO RIGHT"
+        },
+        "49": {
+          "id": 50,
+          "title": "RIGHT TO LEFT"
+        }
+      },
+      "tasks" : [
+        {
+          "id": 39,
+          "type": 1,
+          "timed": false,
+          "title": "Type f and press spacebar",
+          "instructions": "Type f and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["f␣","f␣","f␣","f␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 42,
+          "type": 1,
+          "timed": false,
+          "title": "Type j and press spacebar",
+          "instructions": "Type j and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["j␣","j␣","j␣","j␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 40,
+          "type": 1,
+          "timed": false,
+          "title": "Type fj and press spacebar",
+          "instructions": "Type fj and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["fj␣","fj␣","fj␣","fj␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+        },
+        {
+          "id": 43,
+          "type": 1,
+          "timed": false,
+          "title": "Type fjk and press spacebar",
+          "instructions": "Type fjk and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["fjk␣","fjk␣","fjk␣","fjk␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 44,
+          "type": 1,
+          "timed": false,
+          "title": "Type fjkl and press spacebar",
+          "instructions": "Type fjkl and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["fjkl␣","fjkl␣","fjkl␣","fjkl␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 46,
+          "type": 1,
+          "timed": false,
+          "title": "Type jf and press spacebar",
+          "instructions": "Type jf and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jf␣","jf␣","jf␣","jf␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 47,
+          "type": 1,
+          "timed": false,
+          "title": "Type jfd and press spacebar",
+          "instructions": "Type jfd and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jfd␣","jfd␣","jfd␣","jfd␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 48,
+          "type": 1,
+          "timed": false,
+          "title": "Type jfds and press spacebar",
+          "instructions": "Type jfds and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jfds␣","jfds␣","jfds␣","jfds␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 49,
+          "type": 1,
+          "timed": false,
+          "title": "Type jfdsa and press spacebar",
+          "instructions": "Type jfdsa and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jfdsa␣","jfdsa␣","jfdsa␣","jfdsa␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 51,
+          "type": 1,
+          "timed": false,
+          "title": "Type jfa and press spacebar",
+          "instructions": "Type jfa and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jfa␣","jfa␣","jfa␣","jfa␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 52,
+          "type": 1,
+          "timed": false,
+          "title": "Type jfas and press spacebar",
+          "instructions": "Type jfas and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jfas␣","jfas␣","jfas␣","jfas␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 53,
+          "type": 1,
+          "timed": false,
+          "title": "Type jfasdf and press spacebar",
+          "instructions": "Type jfasdf and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jfasdf␣","jfasdf␣","jfasdf␣","jfasdf␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 54,
+          "type": 1,
+          "timed": false,
+          "title": "Type jfasdfj and press spacebar",
+          "instructions": "Type jfasdfj and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jfasdfj␣","jfasdfj␣","jfasdfj␣","jfasdfj␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 55,
+          "type": 1,
+          "timed": false,
+          "title": "Type jklf and press spacebar",
+          "instructions": "Type jklf and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jklf␣","jklf␣","jklf␣","jklf␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 56,
+          "type": 1,
+          "timed": false,
+          "title": "Type jklfdsa and press spacebar",
+          "instructions": "Type jklfdsa and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jklfdsa␣","jklfdsa␣","jklfdsa␣","jklfdsa␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        },
+        {
+          "id": 57,
+          "type": 1,
+          "timed": false,
+          "title": "Type jklasdf and press spacebar",
+          "instructions": "Type jklasdf and press spacebar. Do this 4 times. Target accuracy 75%.",
+          "content": ["jklasdf␣","jklasdf␣","jklasdf␣","jklasdf␣"],
+          "isPassFail": true,
+          "passPercentage": 75,
+          "showUserAnswerWithBackground": true,
+          "isBackspaceAllowed": false,
+          "isKeyboardRequired": true
+
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "visible": false,
+      "title": "Spelling Exercises",
+      "instructions": "See if you can spell these words.",
+      "tasks" : [
+
+      ]
+    },
+    {
+      "id": 24,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "visible": false,
+      "title": "Comparing numbers",
+      "instructions": "Test your number skills with these games",
+      "tasks": [
+
+      ]
+    },
+    {
+      "id": 25,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "visible": false,
+      "title": "Addition and Subtraction",
+      "instructions": "Test your addition and subtraction skills with these exercises.",
+      "tasks" : [
+
+      ]
+    },
+    {
+      "id": 23,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "visible": false,
+      "title": "Clock face",
+      "instructions": "Test your geometry skills with these clock face exercises.",
+      "tasks" : [
+
+      ]
+    },
+    {
+      "id": 26,
+      "creator": "RycAhfhPsXOrUdbO8GOJqucktAA3",
+      "visible": false,
+      "title": "Spot the spelling mistakes",
+      "instructions": "See if you can find the spelling mistakes.",
+      "tasks" :[
+
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.starsearth.five">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false" />
+
+
+    <application
+        android:name=".application.StarsEarthApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.KeyboardActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|smallestScreenSize|navigation|locale|layoutDirection|fontScale"
+            android:label="@string/keyboard_test" />
+        <activity
+            android:name=".activity.auth.LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.AdminModeActivity" />
+        <activity android:name=".activity.auth.SignupActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/app_name" />
+        <activity android:name=".activity.auth.ChangePasswordActivity" />
+        <activity android:name=".activity.WelcomeActivity">
+
+            <!-- Welcome intent goes here -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.TaskActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.auth.AddEditPhoneNumberActivity"
+            android:label="@string/enter_phone_number"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".activity.auth.SendOTPActivity"
+            android:configChanges="orientation"
+            android:label="@string/enter_otp"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".activity.profile.PhoneNumberActivity"
+            android:label="@string/phone_number" />
+        <activity
+            android:name=".activity.profile.FullNameActivity"
+            android:label="@string/title_activity_full_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.TabbedActivity"
+            android:label="@string/title_activity_tabbed"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.FullScreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_google_ad"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.TaskTwoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,477 @@
+<resources>
+    <array name="se_actions_list">
+        <item>Courses</item>
+        <item>My Records</item>
+        <item>Activities by subject</item>
+        <item>Timed Activities</item>
+        <item>All Games</item>
+        <item>All Gesture Activities</item>
+        <item>All Spelling Activities</item>
+    </array>
+    <array name="se_user_admin_list">
+        <item>Courses Admin Mode</item>
+    </array>
+    <array name="se_user_god_mode">
+        <item>Admin Access List</item>
+    </array>
+    <string name="app_name">Two</string>
+    <string name="done">DONE</string>
+    <string name="submit">SUBMIT</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="continue_label">Continue</string>
+
+    <string name="alert">Alert</string>
+    <string name="true_">True</string>
+
+    <string name="false_">False</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="created_by">Created By</string>
+    <string name="name">Name</string>
+
+    <string name="action_questions_feedback">Questions/Feedback</string>
+    <string name="message_questions_feedback">You can share you questions/feedback via our Google Play Store page. Would you like to do this?</string>
+    <string name="talk_by_typing">Talk by typing</string>
+    <string name="swipe_left_action">Tap button or swipe left\nTo start learning typing\n*------------------------|</string>
+    <string name="tap_here_to_start_activity">TAP HERE TO START ACTIVITY</string>
+    <string name="tap_screen_to_talk">Swipe up to ask questions</string>
+    <string name="long_press_to_repeat_response">Long press screen to repeat response</string>
+    <string name="long_press_to_cancel">Long press to cancel</string>
+    <string name="talk_prompt">Talk</string>
+    <string name="type_prompt">Start typing</string>
+    <string name="what_can_i_ask">What can I ask</string>
+    <string name="please_wait">Please wait</string>
+
+    <string name="error">Error</string>
+    <string name="something_went_wrong">Sorry something went wrong. Please try again later</string>
+    <string name="error_downloading_image">Error downloading image</string>
+    <string name="no_internet">You do not have an internet connection</string>
+    <string name="no_items_to_displayay">No items to display</string>
+    <string name="you_did_not_enter_search">You did not enter any search query</string>
+    <string name="no_search_results">No search results found</string>
+    <string name="no_content_found">No content found</string>
+    <string name="no_educator_content_found">No content found that has been created by you. Please reach out to hasijaadarsh@gmail.com to add education content</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+
+
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="no_user_found">No User Found</string>
+
+    <!-- Typing Activity -->
+    <string name="login_signup_access_questions">You need to login or signup to do the questions</string>
+    <string name="starting_signup_please_wait">Starting signup please wait</string>
+    <string name="signup_failed">Signup failed: </string>
+    <string name="prompt_connect_keyboard">Connect a keyboard to start</string>
+    <string name="keyboard_removed">Keyboard has been removed</string>
+    <string name="press_any_key">Connect a usb keyboard and press any key to know if your keyboard works with this app.</string>
+
+    <!-- Main SE Activity -->
+    <string name="keypad_reading_mode_enabled">Keypad reading mode is now enabled</string>
+    <string name="keypad_reading_mode_already_enabled">Keypad reading mode is already enabled</string>
+    <string name="continue_to_login_screen">Continue to login screen</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="se_assistant">StarsEarth Teacher</string>
+    <string name="se_assistant_tap_here_to_begin">Tap here to begin</string>
+    <string name="se_assistant_tap_here_to_continue">Tap here to continue</string>
+    <string name="se_assistant_keyboard_test_completed">Keyboard test completed</string>
+    <string name="complete">Complete</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="course_complete">Course Complete</string>
+    <string name="se_assistant_no_update">No Update</string>
+    <string name="se_assistant_typing_games_welcome">You may now proceed to play any typing task from the main menu</string>
+    <string name="se_assistant_welcome_message">I am the StarsEarth Teacher. I will help you use this app.\nTap screen to continue</string>
+    <string name="se_assistant_keyboard_test_introduction">First we will test to see if your USB keyboard works with this app. It is helpful to have a USB keyboard when learning typing.\nTap screen to continue</string>
+    <string name="se_assistant_keyboard_test_start">I will now show you the keyboard test. If you have a USB keyboard, connect it when the keyboard test opens. Press any key. If the keyboard recognizes the key, the keyboard works. If you do not have a USB keyboard, simply press back to exit the keyboard test screen.\nTap screen to open keyboard test</string>
+    <string name="se_assistant_keyboard_test_end">The keyboard test was %s. You can open the keyboard test at any time by swiping right at the top of the main menu.\nTap screen to continue</string>
+    <string name="view_all">View All</string>
+    <string name="educator_search">Educator Search</string>
+    <string name="educator_profile">Educator Profile</string>
+    <string name="educator_search_hint">If you know someone who is an Educator on this app, enter their full name here</string>
+    <string name="class_search_hint">You can search Class 1, Class 2, Class 3, Class 8 etc</string>
+    <string name="covid19">Covid-19</string>
+    <string name="fun">Fun</string>
+    <string name="typing">Typing</string>
+    <string name="english">English</string>
+    <string name="mathematics">Mathematics</string>
+    <string name="search_by_class">Search By Class</string>
+    <string name="search_by_class_hint">Enter class. eg: Class 1</string>
+    <string name="logout_successful">Logout Successful</string>
+
+
+    <!-- Corona section -->
+    <string name="corona_help_requests">Help Requests</string>
+    <string name="corona_my_help_requests">My Help Requests</string>
+    <string name="search_by_organization">Search By Organization</string>
+    <string name="corona_make_new_help_request">Make New Help Request</string>
+    <!-- End of Corona section -->
+
+    <!-- States served for Corona -->
+    <string name="karnataka">Karnataka</string>
+    <!-- END -->
+
+    <!-- Login screen -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="email_error">You have not entered an email address</string>
+    <string name="password_error">You have not entered a password</string>
+    <string name="login_started">Login started, please wait</string>
+    <string name="login_successful">Login successful</string>
+    <string name="login_failed">Login failed </string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="saved">Saved</string>
+    <string name="save_successful">Save Successful</string>
+
+    <!--Admin console-->
+    <string name="admin">Admin</string>
+    <string name="admin_description">You are now entering admin mode. Here you will be able to add, edit and delete data. Tap the button to continue</string>
+    <string name="view_data">View data</string>
+
+    <!--Courses list screen -->
+    <string name="courses">Courses</string>
+    <string name="add_course">Add course</string>
+
+    <!-- Add course screen -->
+    <string name="enter_edit_course_details">Enter/Edit Course Details</string>
+    <string name="course_type">Course status</string>
+    <string name="course_difficulty">Course difficulty</string>
+    <string name="course_description">Course description</string>
+    <string name="course_description_blank">You need to provide a course description</string>
+    <string name="course_details">Course Details</string>
+    <string name="edit_course">Edit Course</string>
+
+    <!--Lessons list screen -->
+    <string name="delete_course">Delete Course</string>
+    <string name="add_lesson">Add Lesson</string>
+    <string name="lessons">Lessons</string>
+    <string name="delete_course_confirm_message">Are you sure you want to delete this course? All related information will also be deleted</string>
+    <string name="enter_edit_lesson_details">Enter/Edit Lesson Details</string>
+    <string name="lesson_number">Lesson Number</string>
+
+    <!--Add lesson screen-->
+    <string name="lesson_title">Lesson title</string>
+    <string name="lesson_name_blank">You need to provide a lesson name</string>
+    <string name="lesson_details">Lesson Details</string>
+    <string name="edit_lesson">Edit Lesson</string>
+
+    <!--Topics list screen-->
+    <string name="delete_lesson">Delete Lesson</string>
+    <string name="add_topic">Add Topic</string>
+    <string name="topics">Topics</string>
+    <string name="delete_lesson_confirm_message">Are you sure you want to delete this lesson? All related information will also be deleted</string>
+    <string name="enter_edit_topic_details">Enter/Edit Topic Details</string>
+    <string name="topic_name">Topic name</string>
+
+    <!--Add topic screen-->
+    <string name="topic_description">Topic description</string>
+    <string name="topic_title_blank">You need to provide a topic title</string>
+    <string name="topic_description_blank">You need to provide a topic description</string>
+    <string name="topic_details">Topic Details</string>
+    <string name="edit_topic">Edit Topic</string>
+
+    <!--Exercises list screen-->
+    <string name="delete_topic">Delete Topic</string>
+    <string name="add_exercise">Add Exercise</string>
+    <string name="exercises">EXERCISES</string>
+    <string name="delete_topic_confirm_message">Are you sure you want to delete this topic? All related information will also be deleted</string>
+    <string name="enter_edit_exercise_details">Enter/Edit Exercise Details</string>
+    <string name="exercise_title">Exercise title</string>
+
+    <!--Add exercise screen-->
+    <string name="exercise_description">Exercise description</string>
+    <string name="exercise_title_blank">You need to provide an exercise title</string>
+    <string name="exercise_description_blank">You need to provide an exercise description</string>
+    <string name="exercise_details">Exercise Details</string>
+    <string name="edit_exercise">Edit Exercise</string>
+
+    <!--Questions list screen-->
+    <string name="delete_exercise">Delete Exercise</string>
+    <string name="add_question">Add Question</string>
+    <string name="questions">QUESTIONS</string>
+    <string name="delete_exercise_confirm_message">Are you sure you want to delete this exercise? All related information will also be deleted</string>
+    <string name="delete_question">Delete Question</string>
+    <string name="delete_question_confirm_message">Are you sure you want to delete this question?</string>
+    <string name="enter_edit_question_details">Enter/Edit Question Details</string>
+    <string name="question">Question</string>
+
+    <!--Add question screen-->
+    <string name="answer">Answer</string>
+    <string name="hint">Hint</string>
+    <string name="question_instruction">Instruction</string>
+    <string name="question_repeats">Repeats</string>
+    <string name="question_positive_weight">Positive weight</string>
+    <string name="question_negative_weight">Negative weight</string>
+    <string name="question_feedback_correct_answer">Feedback for correct answer</string>
+    <string name="question_feedback_wrong_answer">Feedback for wrong answer</string>
+    <string name="question_title_blank">You need to provide a question title</string>
+    <string name="question_answer_blank">You need to provide an answer to the question</string>
+    <string name="question_feedback_correct_answer_hint">You need to provide feedback for the correct answer</string>
+    <string name="question_feedback_wrong_answer_hint">You need to provide feedback for the wrong answer</string>
+    <string name="no_exercises_go_back">No exercises, go back</string>
+    <string name="title_activity_question">Question</string>
+
+    <string name="current_password_hint">Current Password</string>
+    <string name="new_password_hint">New Password</string>
+    <string name="new_password_hint_repeat">Reenter new password</string>
+    <string name="current_password_error">You have not provided your current password</string>
+    <string name="new_password_error">You have not provided a new password</string>
+    <string name="new_password_repeat_error">You have not repeated your new password</string>
+    <string name="new_password_match_error">Your password and repeated password do not match</string>
+    <string name="updating_password_please_wait">Updating password please wait</string>
+    <string name="password_updated_successfully">Password updated successfully</string>
+    <string name="password_update_failed">Password update failed</string>
+    <string name="logout">Logout</string>
+    <string name="view_courses_selected">View Courses selected</string>
+    <string name="keyboard_test">Keyboard Test</string>
+    <string name="keyboard_test_why">If you are using a USB keyboard, tap here to do a keyboard test. This will confirm if you can use the keyboard with this app</string>
+    <string name="escape_key_description">Screen has closed. Pressing this closes the screen that you are on</string>
+    <string name="print_screen_description">Image of the screen has been taken. Pressing this takes an image of the screen</string>
+    <string name="go_to_questions">Go to questions</string>
+    <string name="go_to_next_topic">Go to next topic</string>
+    <string name="go_back_to_lessons">Go back to lessons</string>
+    <string name="lesson_last_topic_no_questions">This is the last topic. It has no questions. Go back.</string>
+    <string name="press_spacebar">Good, now press Spacebar</string>
+    <string name="correct_comma_type">Correct, status</string>
+    <string name="no_type">No, status</string>
+    <string name="next_question">Next Question</string>
+    <string name="guest_authentication_failed">Guest authentication failed</string>
+    <string name="i_have_account">I have an account</string>
+    <string name="i_do_not_have_account">I do not have an account</string>
+    <string name="sign_up_or_guest">You can sign up for continue as a guest</string>
+    <string name="guest_account_info">If you continue as a guest, you must signup later to save your data</string>
+    <string name="continue_as_guest">Continue as guest</string>
+    <string name="usb_keyboard">You need to connect a USB keyboard to the phone to use this app</string>
+    <string name="question_type">Question status</string>
+    <string name="course_keyboard_required">USB Keyboard required</string>
+    <string name="account_with_ngo">You need to have an account with an NGO to use this app</string>
+    <string name="space">Space</string>
+    <string name="space_symbol">␣</string>
+    <string name="full_stop">Full stop</string>
+    <string name="help">Help</string>
+    <string name="first_prime_minister_of_india">The first Prime Minister of India was Jawaharlal Nehru</string>
+    <string name="test_complete">Test Complete</string>
+    <string name="alert_typing_game" formatted="false">%d words per minute</string>
+    <string name="time_taken">Time taken</string>
+    <string name="new_reocrd">New Record</string>
+    <string name="start_new_game">Start</string>
+    <string name="your_most_recent_score">Your most recent score will be displayed here.</string>
+    <string name="your_best_score">Your best score will be displayed here.</string>
+    <string name="complete_as_many_as">Complete as many as you can within</string>
+    <string name="do_this_number_times">Do this %d times.</string>
+    <string name="typing_game_instructions_letters_small">You will be shown some letters. Type as many of them as you can within 1 minute.\nYour most recent score will be displayed here</string>
+    <string name="typing_game_instructions_letters_capital">You will be shown some letters. Type as many of them as you can within 1 minute.\nYour most recent score will be displayed here</string>
+    <string name="typing_game_instructions_1_word">Type the word %s as many times as you can within 1 minute.\nYour most recent score will be displayed here</string>
+    <string name="typing_game_instructions_many_words">You will be shown some words. Type as many of them as you can within 1 minute.\nYour most recent score will be displayed here</string>
+    <string name="typing_game_instructions_1_sentence">Type the sentence\n %s\n as many times as you can within 1 minute.\nYour most recent score will be displayed here</string>
+    <string name="typing_game_instructions_many_sentences">You will be shown some sentences. Type as many of them as you can within 1 minute.\nYour most recent score will be displayed here</string>
+    <string name="words_per_minute">Words per Minute</string>
+    <string name="typing_game">Typing Game</string>
+    <string name="high_score">High Score</string>
+    <string name="your_score">Your Score</string>
+    <string name="typing_game_cancelled">The task was cancelled</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="only_india_numbers">Only India mobile numbers are accepted at the moment</string>
+    <string name="country_code_and_number">Please enter your full number starting with your country code. Eg: +911092834890</string>
+    <string name="enter_number_here">Enter number here</string>
+    <string name="otp_will_be_sent">A One Time Passcode will be sent to this number</string>
+
+    <string name="send_otp">Send OTP</string>
+    <string name="not_entered_phone_number">You have not entered a phone number</string>
+    <string name="phone_number_10_digits">Your number should have 10 digits only</string>
+    <string name="correct_number_question">Correct Number?</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="did_not_receive_otp">Did not receive OTP?</string>
+    <string name="send_again">Send Again</string>
+    <string name="otp_not_entered">You have not entered an OTP</string>
+    <string name="otp_6_digit_enter_here">Enter 6 digit OTP here...</string>
+    <string name="otp_only_6_digits">Your OTP should only contain 6 digits</string>
+    <string name="otp_sent_again">An OTP has been sent to you</string>
+    <string name="otp_allow_1_min">Please allow upto 1 min for SMS to arrive</string>
+    <string name="continue_with_phone_number">Continue with Phone Number</string>
+    <string name="continue_with_email_address">Continue with Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="change_phone_number">Change Phone Number</string>
+    <string name="phone_number_updated">Phone number updated successfully</string>
+    <string name="phone_number_verified">Phone Number verified</string>
+    <string name="email_address_verified">Email Address verified</string>
+    <string name="words_correct">Words Correct</string>
+    <string name="characters_correct">Characters Correct</string>
+    <string name="letters_correct">Letters Correct</string>
+    <string name="numbers_correct">Numbers Correct</string>
+    <string name="accuracy">Accuracy</string>
+    <string name="speed">Speed</string>
+    <string name="target_speed">Target speed: 30 words per minute</string>
+    <string name="target_accuracy">Target accuracy</string>
+    <string name="title_activity_assistant">AssistantActivity</string>
+    <string name="good">good</string>
+    <string name="not_good">not good</string>
+    <string name="last_tried">Last tried</string>
+
+    <string name="title_activity_full_name">FullNameActivity</string>
+
+    <string name="title_activity_tabbed">One</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="educator_not_authorized_msg">Your account has not been given educator priveleges on this app. Only authorized accounts can get educator priveleges.\n\nYou must be recommended by someone to be an authorized educator.\n\nPlease email hasijaadarsh@gmail.com for doubts regarding educator priveleges</string>
+    <string name="educator_authorized_msg">You have been declared an authorized educator on this app</string>
+    <string name="educator_active_msg">You have registered as an educator on this app</string>
+    <string name="educator_suspended_msg">There was an issue with you status as an educator.\n\nPlease contact hasijaadarsh@gmail.com, with subject Educator Status Issue. Also please share your registered mobile number in the email.</string>
+    <string name="educator_deactivated_msg">You have successfuly deactivated your Educator profile. Your profile will not be made available for education services on the platform.\n\nYou can reactivate at any time to make your services available.</string>
+    <string name="name_add_edit">Please write to hasijaadarsh@gmail.com if you wish to add/edit your name or profile picture</string>
+    <string name="activate_educator_status">Activate Educator Status</string>
+    <string name="view_permissions">View Permissions</string>
+    <string name="view_your_content">View Your Content</string>
+    <string name="tagging">Tagging</string>
+    <string name="tagging_all">You have permission to tag any content on this app</string>
+    <string name="tagging_own">You have permission to tag content you have created on this app</string>
+    <string name="tagging_none">You do not have permission to tag content on this app. Contact hasijaadarsh@gmail.com for more info.</string>
+    <string name="you_are_not_creator">You are not the creator of this content. You only have permission to change tags for content you have created</string>
+    <string name="not_attempted">Not Attempted</string>
+    <string name="passed">Passed</string>
+    <string name="failed">Failed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="minute">minute</string>
+    <string name="minutes">minutes</string>
+    <string name="seconds">seconds</string>
+    <string name="milliseconds">milliseconds</string>
+    <string name="less_than_1_second">Less than 1 second</string>
+    <string name="hours">hours</string>
+    <string name="correct">Correct</string>
+    <string name="not_correct">Not Correct</string>
+    <string name="attempted">Attempted</string>
+    <string name="typing_speed">Typing Speed</string>
+    <string name="title_activity_task_gesture">TaskGestureActivity</string>
+    <string name="loading">Loading</string>
+    <string name="loading_complete">Loading Complete</string>
+
+    <string name="yay">YAYY!!!!!</string>
+    <string name="title_activity_google_ad">Advertisement</string>
+    <string name="facebook_app_id">2064355667218856</string>
+    <string name="fb_login_protocol_scheme">fb2064355667218856</string>
+    <string name="screenshot_long_press_for_full_screen">Long press for screenshot view</string>
+
+    <string name="cancelled">Cancelled</string>
+
+
+    <string name="no_attempt">You did not answer any questions</string>
+    <string name="back_button_pressed">The back button was pressed</string>
+
+    <string name="gesture_spam_detected">Gesture Spam Detected</string>
+
+    <string name="unknown">unknown</string>
+    <string name="tap">tap</string>
+    <string name="true_label">true</string>
+    <string name="swipe">swipe</string>
+    <string name="false_label">false</string>
+    <string name="audio">audio</string>
+    <string name="items">items</string>
+    <string name="slides">slides</string>
+    <string name="screenshot">Want screenshot?\nTap for full screen view</string>
+    <string name="tap_screen_to_login">Tap screen to login</string>
+    <string name="tap_screen_to_start">Tap screen to start</string>
+    <string name="have_usb_keyboard_press_enter">Have USB Keyboard?\nPress Enter to start</string>
+    <string name="swipe_continue_next">Swipe to continue to the next item</string>
+    <string name="long_press_for_more_options">Long press for more options</string>
+    <string name="long_press_to_close_this_screen">Long press to close this screen</string>
+    <string name="tap_screen_to_hear_text_again">Tap screen to hear text again</string>
+    <string name="double_tap_screen_to_hear_text_again">Double tap screen to hear text again</string>
+    <string name="double_tap_or_enter_to_start">Double tap screen to start\n\nHave USB Keyboard?\nPress Enter to start</string>
+    <string name="tap_and_long_press_for_more_options">Tap and long press for more options</string>
+    <string name="swipe_with_2_fingers_continue_next">Swipe with 2 fingers to continue to the next item</string>
+    <string name="swipe_with_2_fingers_for_keyboard_test">Swipe with 2 fingers for keyboard test</string>
+    <string name="tap_long_press_to_close_this_screen">Tap and long press to close this screen</string>
+    <string name="tap_screen_to_hear_content">Tap screen to hear content</string>
+    <string name="tap_screen_to_continue">Tap screen to continue</string>
+    <string name="double_tap_screen_to_continue">Double tap screen to continue</string>
+    <string name="result">Result</string>
+    <string name="screenshot_view">Screen shot view</string>
+    <string name="more_options_screen_opened">More options screen opened</string>
+    <string name="timed">Timed</string>
+    <string name="games">Games</string>
+    <string name="not_timed">Not Timed</string>
+    <string name="volume_is_mute">Your volume is mute</string>
+    <string name="all_results">All results</string>
+    <string name="as_an_educator">As a registered educator on this app, you are able to access this option</string>
+    <string name="full_course">Full course</string>
+    <string name="see_progress">See progress</string>
+    <string name="repeat_tasks_you_passed">Repeat tasks you have passed</string>
+    <string name="see_results_of_tasks_you_attempted">See results of tasks you attempted</string>
+    <string name="tap_to_view_details">Tap to view details</string>
+    <string name="tap_to_view_explanation">Tap to view explanation</string>
+    <string name="move_your_finger_to_top_left_to_get_content">Move your finger to the top left to get content</string>
+    <string name="long_press_to_view_responses">Long press to view your responses</string>
+    <string name="tap_long_press_to_view_responses">Tap and long press to view your responses</string>
+    <string name="spell">Spell</string>
+    <string name="type_character">Type character</string>
+    <string name="swipe_action">Swipe action</string>
+    <string name="tap_action">Tap action</string>
+    <string name="expected">Expected</string>
+    <string name="responses_not_recorded">Responses not recorded</string>
+    <string name="activity_will_end_if_interrupted">Please note that the activity will be ended if it is cancelled(example: by pressing Home)</string>
+    <string name="no_answer_received">No answer received</string>
+    <string name="first_task">First Task</string>
+    <string name="next_task">Next Task</string>
+    <string name="swipe_for_keyboard_test">Swipe for keyboard test</string>
+    <string name="actions">Actions</string>
+    <string name="records">Records</string>
+    <string name="checkpoint_reached">CHECKPOINT REACHED</string>
+    <string name="reached">Reached</string>
+    <string name="not_reached">Not Reached</string>
+    <string name="tap_swipe_keyboard_instructions">Using a USB keyboard?\nTap Y = True\nTap N = False\nTap Spacebar = Repeat question</string>
+    <string name="backspace">Backspace</string>
+    <string name="backspace_not_allowed">Backspace not allowed</string>
+    <string name="course">course</string>
+    <string name="next_character">next character</string>
+    <string name="in_order">in order</string>
+    <string name="not_in_order">not in order</string>
+    <string name="double_tap_for_next_item">double tap screen to hear next item</string>
+    <string name="enter_educator_name">Enter educator name</string>
+    <string name="search">Search</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="course_type">
+        <item>Typing</item>
+    </string-array>
+    <string-array name="course_difficulty">
+        <item>Basic</item>
+        <item>Advanced</item>
+    </string-array>
+    <string-array name="question_types">
+        <item>Trial</item>
+        <item>Test</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="typing_test_sentences">
+        <item>Roses are red</item>
+        <item>Mary had a little lamb</item>
+        <item>The sun is bright</item>
+        <item>The Earth is round</item>
+        <item>The cat looked out of the window</item>
+        <item>Mickey Mouse</item>
+        <item>Donald Duck</item>
+        <item>Tom and Jerry</item>
+        <item>Scooby Doo</item>
+        <item>The horse ran fast</item>
+        <item>The door was open</item>
+        <item>Dinosaurs were very big</item>
+        <item>The grass is green</item>
+        <item>The sky is blue</item>
+        <item>The spider spun a web</item>
+        <item>Birds fly in the air</item>
+        <item>Hare and the tortoise</item>
+        <item>The giraffe has a long neck</item>
+        <item>The lion roared</item>
+        <item>The dog barked</item>
+        <item>The fish swam in the sea</item>
+        <item>The tree has leaves</item>
+        <item>The train went very fast</item>
+        <item>Elephants have long trunks</item>
+        <item>Ants are very small</item>
+        <item>Jack and Jill</item>
+        <item>They went up the hill</item>
+    </string-array>
+</resources>

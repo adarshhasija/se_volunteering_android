@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>ads</key>
+        <value>None</value>
+    </entry>
+    <entry>
+        <key>ads_frequency_modulo</key> <!-- This decides how often ads should be displayed after completion of task -->
+        <value>0</value>
+    </entry>
+    <entry>
+        <key>analytics</key>
+        <value>none</value>
+    </entry>
+    <entry>
+        <key>gesture_spam_message</key>
+        <value>Gesture spam is the act of doing one gesture repeatly without following the content. This is not allowed. You should read the content carefully and respond accordingly.</value>
+    </entry>
+    <entry>
+        <key>sos_button_text</key>
+        <value></value>
+    </entry>
+
+</defaultsMap>
+    <!-- END xml_defaults -->
