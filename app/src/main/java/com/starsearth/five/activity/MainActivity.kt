@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(),
         CourseDescriptionFragment.OnFragmentInteractionListener,
         AnswerExplanationFragment.OnFragmentInteractionListener,
         AutismStoryFragment.OnListFragmentInteractionListener,
-        ProfileEducatorFragment.OnProfileEducatorFragmentInteractionListener,
+        ProfileVolunteerFragment.OnProfileEducatorFragmentInteractionListener,
         TagListFragment.OnListFragmentInteractionListener,
         ProfileEducatorPermissionsListFragment.OnListFragmentInteractionListener,
         EducatorContentFragment.OnListFragmentInteractionListener,
@@ -351,8 +351,8 @@ class MainActivity : AppCompatActivity(),
                     openFragmentWithSlideToLeftEffect(fragment, TagListFragment.TAG)
                 }
                 else if (mEducator?.status == Educator.Status.AUTHORIZED || mEducator?.status == Educator.Status.DEACTIVATED) {
-                    val fragment = ProfileEducatorFragment.newInstance(itemTitle, teachingContent as Parcelable)
-                    openFragmentWithSlideToLeftEffect(fragment, ProfileEducatorFragment.TAG)
+                    val fragment = ProfileVolunteerFragment.newInstance(itemTitle, teachingContent as Parcelable)
+                    openFragmentWithSlideToLeftEffect(fragment, ProfileVolunteerFragment.TAG)
                 }
             }
             else -> {
@@ -469,9 +469,9 @@ class MainActivity : AppCompatActivity(),
             val searchFragment = SearchFragment.newInstance("CLASS")
             openFragment(searchFragment, SearchFragment.TAG)
         }
-        else if (type == SEOneListItem.Type.EDUCATOR_PROFILE) {
-            val profileEducatorFragment = ProfileEducatorFragment.newInstance()
-            openFragment(profileEducatorFragment, ProfileEducatorFragment.TAG)
+        else if (type == SEOneListItem.Type.VOLUNTEER_PROFILE) {
+            val profileEducatorFragment = ProfileVolunteerFragment.newInstance()
+            openFragment(profileEducatorFragment, ProfileVolunteerFragment.TAG)
         }
         else if (type == SEOneListItem.Type.LOGOUT) {
             FirebaseAuth.getInstance().signOut();

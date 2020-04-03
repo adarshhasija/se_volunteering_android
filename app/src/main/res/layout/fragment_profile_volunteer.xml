@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ProfileEducatorFragment">
+    tools:context=".fragments.ProfileVolunteerFragment">
 
     <LinearLayout
         android:id="@+id/llPleaseWait"
@@ -35,6 +35,7 @@
         android:id="@+id/tvStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:gravity="center"
         android:text="@string/educator_not_authorized_msg"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -60,7 +61,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="5dp"
-            android:src="@mipmap/ic_computer" />
+            android:src="@mipmap/app_icon" />
 
         <TextView
             android:id="@+id/tvName"
@@ -71,12 +72,27 @@
             android:text="@string/name" />
 
         <TextView
+            android:id="@+id/tvVolunteerOrg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:text="No Volunteer Organization mentioned" />
+
+        <TextView
             android:id="@+id/tvProfileAddEdit"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name_add_edit"
             android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Details such as your name and volunteer organization will be used to auto-populate forms to save you time" />
 
     </LinearLayout>
     

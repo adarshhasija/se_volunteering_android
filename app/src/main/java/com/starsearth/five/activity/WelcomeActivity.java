@@ -112,7 +112,7 @@ public class WelcomeActivity extends AppCompatActivity {
         if (currentUser != null) {
             ((StarsEarthApplication) getApplication()).getAnalyticsManager().updateUserAnalyticsInfo(currentUser.getUid());
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("users").child(currentUser.getUid()).child("se_one").setValue(true);
+            mDatabase.child("users").child(currentUser.getUid()).child("se_five").setValue(true);
         }
 
     }

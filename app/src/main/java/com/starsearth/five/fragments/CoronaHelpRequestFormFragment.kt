@@ -511,7 +511,10 @@ class CoronaHelpRequestFormFragment : Fragment() {
                 val mDatabase = FirebaseDatabase.getInstance().getReference()
                 mDatabase.updateChildren(childUpdates).addOnSuccessListener {
                     llPleaseWait?.visibility = View.GONE
-                    listener?.requestCompleted()
+                    btnComplete?.visibility = View.GONE
+                    btnCancel?.visibility = View.GONE
+                    llDeliveryStatus?.visibility = View.VISIBLE //We do not want to exit once the save is complete. We will just show that the delivery successfully completed
+                    //listener?.requestCompleted()
                 }.addOnFailureListener {
                     llPleaseWait?.visibility = View.GONE
                     val alertDialog2 = (activity?.application as StarsEarthApplication)?.createAlertDialog(mContext)

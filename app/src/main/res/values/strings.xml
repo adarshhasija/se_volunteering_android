@@ -89,7 +89,7 @@
     <string name="se_assistant_keyboard_test_end">The keyboard test was %s. You can open the keyboard test at any time by swiping right at the top of the main menu.\nTap screen to continue</string>
     <string name="view_all">View All</string>
     <string name="educator_search">Educator Search</string>
-    <string name="educator_profile">Educator Profile</string>
+    <string name="volunteer_profile">Volunteer Profile</string>
     <string name="educator_search_hint">If you know someone who is an Educator on this app, enter their full name here</string>
     <string name="class_search_hint">You can search Class 1, Class 2, Class 3, Class 8 etc</string>
     <string name="covid19">Covid-19</string>
@@ -320,7 +320,7 @@
     <string name="educator_active_msg">You have registered as an educator on this app</string>
     <string name="educator_suspended_msg">There was an issue with you status as an educator.\n\nPlease contact hasijaadarsh@gmail.com, with subject Educator Status Issue. Also please share your registered mobile number in the email.</string>
     <string name="educator_deactivated_msg">You have successfuly deactivated your Educator profile. Your profile will not be made available for education services on the platform.\n\nYou can reactivate at any time to make your services available.</string>
-    <string name="name_add_edit">Please write to hasijaadarsh@gmail.com if you wish to add/edit your name or profile picture</string>
+    <string name="name_add_edit">Please write to hasijaadarsh@gmail.com if you wish to add/edit your name or profile picture or volunteer organization</string>
     <string name="activate_educator_status">Activate Educator Status</string>
     <string name="view_permissions">View Permissions</string>
     <string name="view_your_content">View Your Content</string>

@@ -52,7 +52,7 @@ public class SEOneListItem implements Parcelable {
         list.add(new SEOneListItem(context.getResources().getString(R.string.educator_search), Type.EDUCATOR_SEARCH));
         list.add(new SEOneListItem(context.getResources().getString(R.string.search_by_class), Type.SEARCH_BY_CLASS));
         list.add(new SEOneListItem(context.getResources().getString(R.string.fun), Type.TAG));
-        list.add(new SEOneListItem(context.getResources().getString(R.string.educator_profile), Type.EDUCATOR_PROFILE));
+        list.add(new SEOneListItem(context.getResources().getString(R.string.volunteer_profile), Type.VOLUNTEER_PROFILE));
         list.add(new SEOneListItem(context.getResources().getString(R.string.keyboard_test), Type.KEYBOARD_TEST));
         list.add(new SEOneListItem(context.getResources().getString(R.string.phone_number), Type.PHONE_NUMBER));
         if (BuildConfig.DEBUG) {
@@ -68,6 +68,7 @@ public class SEOneListItem implements Parcelable {
         list.add(new SEOneListItem(context.getResources().getString(R.string.corona_help_requests), Type.CORONA_HELP_REQUESTS));
         list.add(new SEOneListItem(context.getResources().getString(R.string.search_by_organization), Type.CORONA_ORGANIZATION_SEARCH));
         list.add(new SEOneListItem(context.getResources().getString(R.string.corona_make_new_help_request), Type.CORONA_NEW_HELP_REQUEST));
+        list.add(new SEOneListItem(context.getResources().getString(R.string.volunteer_profile), Type.VOLUNTEER_PROFILE));
 
         return list;
     }
@@ -114,7 +115,7 @@ public class SEOneListItem implements Parcelable {
             PHONE_NUMBER("PHONE_NUMBER"),
             EDUCATOR_SEARCH("EDUCATOR_SEARCH"),
             SEARCH_BY_CLASS("SEARCH_BY_CLASS"),
-            EDUCATOR_PROFILE("EDUCATOR_PROFILE"),
+            VOLUNTEER_PROFILE("VOLUNTEER_PROFILE"),
             GAME("GAME"),
             TIMED("TIMED"),
             ALL("ALL"),

@@ -21,7 +21,7 @@ import com.starsearth.five.domain.SETeachingContent
 import com.starsearth.five.domain.TagListItem
 import com.starsearth.five.managers.FirebaseManager
 import kotlinx.android.synthetic.main.fragment_autismstory_list.*
-import kotlinx.android.synthetic.main.fragment_profile_educator.*
+import kotlinx.android.synthetic.main.fragment_profile_volunteer.*
 import kotlinx.android.synthetic.main.fragment_tag_list.view.*
 import java.util.*
 import kotlin.collections.ArrayList

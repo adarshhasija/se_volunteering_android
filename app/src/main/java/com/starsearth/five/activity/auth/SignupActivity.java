@@ -52,7 +52,7 @@ public class SignupActivity extends AppCompatActivity {
                     if (mProgressBar != null) mProgressBar.setVisibility(View.GONE);
                     ((StarsEarthApplication) getApplication()).getAnalyticsManager().updateUserAnalyticsInfo(user.getUid());
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                    mDatabase.child("users").child(user.getUid()).child("se_one").setValue(true);
+                    mDatabase.child("users").child(user.getUid()).child("se_five").setValue(true);
                     finish();
                 }
             }
