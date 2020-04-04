@@ -425,20 +425,30 @@ class MainActivity : AppCompatActivity(),
         (application as? StarsEarthApplication)?.analyticsManager?.sendAnalyticsForListItemTap(item.text1, index)
         val intent: Intent
         val type = item.type
-        if (type == SEOneListItem.Type.KEYBOARD_TEST) {
-            intent = Intent(this, KeyboardActivity::class.java)
-            startActivity(intent)
+        if (mUser?.volunteerOrganization == null
+                && (type == SEOneListItem.Type.CORONA_HELP_REQUESTS || type == SEOneListItem.Type.CORONA_NEW_HELP_REQUEST)) {
+            //Only if they are part of a volunteer organization can they make a new request or see the list of requests
+            val alertDialog = (application as? StarsEarthApplication)?.createAlertDialog(this)
+            alertDialog?.setTitle(getString(R.string.error))
+            alertDialog?.setMessage("You must have a volunteer organization on your profile. Please see your volunteer profile for more information")
+            alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
+            alertDialog?.show()
+            return
         }
-        // START: CORONA
-        else if (type == SEOneListItem.Type.CORONA_DASHBOARD) {
+
+        if (type == SEOneListItem.Type.CORONA_DASHBOARD) {
             val coronaList = SEOneListItem.populateCoronaMenuList(this) as ArrayList<Parcelable>
             val coronaMainMenuListFragment = SeOneListFragment.newInstance(coronaList)
             openFragmentWithSlideToLeftEffect(coronaMainMenuListFragment, SeOneListFragment.TAG)
         }
         else if (type == SEOneListItem.Type.CORONA_HELP_REQUESTS) {
-            val coronaCitiesList = SEOneListItem.populateCoronaStatesList(this) as ArrayList<Parcelable>
-            val coronaCitiesListFragment = SeOneListFragment.newInstance(coronaCitiesList)
-            openFragmentWithSlideToLeftEffect(coronaCitiesListFragment, SeOneListFragment.TAG)
+            //val coronaCitiesList = SEOneListItem.populateCoronaStatesList(this) as ArrayList<Parcelable>
+            //val coronaCitiesListFragment = SeOneListFragment.newInstance(coronaCitiesList)
+            //openFragmentWithSlideToLeftEffect(coronaCitiesListFragment, SeOneListFragment.TAG)
+
+            //We are assuming there is a volunteer org in place
+            val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(mUser!!.volunteerOrganization)
+            openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)
         }
         else if (type == SEOneListItem.Type.CORONA_HELP_REQUESTS_FOR_STATES) {
             val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(1, null)
@@ -455,19 +465,9 @@ class MainActivity : AppCompatActivity(),
             val searchFragment = SearchFragment.newInstance("CORONA_ORGANIZATION_SEARCH")
             openFragment(searchFragment, SearchFragment.TAG)
         }
-        // END: CORONA
-
         else if (type == SEOneListItem.Type.PHONE_NUMBER) {
             intent = Intent(this, PhoneNumberActivity::class.java)
             startActivity(intent)
-        }
-        else if (type == SEOneListItem.Type.EDUCATOR_SEARCH) {
-            val searchFragment = SearchFragment.newInstance("EDUCATOR")
-            openFragment(searchFragment, SearchFragment.TAG)
-        }
-        else if (type == SEOneListItem.Type.SEARCH_BY_CLASS) {
-            val searchFragment = SearchFragment.newInstance("CLASS")
-            openFragment(searchFragment, SearchFragment.TAG)
         }
         else if (type == SEOneListItem.Type.VOLUNTEER_PROFILE) {
             val profileEducatorFragment = ProfileVolunteerFragment.newInstance()
@@ -480,10 +480,8 @@ class MainActivity : AppCompatActivity(),
             startActivity(intent)
         }
         else {
-            //val recordsListFragment = RecordListFragment.newInstance(item.type, item.text1)
+            //val recordsListFragment = RecordListFragment.newInstance(TagListItem(item.text1) as Parcelable, "TAG")
             //openFragment(recordsListFragment, RecordListFragment.TAG)
-            val recordsListFragment = RecordListFragment.newInstance(TagListItem(item.text1) as Parcelable, "TAG")
-            openFragment(recordsListFragment, RecordListFragment.TAG)
         }
     }
 
@@ -791,6 +789,22 @@ class MainActivity : AppCompatActivity(),
             today.time = dateTimeMillis
         }
         return dateFormat.format(today);
+    }
+
+    fun convertDateToIST(d : Date) : String {
+        //You are getting server date as argument, parse your server response and then pass date to this method
+        val sdf = SimpleDateFormat("hh:mm:ss");
+
+        val actualTime = sdf.format(d);
+        //Changed timezone
+        val tzInCurrentLocation = TimeZone.getDefault()
+        sdf.setTimeZone(tzInCurrentLocation);
+
+        val convertedTime = sdf.format(d);
+
+        System.out.println("actual : " + actualTime + "  converted " + convertedTime);
+
+        return convertedTime;
     }
 
 }

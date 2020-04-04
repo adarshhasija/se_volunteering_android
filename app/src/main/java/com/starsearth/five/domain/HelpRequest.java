@@ -15,6 +15,13 @@ public class HelpRequest implements Parcelable {
     public String landmark;
     public String volunteerOrganization;
     public String request;
+
+    //request type = DISTRIBUTION
+    public String noOfFamilyMembers;
+    public String aidType;
+    public String rationCard;
+    //
+
     public SEAddress address;
     public String status; //ACTIVE / COMPLETE / CANCELLED
     public String picCompleteUrl;
@@ -34,6 +41,9 @@ public class HelpRequest implements Parcelable {
         this.landmark = map.containsKey("landmark") ? (String) map.get("landmark") : null;
         this.volunteerOrganization = map.containsKey("volunteer_organization") ? (String) map.get("volunteer_organization") : null;
         this.request = map.containsKey("request") ? (String) map.get("request") : null;
+        this.noOfFamilyMembers = map.containsKey("no_of_family_members") ? (String) map.get("no_of_family_members") : null;
+        this.aidType = map.containsKey("aid_type") ? (String) map.get("aid_type") : null;
+        this.rationCard = map.containsKey("ration_card") ? (String) map.get("ration_card") : null;
         this.address = map.containsKey("address") ? new SEAddress((HashMap<String, Object>) map.get("address")) : null;
         this.status = map.containsKey("status") ? (String) map.get("status") : null;
         this.picCompleteUrl = map.containsKey("pic_complete_url") ? (String) map.get("pic_complete_url") : null;
@@ -50,6 +60,8 @@ public class HelpRequest implements Parcelable {
         landmark = in.readString();
         volunteerOrganization = in.readString();
         request = in.readString();
+        noOfFamilyMembers = in.readString();
+        aidType = in.readString();
         address = in.readParcelable(ClassLoader.getSystemClassLoader());
         status = in.readString();
         picCompleteUrl = in.readString();
@@ -84,6 +96,9 @@ public class HelpRequest implements Parcelable {
         parcel.writeString(landmark);
         parcel.writeString(volunteerOrganization);
         parcel.writeString(request);
+        parcel.writeString(noOfFamilyMembers);
+        parcel.writeString(aidType);
+        parcel.writeString(rationCard);
         parcel.writeParcelable(address, 0);
         parcel.writeString(status);
         parcel.writeString(picCompleteUrl);

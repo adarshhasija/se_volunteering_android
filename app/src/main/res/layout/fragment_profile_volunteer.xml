@@ -55,13 +55,25 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/app_icon"
+            android:layout_marginBottom="2dp" />
+        <TextView
+            android:id="@+id/tvVolunteerNetworkLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginBottom="15dp" />
+
 
         <ImageView
             android:id="@+id/ivProfile"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="5dp"
-            android:src="@mipmap/app_icon" />
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/tvName"
@@ -69,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="@string/name" />
 
         <TextView
@@ -85,14 +98,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name_add_edit"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="5dp"
-            android:text="Details such as your name and volunteer organization will be used to auto-populate forms to save you time" />
+            android:text="Details such as your name and volunteer organization will be used to auto-populate forms to save you time. These details will not be shared with anyone" />
 
     </LinearLayout>
     

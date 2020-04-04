@@ -19,6 +19,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
@@ -59,7 +60,7 @@ private const val ARG_HELP_REQUEST = "help_request"
  * Use the [CoronaHelpRequestFormFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CoronaHelpRequestFormFragment : Fragment() {
+class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedListener {
     // TODO: Rename and change types of parameters
     private lateinit var mContext : Context
     private var mHostPhone: String? = null //If we are re-opening the form in "onBehalfOf" mode.
@@ -151,6 +152,7 @@ class CoronaHelpRequestFormFragment : Fragment() {
         if (mHelpRequest != null) {
             //It is an existing request. Populate
             llLogoTitle?.visibility = View.VISIBLE
+            tvVolunteerNetworkLbl?.text = mContext.resources.getString(R.string.app_name) + " Volunteer Network"
             if (mHelpRequest!!.status == "COMPLETE" && mHelpRequest!!.timestampCompletion > 0) {
                 llDeliveryStatus?.visibility = View.VISIBLE
                 tvDeliveryDate?.visibility = View.VISIBLE
@@ -164,7 +166,13 @@ class CoronaHelpRequestFormFragment : Fragment() {
             tvSublocality?.visibility = View.VISIBLE
             etName?.visibility = View.GONE
             tvNameLabel?.visibility = View.VISIBLE
-            tvName?.text = mHelpRequest!!.name
+            tvName?.text =
+                    if (mHelpRequest!!.name.isNullOrEmpty()) {
+                        "Not given"
+                    }
+                    else {
+                        mHelpRequest!!.name
+                    }
             tvName?.visibility = View.VISIBLE
             if (mHelpRequest!!.guestPhone != null || mHelpRequest!!.guestName != null) {
                 mGuestPhone = mHelpRequest!!.guestPhone
@@ -179,10 +187,27 @@ class CoronaHelpRequestFormFragment : Fragment() {
             tvNeedHelpWithLbl?.visibility = View.VISIBLE
             tvSelectedRequest?.text = mHelpRequest!!.request
             tvSelectedRequest?.visibility = View.VISIBLE
+            if (mHelpRequest!!.request == "DISTRIBUTION") {
+                tvNoOfFamilyMembersLbl?.visibility = View.VISIBLE
+                tvNoOfFamilyMembers?.visibility = View.VISIBLE
+                tvNoOfFamilyMembers?.text = mHelpRequest!!.noOfFamilyMembers
+                tvAidTypeLbl?.visibility = View.VISIBLE
+                tvAidType?.visibility = View.VISIBLE
+                tvAidType?.text = mHelpRequest!!.aidType
+                tvRationCardLbl?.visibility = View.VISIBLE
+                tvRationCard?.visibility = View.VISIBLE
+                tvRationCard?.text = mHelpRequest!!.rationCard
+            }
             mHelpRequest!!.volunteerOrganization?.let {
                 tvYourOrganizationLbl?.visibility = View.VISIBLE
                 tvYourOrganization?.visibility = View.VISIBLE
-                tvYourOrganization?.text = it
+                tvYourOrganization?.text =
+                        if (it.isNotEmpty()) {
+                            it
+                        }
+                        else {
+                            "Not given"
+                        }
                 etOrganization?.visibility = View.GONE
             }
             spinnerRequest?.visibility = View.GONE
@@ -299,6 +324,7 @@ class CoronaHelpRequestFormFragment : Fragment() {
             etPhoneNumber?.visibility = View.VISIBLE
             etPhoneNumber?.setText(mGuestPhone, TextView.BufferType.EDITABLE)
             etName?.visibility = View.VISIBLE
+            etName?.hint = "Name of person or head of family"
             etName?.setText(mGuestName, TextView.BufferType.EDITABLE)
             btnSubmit?.visibility = View.VISIBLE
             btnSubmit?.text = "DONE"
@@ -349,10 +375,10 @@ class CoronaHelpRequestFormFragment : Fragment() {
         btnOnBehalf?.visibility = View.VISIBLE
         etLandmark?.visibility = View.VISIBLE
         val spinnerList = ArrayList<String>()
-        spinnerList.add("Food")
-        spinnerList.add("Groceries")
-        spinnerList.add("Medical")
-        //spinnerList.add("Distribution")
+        spinnerList.add("FOOD")
+        spinnerList.add("GROCERIES")
+        spinnerList.add("MEDICAL")
+        spinnerList.add("DISTRIBUTION")
 
         //Creating the ArrayAdapter instance having the country list
         val aa = ArrayAdapter(mContext,android.R.layout.simple_spinner_item,spinnerList.toArray())
@@ -362,6 +388,8 @@ class CoronaHelpRequestFormFragment : Fragment() {
         spinnerRequest.setSelection(0)
         tvNeedHelpWithLbl?.visibility = View.VISIBLE
         spinnerRequest?.visibility = View.VISIBLE
+
+        spinnerRequest?.onItemSelectedListener = this
 
         btnSubmit?.setOnClickListener {
             val userName = (activity as? MainActivity)?.mUser?.name
@@ -384,7 +412,6 @@ class CoronaHelpRequestFormFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val city = tvSublocality?.text?.toString()?.toUpperCase(Locale.getDefault())
             val landmark = etLandmark?.text.toString().toUpperCase(Locale.getDefault())
             val newlyEnteredOrganization = etOrganization?.text.toString().toUpperCase(Locale.getDefault())
             val request = (spinnerRequest?.selectedItem as String).toUpperCase(Locale.getDefault())
@@ -401,6 +428,14 @@ class CoronaHelpRequestFormFragment : Fragment() {
             map.put("landmark", landmark)
             map.put("volunteer_organization", volunteerOrganization ?: newlyEnteredOrganization)
             map.put("request", request)
+            if (request == "DISTRIBUTION") {
+                val noOfFamilyMembers = etNumberOfFamilyMembers?.text.toString()
+                val aidType = (spinnerAidType?.selectedItem as String).toUpperCase(Locale.getDefault())
+                val rationCard = (spinnerRationCard?.selectedItem as String).toUpperCase(Locale.getDefault())
+                map.put("no_of_family_members", noOfFamilyMembers)
+                map.put("aid_type", aidType)
+                map.put("ration_card", rationCard)
+            }
             map.put("status", "ACTIVE")
             mGuestPhone?.let { map.put("guest_phone", it) }
             mGuestName?.let { map.put("guest_name", it) }
@@ -411,16 +446,16 @@ class CoronaHelpRequestFormFragment : Fragment() {
             if (userName.isNullOrBlank() && !name.isNullOrBlank()) {
                 //User had not set username before. Should save it now for future convinience
                 //As per logic above, if username is black, then name is the value from the edittext
-                (activity as? MainActivity)?.mUser?.name = name
-                childUpdates["users/"+userId+"/name"] = name
+                //(activity as? MainActivity)?.mUser?.name = name
+                //childUpdates["users/"+userId+"/name"] = name
             }
             if (volunteerOrganization.isNullOrBlank() && !newlyEnteredOrganization.isNullOrBlank()) {
                 //User has not set their volunteer organization yet. Should save it now for future convinience
-                (activity as? MainActivity)?.mUser?.volunteerOrganization = newlyEnteredOrganization
-                childUpdates["users/"+userId+"/volunteer_organization"] = newlyEnteredOrganization
-                childUpdates["organizations/"+newlyEnteredOrganization+"/exists"] = true
-                childUpdates["organizations/"+newlyEnteredOrganization+"/people/"+userId+"/name"] = name
-                childUpdates["organizations/"+newlyEnteredOrganization+"/people/"+userId+"/phone"] = phoneNumber
+                //(activity as? MainActivity)?.mUser?.volunteerOrganization = newlyEnteredOrganization
+                //childUpdates["users/"+userId+"/volunteer_organization"] = newlyEnteredOrganization
+                //childUpdates["organizations/"+newlyEnteredOrganization+"/exists"] = true
+                //childUpdates["organizations/"+newlyEnteredOrganization+"/people/"+userId+"/name"] = name
+                //childUpdates["organizations/"+newlyEnteredOrganization+"/people/"+userId+"/phone"] = phoneNumber
             }
 
             llPleaseWait?.visibility = View.VISIBLE
@@ -514,6 +549,7 @@ class CoronaHelpRequestFormFragment : Fragment() {
                     btnComplete?.visibility = View.GONE
                     btnCancel?.visibility = View.GONE
                     llDeliveryStatus?.visibility = View.VISIBLE //We do not want to exit once the save is complete. We will just show that the delivery successfully completed
+                    svMain?.scrollTo(0,0) //Scroll back to the top
                     //listener?.requestCompleted()
                 }.addOnFailureListener {
                     llPleaseWait?.visibility = View.GONE
@@ -656,5 +692,50 @@ class CoronaHelpRequestFormFragment : Fragment() {
                         putParcelable(ARG_HELP_REQUEST, helpRequest)
                     }
                 }
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
+        if (index == 3) {
+            val spinnerList = ArrayList<String>()
+            spinnerList.add("FOOD PACKET")
+            spinnerList.add("RATION KIT")
+            spinnerList.add("MEDICINES")
+
+            //Creating the ArrayAdapter instance having the country list
+            val aaAidType = ArrayAdapter(mContext,android.R.layout.simple_spinner_item,spinnerList.toArray())
+            aaAidType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //Setting the ArrayAdapter data on the Spinner
+            spinnerAidType.setAdapter(aaAidType)
+            spinnerAidType.setSelection(0)
+
+            val spinnerListCardType = ArrayList<String>()
+            spinnerListCardType.add("APL")
+            spinnerListCardType.add("BPL")
+            spinnerListCardType.add("ANTHYODAYA")
+
+            //Creating the ArrayAdapter instance having the country list
+            val aaRationCard = ArrayAdapter(mContext,android.R.layout.simple_spinner_item,spinnerListCardType.toArray())
+            aaRationCard.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //Setting the ArrayAdapter data on the Spinner
+            spinnerRationCard.setAdapter(aaRationCard)
+            spinnerRationCard.setSelection(0)
+
+            etNumberOfFamilyMembers?.visibility = View.VISIBLE
+            tvAidTypeLbl?.visibility = View.VISIBLE
+            spinnerAidType?.visibility = View.VISIBLE
+            tvRationCardLbl?.visibility = View.VISIBLE
+            spinnerRationCard?.visibility = View.VISIBLE
+        }
+        else {
+            etNumberOfFamilyMembers?.visibility = View.GONE
+            tvAidTypeLbl?.visibility = View.GONE
+            spinnerAidType?.visibility = View.GONE
+            tvRationCardLbl?.visibility = View.GONE
+            spinnerRationCard?.visibility = View.GONE
+        }
     }
 }

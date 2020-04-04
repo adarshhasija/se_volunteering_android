@@ -29,6 +29,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/svMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -51,11 +52,12 @@
                     android:layout_height="50dp"
                     android:src="@mipmap/app_icon" />
                 <TextView
+                    android:id="@+id/tvVolunteerNetworkLbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold"
-                    android:text="Two Volunteer Network" />
+                    android:text="@string/app_name" />
 
             </LinearLayout>
 
@@ -162,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:textStyle="bold"
-                android:text="Name obtained from account" />
+                android:text="Name" />
 
             <TextView
                 android:id="@+id/tvName"
@@ -218,6 +220,26 @@
                 android:layout_marginBottom="5dp" />
 
 
+            <TextView
+                android:id="@+id/tvYourOrganizationLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="Organization"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvYourOrganization"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etOrganization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:hint="Your Organization" />
 
 
             <TextView
@@ -244,24 +266,72 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textStyle="bold" />
 
+
+            <!-- START: DISTRIBUTION -->
+
             <TextView
-                android:id="@+id/tvYourOrganizationLbl"
+                android:id="@+id/tvNoOfFamilyMembersLbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Organization"
-                android:textStyle="bold" />
-
+                android:visibility="gone"
+                android:text="No. of family members" />
             <TextView
-                android:id="@+id/tvYourOrganization"
+                android:id="@+id/tvNoOfFamilyMembers"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:visibility="gone" />
             <EditText
-                android:id="@+id/etOrganization"
+                android:id="@+id/etNumberOfFamilyMembers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:hint="Your Organization" />
+                android:hint="Number of members in family"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/tvAidTypeLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:text="Aid Type" />
+            <TextView
+                android:id="@+id/tvAidType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="5dp" />
+            <Spinner
+                android:id="@+id/spinnerAidType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/tvRationCardLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:text="Ration Card" />
+            <TextView
+                android:id="@+id/tvRationCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="5dp" />
+            <Spinner
+                android:id="@+id/spinnerRationCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
+
+            <!-- END: DISTRIBUTION -->
+
 
 
             <Button
