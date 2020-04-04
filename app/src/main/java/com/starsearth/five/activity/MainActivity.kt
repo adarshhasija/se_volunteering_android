@@ -447,8 +447,17 @@ class MainActivity : AppCompatActivity(),
             //openFragmentWithSlideToLeftEffect(coronaCitiesListFragment, SeOneListFragment.TAG)
 
             //We are assuming there is a volunteer org in place
-            val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(mUser!!.volunteerOrganization)
-            openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)
+            if (mUser?.volunteerOrganization != null) {
+                val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(mUser!!.volunteerOrganization)
+                openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)
+            }
+            else {
+                val alertDialog = (application as? StarsEarthApplication)?.createAlertDialog(this)
+                alertDialog?.setTitle(getString(R.string.error))
+                alertDialog?.setMessage("We encountered an error while retrieving the details of your volunteer organization. Please go to your volunteer profile and see if it is listed there")
+                alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
+                alertDialog?.show()
+            }
         }
         else if (type == SEOneListItem.Type.CORONA_HELP_REQUESTS_FOR_STATES) {
             val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(1, null)
