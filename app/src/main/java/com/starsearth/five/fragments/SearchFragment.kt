@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +48,26 @@ class SearchFragment : Fragment() {
     private val mVolunteerOrganizationValuesListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot?) {
             llPleaseWait?.visibility = View.GONE
-            val value = dataSnapshot?.value
-            if (value == true) {
-                mSearchText?.let { listener?.onOrganizationFoundThroughSearch(it) }
+            val map = dataSnapshot?.value
+            if (map != null) {
+                var noMatches = true
+                for (entry in (map as HashMap<*, *>).entries) {
+                    noMatches = false
+                    val key = entry.key as String
+                    val value = entry.value as HashMap<String, Any>
+                    val name : String = value.get("name") as String
+                    if (mSearchText?.toUpperCase(Locale.getDefault()) == name.toUpperCase(Locale.getDefault())) {
+                        mSearchText?.let { listener?.onOrganizationFoundThroughSearch(it) }
+                    }
+                }
+
+                if (noMatches) {
+                    val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                    alertDialog?.setTitle(mContext.getString(R.string.error))
+                    alertDialog?.setMessage(mContext.getString(R.string.no_search_results))
+                    alertDialog?.setPositiveButton(android.R.string.ok, null)
+                    alertDialog?.show()
+                }
             }
             else {
                 val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
@@ -58,6 +76,16 @@ class SearchFragment : Fragment() {
                 alertDialog?.setPositiveButton(android.R.string.ok, null)
                 alertDialog?.show()
             }
+         /*   if (value == true) {
+                mSearchText?.let { listener?.onOrganizationFoundThroughSearch(it) }
+            }
+            else {
+                val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                alertDialog?.setTitle(mContext.getString(R.string.error))
+                alertDialog?.setMessage(mContext.getString(R.string.no_search_results))
+                alertDialog?.setPositiveButton(android.R.string.ok, null)
+                alertDialog?.show()
+            }   */
         }
 
         override fun onCancelled(p0: DatabaseError?) {
@@ -264,7 +292,9 @@ class SearchFragment : Fragment() {
                     llPleaseWait?.visibility = View.VISIBLE
                     if (mSearchType == "CORONA_ORGANIZATION_SEARCH") {
                         val refOrgs = FirebaseDatabase.getInstance().getReference("organizations")
-                        refOrgs.child(mSearchText!! + "/exists").addListenerForSingleValueEvent(mVolunteerOrganizationValuesListener)
+                        //refOrgs.child(mSearchText!! + "/exists").addListenerForSingleValueEvent(mVolunteerOrganizationValuesListener)
+                        val orgQuery = refOrgs.orderByChild("name").equalTo(mSearchText!!)
+                        orgQuery.addListenerForSingleValueEvent(mVolunteerOrganizationValuesListener)
                     }
                     else {
                         val refEducators = FirebaseDatabase.getInstance().getReference("users")

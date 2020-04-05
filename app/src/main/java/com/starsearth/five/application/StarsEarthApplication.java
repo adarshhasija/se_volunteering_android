@@ -90,16 +90,17 @@ public class StarsEarthApplication extends Application {
         }); */
 
 
-     /*   DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    /*    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         HashMap<String, Object> childUpdates = new HashMap<>();
         String userId = "RycAhfhPsXOrUdbO8GOJqucktAA3";
         String newlyEnteredOrganization = "SMILEYS";
         String name = "ADARSH HASIJA";
         String phoneNumber = "+918050389798";
-        childUpdates.put("users/"+userId+"/volunteer_organization", newlyEnteredOrganization);
-        childUpdates.put("organizations/"+newlyEnteredOrganization+"/exists", true);
-        childUpdates.put("organizations/"+newlyEnteredOrganization+"/people/"+userId+"/name", name);
-        childUpdates.put("organizations/"+newlyEnteredOrganization+"/people/"+userId+"/phone", phoneNumber);
+        String keyOrg = mDatabase.push().getKey();
+        //childUpdates.put("users/"+userId+"/volunteer_organization", newlyEnteredOrganization);
+        childUpdates.put("organizations/"+keyOrg+"/name/", newlyEnteredOrganization);
+        childUpdates.put("organizations/"+keyOrg+"/people/"+userId+"/name", name);
+        childUpdates.put("organizations/"+keyOrg+"/people/"+userId+"/phone", phoneNumber);
         mDatabase.updateChildren(childUpdates);
         */
     }
