@@ -127,6 +127,7 @@ public class SEOneListItem implements Parcelable {
             CORONA_MY_HELP_REQUESTS("CORONA_MY_HELP_REQUESTS"),
             CORONA_HELP_REQUESTS_FOR_STATES("CORONA_HELP_REQUESTS_FOR_STATES"),
             CORONA_NEW_HELP_REQUEST("CORONA_NEW_HELP_REQUEST"),
+            NORMAL_STRING("NORMAL_STRING"),
             TAG("TAG")
             ;
 

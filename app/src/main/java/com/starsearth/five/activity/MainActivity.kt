@@ -60,6 +60,11 @@ class MainActivity : AppCompatActivity(),
         CoronaHelpRequestFormFragment.OnFragmentInteractionListener,
         SeOneListFragment.OnSeOneListFragmentInteractionListener {
 
+    override fun onLocationChangeOptionSelected(locationsList: ArrayList<Parcelable>) {
+        val coronaMainMenuListFragment = SeOneListFragment.newInstance(locationsList)
+        openFragmentWithSlideToLeftEffect(coronaMainMenuListFragment, SeOneListFragment.TAG)
+    }
+
     override fun onBehalfOfDetailsEntered(phone: String, name: String) {
         supportFragmentManager?.popBackStackImmediate()
         val lastFragment = supportFragmentManager?.fragments?.last()

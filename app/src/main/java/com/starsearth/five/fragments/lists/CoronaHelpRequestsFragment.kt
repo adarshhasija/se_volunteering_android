@@ -11,6 +11,7 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
+import android.os.Parcelable
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -26,11 +27,13 @@ import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.starsearth.five.R
 import com.starsearth.five.activity.MainActivity
 import com.starsearth.five.adapter.CoronaHelpRequestsRecyclerViewAdapter
 import com.starsearth.five.domain.HelpRequest
+import com.starsearth.five.domain.SEOneListItem
 import com.starsearth.five.domain.User
 import com.starsearth.five.managers.FirebaseManager
 
@@ -206,7 +209,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             mVolunteerOrg = it.getString(ARG_ORG)
         }
 
-        //setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -327,6 +330,34 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                 listener?.onCoronaHelpListFragmentAddButtonTapped()
                 return true
             }
+            R.id.changeLocation -> {
+                llPleaseWait?.visibility = View.VISIBLE
+                FirebaseDatabase.getInstance().getReference("help_request_locations").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                        llPleaseWait?.visibility = View.GONE
+                        val map = dataSnapshot?.value as HashMap<String, Any>
+                        if (map != null) {
+                            val locationsList = ArrayList<Parcelable>()
+                            for (entry in (map as HashMap<*, *>).entries) {
+                                Log.d(TAG, "*******KEY :" + entry.key)
+                                Log.d(TAG, "********VALUE :" + entry.value)
+                                val country = entry.key as String
+                                val seOnListItem = SEOneListItem(country, SEOneListItem.Type.NORMAL_STRING)
+                                locationsList.add(seOnListItem)
+                            }
+                            listener?.onLocationChangeOptionSelected(locationsList)
+                        }
+
+                    }
+
+                    override fun onCancelled(p0: DatabaseError?) {
+                        llPleaseWait?.visibility = View.GONE
+                    }
+
+                })
+
+                return true
+            }
         }
 
         return false
@@ -435,6 +466,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         fun onCoronaHelpListFragmentInteraction(item: HelpRequest)
         fun onCoronaHelpListFragmentAddButtonTapped()
         fun requestLocationToViewHelpRequests()
+        fun onLocationChangeOptionSelected(locationsList : ArrayList<Parcelable>)
     }
 
     companion object {
