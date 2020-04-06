@@ -426,7 +426,7 @@ class MainActivity : AppCompatActivity(),
         val intent: Intent
         val type = item.type
         if (mUser?.volunteerOrganization == null
-                && (type == SEOneListItem.Type.CORONA_HELP_REQUESTS || type == SEOneListItem.Type.CORONA_NEW_HELP_REQUEST)) {
+                && (type == SEOneListItem.Type.CORONA_ORG_HELP_REQUESTS || type == SEOneListItem.Type.CORONA_NEW_HELP_REQUEST)) {
             //Only if they are part of a volunteer organization can they make a new request or see the list of requests
             val alertDialog = (application as? StarsEarthApplication)?.createAlertDialog(this)
             alertDialog?.setTitle(getString(R.string.error))
@@ -441,7 +441,7 @@ class MainActivity : AppCompatActivity(),
             val coronaMainMenuListFragment = SeOneListFragment.newInstance(coronaList)
             openFragmentWithSlideToLeftEffect(coronaMainMenuListFragment, SeOneListFragment.TAG)
         }
-        else if (type == SEOneListItem.Type.CORONA_HELP_REQUESTS) {
+        else if (type == SEOneListItem.Type.CORONA_ORG_HELP_REQUESTS) {
             //val coronaCitiesList = SEOneListItem.populateCoronaStatesList(this) as ArrayList<Parcelable>
             //val coronaCitiesListFragment = SeOneListFragment.newInstance(coronaCitiesList)
             //openFragmentWithSlideToLeftEffect(coronaCitiesListFragment, SeOneListFragment.TAG)

@@ -234,6 +234,11 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "**********ON VIEW CREATED**************")
 
+        if (mVolunteerOrg != null) {
+            // Viewing requests at volunteer org level, not individual level
+            tvVolunteerOrg?.text = mVolunteerOrg
+            tvVolunteerOrg?.visibility = View.VISIBLE
+        }
         mSpinnerArrayAdapter = ArrayAdapter(mContext,android.R.layout.simple_spinner_item, ArrayList<String>().toMutableList() as List<Any>)
         mSpinnerArrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerLocality?.setAdapter(mSpinnerArrayAdapter)
