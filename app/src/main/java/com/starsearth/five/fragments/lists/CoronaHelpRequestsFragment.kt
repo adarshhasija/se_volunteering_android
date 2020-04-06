@@ -186,7 +186,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
 
     private fun isDateMatching(timeMillis : Long) : Boolean {
         val selectedDate = Calendar.getInstance()
-        selectedDate.timeInMillis = mSelectedDateMillis
+        selectedDate.timeInMillis = mSelectedDateMillis //This is the date user has selected in the filter
         val downloadedDate = Calendar.getInstance()
         downloadedDate.timeInMillis = timeMillis
         return selectedDate.get(Calendar.YEAR) == downloadedDate.get(Calendar.YEAR)

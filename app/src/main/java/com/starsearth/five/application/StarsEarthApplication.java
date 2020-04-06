@@ -73,7 +73,8 @@ public class StarsEarthApplication extends Application {
         //String keyEducator = mDatabase.push().getKey();
         //mDatabase.child("educators").child(keyEducator).setValue(educator);
         //mDatabase.child("educators").child("-LtnpPKKKK4Un92RZ5Zy").child("tagging").setValue(Educator.PERMISSIONS.TAGGING_ALL);
-        //mDatabase.child("users").child("0jLuro6wfcSCMtsYkdj8AaiMkgW2").child("name").setValue("Akanksha Mishra");
+        //mDatabase.child("users").child("ScpogOuQi7QjLJ5cFMyZOFODeeF3").child("name").setValue("MOHAMMED HIDAYATH-ULLA");
+        //mDatabase.child("users").child("Pt2NIGkY2tPp5Xf55IGWabkOeTy1").child("volunteer_organization").setValue("MERCY MISSION");
 
         //StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("images/RycAhfhPsXOrUdbO8GOJqucktAA3.jpg");
         //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.profilepic);
@@ -92,11 +93,11 @@ public class StarsEarthApplication extends Application {
 
         //DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         //HashMap<String, Object> childUpdates = new HashMap<>();
-        //String userId = "RycAhfhPsXOrUdbO8GOJqucktAA3";
-        //String newlyEnteredOrganization = "SMILEYS";
-        //String name = "ADARSH HASIJA";
-        //String phoneNumber = "+918050389798";
-        //String keyOrg = mDatabase.push().getKey();
+        //String userId = "ScpogOuQi7QjLJ5cFMyZOFODeeF3";
+        //String newlyEnteredOrganization = "MERCY MISSION";
+        //String name = "MOHAMMED HIDAYATH-ULLA";
+        //String phoneNumber = "+917259136593";
+        //String keyOrg = "-M4FJnRC2qjA19X-x9yr"; //mDatabase.push().getKey();
         //childUpdates.put("users/"+userId+"/volunteer_organization", newlyEnteredOrganization);
         //childUpdates.put("organizations/"+keyOrg+"/name/", newlyEnteredOrganization);
         //childUpdates.put("organizations/"+keyOrg+"/people/"+userId+"/name", name);
