@@ -156,7 +156,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             if (mHelpRequest!!.status == "COMPLETE" && mHelpRequest!!.timestampCompletion > 0) {
                 llDeliveryStatus?.visibility = View.VISIBLE
                 tvDeliveryDate?.visibility = View.VISIBLE
-                tvDeliveryDate?.text = (activity as? MainActivity)?.getFormattedDate(mHelpRequest!!.timestampCompletion)
+                tvDeliveryDate?.text = (activity as? MainActivity)?.convertDateTimeToIST(Date(mHelpRequest!!.timestampCompletion))
             }
             tvPhoneNumberLbl?.visibility = View.VISIBLE
             tvPhoneNumber?.text = mHelpRequest!!.phone
@@ -420,7 +420,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             val key: String = mDatabase.push().getKey()
             val userId = (activity as? MainActivity)?.mUser?.uid
             val map = HashMap<String, Any>()
-            map.put("uid", key)
+            //map.put("uid", key)
             map.put("userId", userId!!)
             phoneNumber?.let { map.put("phone", it) }
             map.put("name", name)

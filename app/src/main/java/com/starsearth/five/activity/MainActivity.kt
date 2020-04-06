@@ -800,9 +800,19 @@ class MainActivity : AppCompatActivity(),
         return dateFormat.format(today);
     }
 
-    fun convertDateToIST(d : Date) : String {
+    fun getFormattedDateAndTime(dateTimeMillis : Long?) : String {
+        val dateFormat = SimpleDateFormat("dd-MMM-yyyy hh:mm a")
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        val today = Calendar.getInstance().time
+        if (dateTimeMillis != null) {
+            today.time = dateTimeMillis
+        }
+        return dateFormat.format(today);
+    }
+
+    fun convertDateTimeToIST(d : Date) : String {
         //You are getting server date as argument, parse your server response and then pass date to this method
-        val sdf = SimpleDateFormat("hh:mm:ss");
+        val sdf = SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a");
 
         val actualTime = sdf.format(d);
         //Changed timezone
