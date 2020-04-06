@@ -205,6 +205,8 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             mCopyOfUser = it.getParcelable(ARG_USER)
             mVolunteerOrg = it.getString(ARG_ORG)
         }
+
+        //setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

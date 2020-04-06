@@ -152,7 +152,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         if (mHelpRequest != null) {
             //It is an existing request. Populate
             llLogoTitle?.visibility = View.VISIBLE
-            tvVolunteerNetworkLbl?.text = mContext.resources.getString(R.string.app_name) + " Volunteer Network"
+            tvVolunteerNetworkLbl?.text = "SE Volunteer Network"
             if (mHelpRequest!!.status == "COMPLETE" && mHelpRequest!!.timestampCompletion > 0) {
                 llDeliveryStatus?.visibility = View.VISIBLE
                 tvDeliveryDate?.visibility = View.VISIBLE
@@ -444,18 +444,23 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             val childUpdates: MutableMap<String, Any> = HashMap()
             childUpdates["help_requests/"+key] = map
             if (userName.isNullOrBlank() && !name.isNullOrBlank()) {
+                //********We are not saving this here. We are getting it from the user's volunteer profile
                 //User had not set username before. Should save it now for future convinience
                 //As per logic above, if username is black, then name is the value from the edittext
                 //(activity as? MainActivity)?.mUser?.name = name
                 //childUpdates["users/"+userId+"/name"] = name
             }
             if (volunteerOrganization.isNullOrBlank() && !newlyEnteredOrganization.isNullOrBlank()) {
+                //*********We are not saving this here right now. We are getting it from the user's volunteer profile*****
                 //User has not set their volunteer organization yet. Should save it now for future convinience
                 //(activity as? MainActivity)?.mUser?.volunteerOrganization = newlyEnteredOrganization
                 //childUpdates["users/"+userId+"/volunteer_organization"] = newlyEnteredOrganization
                 //childUpdates["organizations/"+newlyEnteredOrganization+"/exists"] = true
                 //childUpdates["organizations/"+newlyEnteredOrganization+"/people/"+userId+"/name"] = name
                 //childUpdates["organizations/"+newlyEnteredOrganization+"/people/"+userId+"/phone"] = phoneNumber
+            }
+            mAddressFromPhone?.let {
+                childUpdates["help_request_locations/"+it.countryName.toUpperCase()+"/"+it.adminArea] = true
             }
 
             llPleaseWait?.visibility = View.VISIBLE
