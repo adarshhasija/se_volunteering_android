@@ -7,8 +7,10 @@ import android.os.Handler
 import android.os.Parcelable
 import android.view.View
 import com.starsearth.five.R
+import com.starsearth.five.domain.User
 import com.starsearth.five.fragments.HighScoreFragment
 import com.starsearth.five.fragments.ProfilePicFragment
+import com.starsearth.five.fragments.SummaryFragment
 import kotlinx.android.synthetic.main.activity_full_screen.*
 
 /**
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_full_screen.*
  * status bar and navigation/system bar) with user interaction.
  */
 class FullScreenActivity : AppCompatActivity(),
+        SummaryFragment.OnFragmentInteractionListener,
         ProfilePicFragment.OnFragmentInteractionListener,
         HighScoreFragment.OnFragmentInteractionListener {
 
@@ -92,6 +95,30 @@ class FullScreenActivity : AppCompatActivity(),
                 supportFragmentManager.beginTransaction()
                         .add(R.id.fragment_container_main, fragment).commit()
             }
+
+        }
+        else if (view_type == VIEW_TYPE_DAILY_SUMMARY) {
+            val hashMap = extras.getSerializable("MAP") as HashMap<String, Any>
+            val fragment = SummaryFragment.newInstance(hashMap)
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.fragment_container_main, fragment).commit()
+          /*  val byteArray = extras.getByteArray(IMG_BYTE_ARRAY)
+            val totalCompleted = extras.getInt(TOTAL_COMPLETED)
+            val volunteerOrg = extras.getString(VOLUNTEER_ORG)
+            val formattedDateTime = extras.getString(FORMATTED_DATE_TIME)
+            val user = extras.getParcelable(USER) as User
+
+            if (user != null && formattedDateTime != null && totalCompleted != null) {
+                val hashMap = HashMap<String, Any>()
+                hashMap.put(SummaryFragment.ARG_USER, user)
+                hashMap.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, formattedDateTime)
+                hashMap.put(SummaryFragment.ARG_COMPLETED, totalCompleted)
+                hashMap.put(SummaryFragment.ARG_VOLUNTEER_ORG, volunteerOrg)
+                hashMap.put(SummaryFragment.ARG_BYTE_ARRAY, byteArray)
+                val fragment = SummaryFragment.newInstance(hashMap)
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.fragment_container_main, fragment).commit()
+            }   */
 
         }
 
@@ -172,5 +199,11 @@ class FullScreenActivity : AppCompatActivity(),
 
         val VIEW_TYPE_PROFILE_PIC = "view_type_profile_pic"
         val IMG_BYTE_ARRAY = "img_byte_array"
+
+        val VIEW_TYPE_DAILY_SUMMARY = "view_type_daily_summary"
+        val TOTAL_COMPLETED = "total_completed"
+        val VOLUNTEER_ORG = "volunteer_org"
+        val FORMATTED_DATE_TIME = "formatted_date_time"
+        val USER = "user"
     }
 }

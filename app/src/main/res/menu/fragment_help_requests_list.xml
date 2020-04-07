@@ -11,9 +11,9 @@
         app:showAsAction="always" />    -->
 
     <item
-        android:id="@+id/changeLocation"
-        android:orderInCategory="200"
-        android:title="Change Location"
+        android:id="@+id/summary"
+        android:orderInCategory="300"
+        android:title="Summary"
         android:visible="true"
         app:showAsAction="never" />
 </menu>

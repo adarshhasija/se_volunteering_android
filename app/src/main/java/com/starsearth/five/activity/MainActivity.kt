@@ -60,6 +60,15 @@ class MainActivity : AppCompatActivity(),
         CoronaHelpRequestFormFragment.OnFragmentInteractionListener,
         SeOneListFragment.OnSeOneListFragmentInteractionListener {
 
+    override fun onMenuItemSummaryTapped(hashmap: HashMap<String, Any>) {
+        val intent = Intent(this@MainActivity, FullScreenActivity::class.java)
+        val bundle = Bundle()
+        bundle.putString(FullScreenActivity.VIEW_TYPE, FullScreenActivity.VIEW_TYPE_DAILY_SUMMARY)
+        bundle.putSerializable("MAP", hashmap)
+        intent.putExtras(bundle)
+        startActivity(intent)
+    }
+
     override fun onBehalfOfDetailsEntered(phone: String, name: String) {
         supportFragmentManager?.popBackStackImmediate()
         val lastFragment = supportFragmentManager?.fragments?.last()
@@ -809,7 +818,7 @@ class MainActivity : AppCompatActivity(),
 
     fun convertDateTimeToIST(d : Date) : String {
         //You are getting server date as argument, parse your server response and then pass date to this method
-        val sdf = SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a");
+        val sdf = SimpleDateFormat("dd-MMM-yyyy hh:mm a");
 
         val actualTime = sdf.format(d);
         //Changed timezone

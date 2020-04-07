@@ -27,11 +27,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.starsearth.five.R
 import com.starsearth.five.activity.MainActivity
 import com.starsearth.five.adapter.CoronaHelpRequestsRecyclerViewAdapter
+import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.domain.HelpRequest
 import com.starsearth.five.domain.User
+import com.starsearth.five.fragments.SummaryFragment
 import com.starsearth.five.managers.FirebaseManager
 
 import kotlinx.android.synthetic.main.fragment_coronahelprequests_list.*
@@ -61,6 +64,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
     private var mCopyOfUser : User? = null
     private var mHostPhoneNumber : String? = FirebaseAuth.getInstance().currentUser?.phoneNumber
     private var mSubLocalities : LinkedHashMap<String, Int> = LinkedHashMap()
+    private var mNumberComplete : Int = 0
     private var listener: OnListFragmentInteractionListener? = null
 
     private val mHelpRequestsListener = object : ValueEventListener {
@@ -95,11 +99,10 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                         Log.d("TAG", "********DATE NOT MATCHING************")
                         continue
                     }
-                /*    if (newHelpRequest.status != "ACTIVE") {
-                        Log.d("TAG", "********NOT ACTIVE************")
-                        //If it belongs to the same area but is not active, let it go
+                    if (newHelpRequest.status == "COMPLETE") {
+                        mNumberComplete++
                         continue
-                    }   */
+                    }
                     Log.d(TAG, "*********SUBLOCALITY of new request: " + newHelpRequest.address.subLocality)
                     // Keep a record of the admin area. Will be needed to pupulate the dropdown
                     newHelpRequest?.address?.subLocality?.let {
@@ -206,7 +209,10 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             mVolunteerOrg = it.getString(ARG_ORG)
         }
 
-        //setHasOptionsMenu(true)
+        if (mCopyOfUser != null) {
+            //Currently Summary option is only available at user level
+            setHasOptionsMenu(true)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -332,6 +338,44 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                 listener?.onCoronaHelpListFragmentAddButtonTapped()
                 return true
             }
+            R.id.summary -> {
+                llPleaseWait?.visibility = View.VISIBLE
+                val user = (activity as? MainActivity)?.mUser
+                val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
+                val map = HashMap<String, Any>()
+                user?.let { map.put(SummaryFragment.ARG_USER, it) }
+                dateTime?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, it) }
+                map.put(SummaryFragment.ARG_COMPLETED, mNumberComplete)
+                mVolunteerOrg?.let { map.put(SummaryFragment.ARG_VOLUNTEER_ORG, it) }
+                val picUrl : String? = (activity as? MainActivity)?.mUser?.pic
+                if (picUrl != null) {
+                    var profilePicRef = FirebaseStorage.getInstance().reference.child(picUrl)
+                    val ONE_MEGABYTE: Long = 1024 * 1024
+                    profilePicRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                        llPleaseWait?.visibility = View.GONE
+                        map.put(SummaryFragment.ARG_BYTE_ARRAY, it)
+                        listener?.onMenuItemSummaryTapped(map)
+                    }.addOnFailureListener {
+                        // Handle any errors
+                        llPleaseWait?.visibility = View.GONE
+                        val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                        alertDialog?.setTitle(mContext.getString(R.string.error))
+                        alertDialog?.setMessage("Operation failed. Please try again later")
+                        alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
+                        alertDialog?.show()
+                    }
+                }
+                else {
+                    llPleaseWait?.visibility = View.GONE
+                    val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                    alertDialog?.setTitle(mContext.getString(R.string.error))
+                    alertDialog?.setMessage("You need a photo in order to produce a summary sheet. Please contact hasijaadarsh@gmail.com for more information")
+                    alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
+                    alertDialog?.show()
+                }
+
+                return true
+            }
         }
 
         return false
@@ -440,6 +484,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         fun onCoronaHelpListFragmentInteraction(item: HelpRequest)
         fun onCoronaHelpListFragmentAddButtonTapped()
         fun requestLocationToViewHelpRequests()
+        fun onMenuItemSummaryTapped(hashMap: HashMap<String, Any>)
     }
 
     companion object {
