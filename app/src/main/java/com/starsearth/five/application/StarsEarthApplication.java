@@ -93,11 +93,12 @@ public class StarsEarthApplication extends Application {
 
         //DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         //HashMap<String, Object> childUpdates = new HashMap<>();
-        //String userId = "ScpogOuQi7QjLJ5cFMyZOFODeeF3";
-        //String newlyEnteredOrganization = "MERCY MISSION";
+        //String userId = "RycAhfhPsXOrUdbO8GOJqucktAA3";
+        //String newlyEnteredOrganization = "SMILEYS";
         //String name = "MOHAMMED HIDAYATH-ULLA";
-        //String phoneNumber = "+917259136593";
-        //String keyOrg = "-M4FJnRC2qjA19X-x9yr"; //mDatabase.push().getKey();
+        //String phoneNumber = "+918050389798";
+        //String keyOrg = mDatabase.push().getKey();
+        //childUpdates.put("organizations/authorized_people/"+phoneNumber+"/SMILEYS", true);  //Use this line if you would like to add a phone number as authorized user
         //childUpdates.put("users/"+userId+"/volunteer_organization", newlyEnteredOrganization);
         //childUpdates.put("organizations/"+keyOrg+"/name/", newlyEnteredOrganization);
         //childUpdates.put("organizations/"+keyOrg+"/people/"+userId+"/name", name);

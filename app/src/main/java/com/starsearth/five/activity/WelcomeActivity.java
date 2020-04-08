@@ -3,6 +3,7 @@ package com.starsearth.five.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,14 +11,20 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.starsearth.five.BuildConfig;
 import com.starsearth.five.R;
 import com.starsearth.five.activity.auth.AddEditPhoneNumberActivity;
 import com.starsearth.five.activity.auth.LoginActivity;
 import com.starsearth.five.application.StarsEarthApplication;
 import com.starsearth.five.domain.SEOneListItem;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -113,6 +120,22 @@ public class WelcomeActivity extends AppCompatActivity {
             ((StarsEarthApplication) getApplication()).getAnalyticsManager().updateUserAnalyticsInfo(currentUser.getUid());
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             mDatabase.child("users").child(currentUser.getUid()).child("se_five").setValue(true);
+            mDatabase.child("organizations").child("authorized_people").child(currentUser.getPhoneNumber()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    HashMap<String, Object> map = (HashMap<String, Object>) dataSnapshot.getValue();
+                    if (map != null) {
+                        for (Map.Entry<String,Object> entry : map.entrySet()) {
+                            mDatabase.child("users").child(currentUser.getUid()).child("volunteer_organization").setValue(entry.getKey().toUpperCase());
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.d("WELCOME_ACTIV", "**********UPDATE USER VOLUNTEER ORG FAILED************");
+                }
+            });
         }
 
     }
