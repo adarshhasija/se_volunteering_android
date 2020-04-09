@@ -95,10 +95,11 @@ public class StarsEarthApplication extends Application {
         //HashMap<String, Object> childUpdates = new HashMap<>();
         //String userId = "RycAhfhPsXOrUdbO8GOJqucktAA3";
         //String newlyEnteredOrganization = "SMILEYS";
-        //String name = "MOHAMMED HIDAYATH-ULLA";
+        //String name = "ADARSH HASIJA";
         //String phoneNumber = "+918050389798";
         //String keyOrg = mDatabase.push().getKey();
-        //childUpdates.put("organizations/authorized_people/"+phoneNumber+"/SMILEYS", true);  //Use this line if you would like to add a phone number as authorized user
+        //childUpdates.put("organizations/authorized_people/"+phoneNumber+"/volunteer_organization", newlyEnteredOrganization);  //Use this line if you would like to add a phone number as authorized user
+        //childUpdates.put("organizations/authorized_people/"+phoneNumber+"/name", name);
         //childUpdates.put("users/"+userId+"/volunteer_organization", newlyEnteredOrganization);
         //childUpdates.put("organizations/"+keyOrg+"/name/", newlyEnteredOrganization);
         //childUpdates.put("organizations/"+keyOrg+"/people/"+userId+"/name", name);

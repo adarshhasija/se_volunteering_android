@@ -125,9 +125,12 @@ public class WelcomeActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     HashMap<String, Object> map = (HashMap<String, Object>) dataSnapshot.getValue();
                     if (map != null) {
+                        HashMap<String, Object> childUpdates = new HashMap<>();
                         for (Map.Entry<String,Object> entry : map.entrySet()) {
-                            mDatabase.child("users").child(currentUser.getUid()).child("volunteer_organization").setValue(entry.getKey().toUpperCase());
+                            //At the time of writing this, users are not allowed fill their own profile. We fill it for them. So instead of waiting for the user to signup and then using their uid to update their name/org details, we have done it using their phone number as a key. Now when they login, we retrieve that info using their phone number as a key and populate their user info. Their account is setup when they login
+                            childUpdates.put("users/"+currentUser.getUid()+"/"+entry.getKey(), entry.getValue());
                         }
+                        mDatabase.updateChildren(childUpdates);
                     }
                 }
 
