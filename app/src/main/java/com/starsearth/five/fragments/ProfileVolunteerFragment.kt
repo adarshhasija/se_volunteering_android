@@ -62,7 +62,7 @@ class ProfileVolunteerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvVolunteerNetworkLbl?.text = "SE Volunteer Network"
+        tvVolunteerNetworkLbl?.text = "Volunteer Network"
         updateProfile()
         llProfile?.visibility = View.VISIBLE
 
