@@ -53,7 +53,7 @@ class CoronaHelpRequestsRecyclerViewAdapter(
         holder.mHelpNeededView.text = item.request
 
         if (item.status == "COMPLETE") {
-            holder.mView.setBackgroundColor(Color.GREEN)
+            holder.mView.setBackgroundColor(Color.parseColor("#008000"))
         }
 
         with(holder.mView) {

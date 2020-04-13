@@ -101,7 +101,6 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                     }
                     if (newHelpRequest.status == "COMPLETE") {
                         mNumberComplete++
-                        continue
                     }
                     Log.d(TAG, "*********SUBLOCALITY of new request: " + newHelpRequest.address.subLocality)
                     // Keep a record of the admin area. Will be needed to pupulate the dropdown
