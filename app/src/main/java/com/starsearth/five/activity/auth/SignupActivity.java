@@ -53,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
                     ((StarsEarthApplication) getApplication()).getAnalyticsManager().updateUserAnalyticsInfo(user.getUid());
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                     mDatabase.child("users").child(user.getUid()).child("se_five").setValue(true);
+                    mDatabase.child("users").child(user.getUid()).child("email").setValue(user.getEmail());
                     finish();
                 }
             }

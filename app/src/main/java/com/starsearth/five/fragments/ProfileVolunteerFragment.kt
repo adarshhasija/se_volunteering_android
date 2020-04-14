@@ -14,6 +14,7 @@ import com.google.firebase.storage.FirebaseStorage
 
 import com.starsearth.five.R
 import com.starsearth.five.activity.MainActivity
+import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.domain.Educator
 import com.starsearth.five.domain.SETeachingContent
 import com.starsearth.five.fragments.lists.DetailListFragment
@@ -99,6 +100,10 @@ class ProfileVolunteerFragment : Fragment() {
     }
 
     private fun updateProfile() {
+        (activity?.application as StarsEarthApplication).getFirebaseRemoteConfigWrapper().volunteerNetworkName?.let {
+            tvVolunteerNetworkLbl?.text = it
+        }
+
         (activity as? MainActivity)?.mUser?.name?.let {
             var split = it.split("\\s".toRegex(), 0).toMutableList()
             for (i in 0 until split.size) {

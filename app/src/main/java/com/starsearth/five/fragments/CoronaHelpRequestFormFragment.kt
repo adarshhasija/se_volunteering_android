@@ -153,6 +153,9 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             //It is an existing request. Populate
             llLogoTitle?.visibility = View.VISIBLE
             tvVolunteerNetworkLbl?.text = "SE Volunteer Network"
+            (activity?.application as StarsEarthApplication).getFirebaseRemoteConfigWrapper().volunteerNetworkName?.let {
+                tvVolunteerNetworkLbl?.text = it
+            }
             if (mHelpRequest!!.status == "COMPLETE" && mHelpRequest!!.timestampCompletion > 0) {
                 llDeliveryStatus?.visibility = View.VISIBLE
                 tvDeliveryDate?.visibility = View.VISIBLE

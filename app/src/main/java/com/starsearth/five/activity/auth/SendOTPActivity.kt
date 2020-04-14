@@ -22,8 +22,10 @@ import android.widget.TextView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.*
 import android.widget.Toast
+import com.crashlytics.android.Crashlytics
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.database.FirebaseDatabase
 import com.starsearth.five.R
 import com.starsearth.five.application.StarsEarthApplication
 
@@ -242,9 +244,13 @@ class SendOTPActivity : AppCompatActivity() {
         user.updatePhoneNumber(credential)
                 .addOnCompleteListener(object : OnCompleteListener<Void> {
                     override fun onComplete(task: Task<Void>) {
+
                         mViewPleaseWait?.visibility = View.GONE
                         if (task.isSuccessful) {
                             Log.d(TAG, "Phone number updated.")
+                            Log.d(TAG, "updating phone number for user object")
+                            val ref = FirebaseDatabase.getInstance().getReference("users")
+                            ref.child(user.uid).child("phone").setValue(user.phoneNumber)
                             phoneNumberVerificationSuccessful(user.uid)
                         }
                         else {
@@ -277,13 +283,21 @@ class SendOTPActivity : AppCompatActivity() {
                     mViewPleaseWait?.visibility = View.GONE
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithCredential:success")
+                        Log.d(TAG, "signInWithPhoneCredential:success")
+                        FirebaseAuth.getInstance().currentUser?.let {
+                            Log.d(TAG, "*****UID IS: "+ it.uid)
+                            Log.d(TAG, "updating phone number for user object")
+                            val ref = FirebaseDatabase.getInstance().getReference("users") //Cannot have this in the parent function as we exit the Activity after this
+                            ref.child(it.uid).child("phone").setValue(it.phoneNumber)
+                        }
+
 
                         val user = task.result.user
                         phoneNumberVerificationSuccessful(user.uid)
                     } else {
                         // Sign in failed, display a message and update the UI
                         Log.w(TAG, "signInWithCredential:failure", task.exception)
+                        Crashlytics.log("Login error for userid: "+task.result.user.uid + ". Exception is: "+task.exception)
                         if (task.exception is FirebaseAuthInvalidCredentialsException) {
                             // The verification code entered was invalid
                             val builder = createAlertDialog()

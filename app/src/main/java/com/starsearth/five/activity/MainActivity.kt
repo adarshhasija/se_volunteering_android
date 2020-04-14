@@ -572,7 +572,7 @@ class MainActivity : AppCompatActivity(),
 
     //This is called from any fragment whenever User object is updated
     fun updatedUserProperties() {
-        Log.d("TAG", "*******RECHES HERE*********")
+        Log.d("TAG", "*******MAIN ACTIVITY UPDATE USER PROPERTIES*********")
         val currentUser = FirebaseAuth.getInstance().currentUser
         currentUser?.let {
             val firebaseManager = FirebaseManager("users")

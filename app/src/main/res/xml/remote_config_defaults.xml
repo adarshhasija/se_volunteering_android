@@ -21,6 +21,10 @@
         <key>sos_button_text</key>
         <value></value>
     </entry>
+    <entry>
+        <key>volunteer_network_label</key>
+        <value>Volunteer Network</value>
+    </entry>
 
 </defaultsMap>
     <!-- END xml_defaults -->
