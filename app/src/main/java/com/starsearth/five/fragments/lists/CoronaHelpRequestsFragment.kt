@@ -74,7 +74,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             val map = dataSnapshot?.value
             if (map != null) {
                 //First clear the list so we can repopulate
-                ((view?.list as RecyclerView)?.adapter as CoronaHelpRequestsRecyclerViewAdapter).removeAllItems()
+                ((view?.list as RecyclerView)?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.removeAllItems()
                 for ((key, value) in mSubLocalities) {
                     mSubLocalities[key] = 0 //Resettings all counts to 0
                 }
@@ -173,10 +173,17 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             val location = locationResult.lastLocation
             location?.let {
                 getAddressFromLocation(it).get(0)?.let {
-                    mSelectedSubLocality = it.subLocality as String
-                    mSelectedSubLocality?.let {
-                        mSubLocalities[it] = mSubLocalities[it] ?: 1
-                        mSpinnerArrayAdapter?.add(it)
+                    mSelectedSubLocality = it.subLocality
+                    if (mSelectedSubLocality != null) {
+                        mSubLocalities[mSelectedSubLocality!!] = mSubLocalities[mSelectedSubLocality!!] ?: 1
+                        mSpinnerArrayAdapter?.add(mSelectedSubLocality)
+                        mSpinnerArrayAdapter?.notifyDataSetChanged()
+                    }
+                    else {
+                        // THis is a hack to avoid a crash. If we do not have a sublocality, we will just show a zip code
+                        val zipCode : String = it.postalCode
+                        mSubLocalities[zipCode] = mSubLocalities[zipCode] ?: 1
+                        mSpinnerArrayAdapter?.add(zipCode)
                         mSpinnerArrayAdapter?.notifyDataSetChanged()
                     }
                     mSelectedAdminArea = it.adminArea

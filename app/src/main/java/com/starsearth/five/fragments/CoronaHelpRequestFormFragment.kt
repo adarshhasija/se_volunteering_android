@@ -160,6 +160,14 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                 llDeliveryStatus?.visibility = View.VISIBLE
                 tvDeliveryDate?.visibility = View.VISIBLE
                 tvDeliveryDate?.text = (activity as? MainActivity)?.convertDateTimeToIST(Date(mHelpRequest!!.timestampCompletion))
+                mHelpRequest!!.completedByPhone?.let {
+                    var textToShow = it
+                    if (mHelpRequest!!.completedByName != null) {
+                        textToShow += " - " + mHelpRequest!!.completedByName
+                    }
+                    tvDeliveredByNameNumber?.visibility = View.VISIBLE //We need to have at least a phone number in order to display this
+                    tvDeliveredByNameNumber?.text = "Delivered by: " + textToShow
+                }
             }
             tvPhoneNumberLbl?.visibility = View.VISIBLE
             tvPhoneNumber?.text = mHelpRequest!!.phone
@@ -217,7 +225,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             btnSubmit?.visibility = View.GONE
             btnMap?.visibility = View.VISIBLE
             btnComplete?.visibility =
-                    if (FirebaseAuth.getInstance().currentUser?.phoneNumber == mHelpRequest!!.phone) { //Only the creator is allowed to declare it complete
+                    if ((activity as? MainActivity)?.mUser?.volunteerOrganization == mHelpRequest!!.volunteerOrganization) { //Only volunteers from the same organization can declare it complete
                         View.VISIBLE
                     }
                     else {
@@ -549,6 +557,9 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             uploadTask.addOnSuccessListener {
                 val childUpdates: MutableMap<String, Any> = HashMap()
                 childUpdates["help_requests/" + mHelpRequest!!.uid + "/status"] = "COMPLETE"
+                (activity as? MainActivity)?.mUser?.uid?.let { childUpdates["help_requests/" + mHelpRequest!!.uid + "/completed_user_id"] = it }
+                (activity as? MainActivity)?.mUser?.phone?.let { childUpdates["help_requests/" + mHelpRequest!!.uid + "/completed_user_phone"] = it }
+                (activity as? MainActivity)?.mUser?.name?.let { childUpdates["help_requests/" + mHelpRequest!!.uid + "/completed_user_name"] = it }
                 childUpdates["help_requests/" + mHelpRequest!!.uid + "/pic_complete_url"] = "images/help_requests/"+mHelpRequest!!.uid+".jpg"
                 childUpdates["help_requests/" + mHelpRequest!!.uid + "/timestamp_completion"] = ServerValue.TIMESTAMP
                 val mDatabase = FirebaseDatabase.getInstance().getReference()

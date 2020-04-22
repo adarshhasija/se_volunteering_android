@@ -25,6 +25,9 @@ public class HelpRequest implements Parcelable {
     public SEAddress address;
     public String status; //ACTIVE / COMPLETE / CANCELLED
     public String picCompleteUrl;
+    public String completedByUserId;
+    public String completedByName;
+    public String completedByPhone;
     public long timestampCompletion;
     public long timestamp;
 
@@ -47,6 +50,9 @@ public class HelpRequest implements Parcelable {
         this.address = map.containsKey("address") ? new SEAddress((HashMap<String, Object>) map.get("address")) : null;
         this.status = map.containsKey("status") ? (String) map.get("status") : null;
         this.picCompleteUrl = map.containsKey("pic_complete_url") ? (String) map.get("pic_complete_url") : null;
+        this.completedByUserId = map.containsKey("completed_user_id") ? (String) map.get("completed_user_id") : null;
+        this.completedByName = map.containsKey("completed_user_name") ? (String) map.get("completed_user_name") : null;
+        this.completedByPhone = map.containsKey("completed_user_phone") ? (String) map.get("completed_user_phone") : null;
         this.timestampCompletion = map.containsKey("timestamp_completion") ? (long) map.get("timestamp_completion") : 0;
         this.timestamp = map.containsKey("timestamp") ? (long) map.get("timestamp") : 0;
     }
@@ -65,6 +71,9 @@ public class HelpRequest implements Parcelable {
         address = in.readParcelable(ClassLoader.getSystemClassLoader());
         status = in.readString();
         picCompleteUrl = in.readString();
+        completedByUserId = in.readString();
+        completedByName = in.readString();
+        completedByPhone = in.readString();
         timestampCompletion = in.readLong();
         timestamp = in.readLong();
     }
@@ -102,6 +111,9 @@ public class HelpRequest implements Parcelable {
         parcel.writeParcelable(address, 0);
         parcel.writeString(status);
         parcel.writeString(picCompleteUrl);
+        parcel.writeString(completedByUserId);
+        parcel.writeString(completedByName);
+        parcel.writeString(completedByPhone);
         parcel.writeLong(timestampCompletion);
         parcel.writeLong(timestamp);
     }

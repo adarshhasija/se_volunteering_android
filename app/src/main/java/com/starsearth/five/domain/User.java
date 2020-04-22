@@ -12,6 +12,7 @@ import java.util.Map;
 public class User implements Parcelable {
 
     public String uid;
+    public String phone;
     public Educator.Status educator;
     public String name;
     public String pic;
@@ -27,6 +28,7 @@ public class User implements Parcelable {
 
     public User(String key, Map<String, Object> map) {
         this.uid = key;
+        this.phone = map.containsKey("phone") ? (String) map.get("phone") : null;
         this.educator = map.containsKey("educator") ? Educator.Status.fromString((String) map.get("educator")) : null;
         this.name = map.containsKey("name") ? (String) map.get("name") : null;
         this.pic = map.containsKey("pic") ? (String) map.get("pic") : null;
@@ -36,6 +38,7 @@ public class User implements Parcelable {
 
     protected User(Parcel in) {
         uid = in.readString();
+        phone = in.readString();
         educator = Educator.Status.fromString(in.readString());
         name = in.readString();
         pic = in.readString();
@@ -62,6 +65,7 @@ public class User implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(uid);
+        dest.writeString(phone);
         dest.writeString(educator.toString());
         dest.writeString(name);
         dest.writeString(pic);
