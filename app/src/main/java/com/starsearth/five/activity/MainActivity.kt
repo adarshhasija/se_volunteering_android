@@ -809,6 +809,16 @@ class MainActivity : AppCompatActivity(),
         return dateFormat.format(today);
     }
 
+    fun getFormattedDateAndTime(dateTimeMillis : Long?) : String {
+        val dateFormat = SimpleDateFormat("dd-MMM-yyyy hh:mm a")
+        //dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        val today = Calendar.getInstance().time
+        if (dateTimeMillis != null) {
+            today.time = dateTimeMillis
+        }
+        return dateFormat.format(today);
+    }
+
     fun getUTCTimestampAsLocalTimestamp(serverTimeMillis : Long) : Long {
         val offset = TimeZone.getDefault().getRawOffset() + TimeZone.getDefault().getDSTSavings();
         val now = serverTimeMillis - offset;

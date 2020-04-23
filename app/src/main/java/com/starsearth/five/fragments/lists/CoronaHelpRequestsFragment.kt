@@ -74,7 +74,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             val map = dataSnapshot?.value
             if (map != null) {
                 //First clear the list so we can repopulate
-                ((view?.list as RecyclerView)?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.removeAllItems()
+                (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.removeAllItems()
                 for ((key, value) in mSubLocalities) {
                     mSubLocalities[key] = 0 //Resettings all counts to 0
                 }
@@ -121,11 +121,11 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                     }
 
                     isListEmpty = false
-                    ((view?.list as RecyclerView)?.adapter as CoronaHelpRequestsRecyclerViewAdapter).addItem(newHelpRequest)
+                    (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.addItem(newHelpRequest)
                     Log.d(TAG, "***********NEW HELP REQUEST ADDED TO LIST: "+newHelpRequest)
                 }
-                ((view?.list as RecyclerView)?.adapter as CoronaHelpRequestsRecyclerViewAdapter).notifyDataSetChanged()
-                (view?.list as RecyclerView)?.layoutManager?.scrollToPosition(0)
+                (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.notifyDataSetChanged()
+                view?.list?.layoutManager?.scrollToPosition(0)
                 if (isListEmpty) {
                     list?.visibility = View.GONE
                     tvEmptyList?.visibility = View.VISIBLE

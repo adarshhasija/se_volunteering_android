@@ -568,6 +568,18 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                     btnComplete?.visibility = View.GONE
                     btnCancel?.visibility = View.GONE
                     llDeliveryStatus?.visibility = View.VISIBLE //We do not want to exit once the save is complete. We will just show that the delivery successfully completed
+                    tvDeliveryDate?.visibility = View.VISIBLE
+                    tvDeliveryDate?.text = (activity as? MainActivity)?.getFormattedDateAndTime(Calendar.getInstance().timeInMillis) //This is just to display now as the real timestamp will only be processed at the server side
+                    (activity as? MainActivity)?.mUser?.let {
+                        if (it.phone != null) {
+                            var finalText = "Delivered by: " + it.phone
+                            if (it.name != null) {
+                                finalText += " - " + it.name
+                            }
+                            tvDeliveredByNameNumber?.visibility = View.VISIBLE
+                            tvDeliveredByNameNumber?.text = finalText
+                        }
+                    }
                     svMain?.scrollTo(0,0) //Scroll back to the top
                     //listener?.requestCompleted()
                 }.addOnFailureListener {

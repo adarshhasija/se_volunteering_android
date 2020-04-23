@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.starsearth.five.R
+import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.domain.User
 import kotlinx.android.synthetic.main.fragment_summary.*
 
@@ -53,6 +54,9 @@ class SummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity?.application as StarsEarthApplication).getFirebaseRemoteConfigWrapper().volunteerNetworkName?.let {
+            tvAppName?.text = it
+        }
         tvDateTimeCurrent?.text = mFormattedDateTime
         if (mVolunteerOrg != null) {
             //This should be from the volunteer org POV
