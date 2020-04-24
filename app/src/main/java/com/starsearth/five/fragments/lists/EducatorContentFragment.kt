@@ -3,14 +3,14 @@ package com.starsearth.five.fragments.lists
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -72,7 +72,7 @@ class EducatorContentFragment : Fragment() {
             llPleaseWait?.visibility = View.VISIBLE
             val query = firebaseManager.getQueryForTeachingContentCreatedByUserId(currentUser)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val adapter = (list?.adapter as? EducatorContentRecyclerViewAdapter)
                     val map = dataSnapshot?.value
                     if (map != null && (map as HashMap<*, *>).entries.size > 0) {
@@ -98,7 +98,7 @@ class EducatorContentFragment : Fragment() {
 
                 }
 
-                override fun onCancelled(p0: DatabaseError?) {
+                override fun onCancelled(p0: DatabaseError) {
                     llPleaseWait?.visibility = View.GONE
                     list?.visibility = View.GONE
                     tvEmptyList?.visibility = View.VISIBLE

@@ -2,14 +2,14 @@ package com.starsearth.five.fragments.lists
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -40,7 +40,7 @@ class ResultListFragment : Fragment() {
     private var listener: OnResultListFragmentInteractionListener? = null
 
     private val mResultValuesListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val adapter = (list.adapter as ResultRecyclerViewAdapter)
             val map = dataSnapshot?.value
             if (map != null) {
@@ -65,7 +65,7 @@ class ResultListFragment : Fragment() {
             list?.visibility = View.VISIBLE
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             progressBar?.visibility = View.GONE
         }

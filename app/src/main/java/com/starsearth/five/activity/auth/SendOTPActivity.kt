@@ -1,12 +1,11 @@
 package com.starsearth.five.activity.auth
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -22,6 +21,7 @@ import android.widget.TextView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.crashlytics.android.Crashlytics
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.AuthResult
@@ -73,7 +73,7 @@ class SendOTPActivity : AppCompatActivity() {
                     .show()
         }
 
-        override fun onCodeSent(verificationId: String?, token: PhoneAuthProvider.ForceResendingToken?) {
+        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
             super.onCodeSent(verificationId, token)
             mVerificationId = verificationId
             mToken = token
@@ -147,7 +147,7 @@ class SendOTPActivity : AppCompatActivity() {
                 mCallbacks);        // OnVerificationStateChangedCallbacks
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (outState != null) {
             outState.putString("verificationId", mVerificationId)
@@ -268,7 +268,6 @@ class SendOTPActivity : AppCompatActivity() {
         mAuth?.currentUser?.linkWithCredential(credential)?.addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 Log.d(TAG, "linkWithCredential:success")
-                val user = task.result.user
             } else {
                 Log.w(TAG, "linkWithCredential:failure", task.exception)
                 Toast.makeText(this@SendOTPActivity, "Authentication failed.",
@@ -292,12 +291,13 @@ class SendOTPActivity : AppCompatActivity() {
                         }
 
 
-                        val user = task.result.user
-                        phoneNumberVerificationSuccessful(user.uid)
+                        task.result?.user?.uid?.let {
+                            phoneNumberVerificationSuccessful(it)
+                        }
                     } else {
                         // Sign in failed, display a message and update the UI
                         Log.w(TAG, "signInWithCredential:failure", task.exception)
-                        Crashlytics.log("Login error for userid: "+task.result.user.uid + ". Exception is: "+task.exception)
+                        Crashlytics.log("Login error for userid: "+task.result?.user?.uid + ". Exception is: "+task.exception)
                         if (task.exception is FirebaseAuthInvalidCredentialsException) {
                             // The verification code entered was invalid
                             val builder = createAlertDialog()

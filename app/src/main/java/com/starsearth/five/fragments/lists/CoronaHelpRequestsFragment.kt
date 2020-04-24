@@ -11,17 +11,18 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -68,7 +69,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
     private var listener: OnListFragmentInteractionListener? = null
 
     private val mHelpRequestsListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             llPleaseWait?.visibility = View.GONE
             var isListEmpty = true
             val map = dataSnapshot?.value
@@ -156,7 +157,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             mSpinnerArrayAdapter?.notifyDataSetChanged()
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             llPleaseWait?.visibility = View.GONE
         }
 
@@ -331,13 +332,13 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         listener = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
         inflater?.inflate(R.menu.fragment_help_requests_list, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item!!.itemId) {
             R.id.add -> {

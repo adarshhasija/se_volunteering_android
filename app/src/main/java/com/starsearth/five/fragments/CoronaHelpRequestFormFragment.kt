@@ -12,9 +12,6 @@ import android.location.*
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +20,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -428,7 +428,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             val request = (spinnerRequest?.selectedItem as String).toUpperCase(Locale.getDefault())
 
             val mDatabase = FirebaseDatabase.getInstance().getReference()
-            val key: String = mDatabase.push().getKey()
+            val key: String? = mDatabase.push().getKey()
             val userId = (activity as? MainActivity)?.mUser?.uid
             val map = HashMap<String, Any>()
             //map.put("uid", key)
@@ -450,7 +450,18 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             map.put("status", "ACTIVE")
             mGuestPhone?.let { map.put("guest_phone", it) }
             mGuestName?.let { map.put("guest_name", it) }
-            map["timestamp"] = ServerValue.TIMESTAMP 
+            map["timestamp"] = ServerValue.TIMESTAMP
+
+            if (key == null) {
+                val alertDialog = (activity?.application as StarsEarthApplication)?.createAlertDialog(mContext)
+                alertDialog.setTitle(getString(R.string.error))
+                alertDialog.setMessage("Could not save. Please try again")
+                alertDialog.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
+                    dialog.dismiss()
+                })
+                alertDialog.show()
+                return@setOnClickListener
+            }
 
             val childUpdates: MutableMap<String, Any> = HashMap()
             childUpdates["help_requests/"+key] = map

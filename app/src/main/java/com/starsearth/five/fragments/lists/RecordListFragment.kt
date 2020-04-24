@@ -4,9 +4,6 @@ package com.starsearth.five.fragments.lists
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +13,10 @@ import com.starsearth.five.managers.AssetsFileManager
 import com.starsearth.five.R
 import com.starsearth.five.adapter.RecordItemRecyclerViewAdapter
 import java.util.*
-import android.support.v7.widget.DividerItemDecoration
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.starsearth.five.activity.MainActivity
 import com.starsearth.five.comparator.ComparatorMainMenuItem
 import com.starsearth.five.domain.*
@@ -54,7 +54,7 @@ class RecordListFragment : Fragment() {
         This is called when displaying teaching content belonging to an educator
      */
     private val mTeachingContentListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val map = dataSnapshot?.value
             if (map != null && (map as HashMap<*, *>).entries.size > 0) {
                 val tcList = ArrayList<SETeachingContent>()
@@ -89,7 +89,7 @@ class RecordListFragment : Fragment() {
             }
 
         }
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             progressBar?.visibility = View.GONE
             list?.visibility = View.GONE
             tvEmptyList?.visibility = View.VISIBLE
@@ -99,7 +99,7 @@ class RecordListFragment : Fragment() {
 
 
     private val mSingleTCItemListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             if (mExpentedTCs != null) mExpentedTCs = mExpentedTCs!! - 1
             val key = dataSnapshot?.key
             val map = dataSnapshot?.value as HashMap<String, Any>
@@ -116,7 +116,7 @@ class RecordListFragment : Fragment() {
 
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             if (mExpentedTCs != null) mExpentedTCs = mExpentedTCs!! - 1
             if (mExpentedTCs != null && mExpentedTCs!! < 1) {
                 mExpentedTCs = null
@@ -129,7 +129,7 @@ class RecordListFragment : Fragment() {
     }
 
     private val mResultValuesListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val adapter = (list?.adapter as? RecordItemRecyclerViewAdapter)
             val map = dataSnapshot?.value
             if (map != null) {
@@ -153,7 +153,7 @@ class RecordListFragment : Fragment() {
             tvEmptyList?.visibility = View.GONE
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             progressBar?.visibility = View.GONE
             list?.visibility = View.VISIBLE
             tvEmptyList?.visibility = View.GONE
@@ -431,7 +431,7 @@ class RecordListFragment : Fragment() {
         progressBar?.visibility = View.VISIBLE
         list?.visibility = View.GONE
         query?.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot?) {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val map = dataSnapshot?.value
                 if (map != null) {
                     val map1 =  (map as HashMap<*, *>).get(tagName.toUpperCase(Locale.getDefault()))
@@ -459,7 +459,7 @@ class RecordListFragment : Fragment() {
 
             }
 
-            override fun onCancelled(p0: DatabaseError?) {
+            override fun onCancelled(p0: DatabaseError) {
                 progressBar?.visibility = View.GONE
                 list?.visibility = View.GONE
                 tvEmptyList?.visibility = View.VISIBLE
@@ -479,7 +479,7 @@ class RecordListFragment : Fragment() {
     }
 
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnRecordListFragmentInteractionListener) {
             mListener = context

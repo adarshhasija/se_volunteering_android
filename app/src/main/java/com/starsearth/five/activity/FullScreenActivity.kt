@@ -1,11 +1,12 @@
 package com.starsearth.five.activity
 
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+
 import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.starsearth.five.R
 import com.starsearth.five.domain.User
 import com.starsearth.five.fragments.HighScoreFragment

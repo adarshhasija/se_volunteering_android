@@ -1,14 +1,14 @@
 package com.starsearth.five.adapter
 
 import android.graphics.BitmapFactory
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.starsearth.five.R
 import com.starsearth.five.domain.AutismContent
 

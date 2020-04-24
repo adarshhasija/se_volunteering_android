@@ -3,12 +3,12 @@ package com.starsearth.five.fragments.lists
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -42,7 +42,7 @@ class TagListFragment : Fragment() {
     private var listener: OnListFragmentInteractionListener? = null
 
     private val mSelectedTagsListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             llPleaseWait?.visibility = View.GONE
             val key = dataSnapshot?.key
             val map = dataSnapshot?.value
@@ -56,14 +56,14 @@ class TagListFragment : Fragment() {
             (view?.list?.adapter as MyTagRecyclerViewAdapter).notifyDataSetChanged()
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             llPleaseWait?.visibility = View.GONE
         }
 
     }
 
     private val mTagsListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             llPleaseWait?.visibility = View.GONE
             val map = dataSnapshot?.value
             if (map != null) {
@@ -71,10 +71,10 @@ class TagListFragment : Fragment() {
                     val key = entry.key as String
                     val value = entry.value as Map<String, Any>
                     var newTag = TagListItem(key, value)
-                    (list?.adapter as MyTagRecyclerViewAdapter).addItem(newTag)
+                    //(list?.adapter as MyTagRecyclerViewAdapter).addItem(newTag)
                 }
-                (list?.adapter as MyTagRecyclerViewAdapter).notifyDataSetChanged()
-                list?.layoutManager?.scrollToPosition(0)
+                //(list?.adapter as MyTagRecyclerViewAdapter).notifyDataSetChanged()
+                //list?.layoutManager?.scrollToPosition(0)
 
                 //Now we look for the ones that were selected
                 (activity as? MainActivity)?.mUser?.uid?.let {
@@ -87,7 +87,7 @@ class TagListFragment : Fragment() {
             list?.visibility = View.VISIBLE
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             llPleaseWait?.visibility = View.GONE
         }
 
@@ -149,13 +149,13 @@ class TagListFragment : Fragment() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
         inflater?.inflate(R.menu.fragment_tags_list, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item!!.itemId) {
             R.id.done -> {

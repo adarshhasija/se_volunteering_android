@@ -2,6 +2,7 @@ package com.starsearth.five.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,8 +14,6 @@ import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -28,6 +27,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.starsearth.five.R;
 import com.starsearth.five.application.StarsEarthApplication;

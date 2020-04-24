@@ -474,4 +474,5 @@
         <item>Jack and Jill</item>
         <item>They went up the hill</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 </resources>

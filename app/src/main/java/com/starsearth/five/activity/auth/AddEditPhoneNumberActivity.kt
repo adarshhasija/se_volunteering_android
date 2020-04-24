@@ -1,16 +1,16 @@
 package com.starsearth.five.activity.auth
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.tasks.OnCompleteListener
@@ -61,7 +61,7 @@ class AddEditPhoneNumberActivity : AppCompatActivity() {
                     .show()
         }
 
-        override fun onCodeSent(verificationId: String?, token: PhoneAuthProvider.ForceResendingToken?) {
+        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
             super.onCodeSent(verificationId, token)
             mViewPleaseWait?.visibility = View.GONE
             val intent = Intent(this@AddEditPhoneNumberActivity, SendOTPActivity::class.java)
@@ -239,12 +239,14 @@ class AddEditPhoneNumberActivity : AppCompatActivity() {
                         Log.d(TAG, "signInWithCredential:success")
                         (application as StarsEarthApplication)?.analyticsManager?.sendAnalyticsForLoginWithPhoneNumber("EnterPhoneNumber")
 
-                        val user = task.result.user
+                        val user = task.result?.user
                         val builder = createAlertDialog()
                         builder.setMessage(R.string.login_successful)
                                 .setPositiveButton(android.R.string.ok) { dialog, which -> dialog.dismiss() }
                                 .show()
-                        phoneNumberVerificationSuccessful(user.uid)
+                        user?.uid?.let {
+                            phoneNumberVerificationSuccessful(it)
+                        }
                         // ...
                     } else {
                         // Sign in failed, display a message and update the UI

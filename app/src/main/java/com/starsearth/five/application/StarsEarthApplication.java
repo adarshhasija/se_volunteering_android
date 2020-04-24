@@ -1,12 +1,11 @@
 package com.starsearth.five.application;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
 
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.starsearth.five.domain.SeOneAccessibilityManager;
@@ -31,14 +30,6 @@ public class StarsEarthApplication extends Application {
 
     public FirebaseRemoteConfigWrapper getFirebaseRemoteConfigWrapper() {
         return mFirebaseRemoteConfigWrapper;
-    }
-
-    public InterstitialAd getGoogleInterstitialAd() {
-        InterstitialAd result = null;
-        //if (mAdsManager != null) {
-            //result = mAdsManager.getGoogleInterstitialAd();
-        //}
-        return result;
     }
 
   /*  public AdsManager getAdsManager() {

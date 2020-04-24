@@ -2,13 +2,13 @@ package com.starsearth.five.adapter
 
 import android.content.Context
 import android.graphics.Color
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.starsearth.five.R
 import com.starsearth.five.domain.Checkpoint
 import com.starsearth.five.domain.Course

@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.*
 
@@ -84,7 +84,7 @@ class DetailFragment : Fragment(), SeOnTouchListener.OnSeTouchListenerInterface 
     }
 
     private val mResultValuesListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val map = dataSnapshot?.value
             if (map != null) {
                 for (entry in (map as HashMap<*, *>).entries) {
@@ -112,13 +112,13 @@ class DetailFragment : Fragment(), SeOnTouchListener.OnSeTouchListenerInterface 
             }
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
     }
 
     private val mTeachingContentListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val map = dataSnapshot?.value
             if (map != null) {
                 //TODO: Process TeachingContent here. Map contains values of a single object
@@ -126,7 +126,7 @@ class DetailFragment : Fragment(), SeOnTouchListener.OnSeTouchListenerInterface 
             }
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
@@ -552,7 +552,7 @@ class DetailFragment : Fragment(), SeOnTouchListener.OnSeTouchListenerInterface 
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnDetailFragmentInteractionListener) {
             mListener = context

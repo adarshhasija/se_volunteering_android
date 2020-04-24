@@ -8,7 +8,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.media.AudioManager
 import android.media.RingtoneManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Vibrator
@@ -22,6 +21,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.starsearth.five.R
 import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.domain.Response

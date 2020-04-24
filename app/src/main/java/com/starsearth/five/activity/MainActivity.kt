@@ -7,16 +7,17 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+
 import android.os.Bundle
 import android.os.Parcelable
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import com.crashlytics.android.Crashlytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -537,7 +538,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private val mUserValueChangeListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val key = dataSnapshot?.key
             val value = dataSnapshot?.value as Map<String, Any?>
             if (key != null && value != null) {
@@ -545,14 +546,14 @@ class MainActivity : AppCompatActivity(),
             }
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
 
         }
 
     }
 
     private val mEducatorValueChangeListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val map = dataSnapshot?.value
             if (map != null) {
                 for (entry in (map as HashMap<*, *>).entries) {
@@ -564,7 +565,7 @@ class MainActivity : AppCompatActivity(),
             }
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
 
         }
 

@@ -1,16 +1,16 @@
 package com.starsearth.five.fragments
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -19,7 +19,6 @@ import com.starsearth.five.R
 import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.domain.TagListItem
 import com.starsearth.five.domain.User
-import com.starsearth.five.viewmodels.SearchViewModel
 import kotlinx.android.synthetic.main.search_fragment.*
 import java.util.*
 
@@ -36,8 +35,7 @@ class SearchFragment : Fragment() {
                     }
                 }
     }
-
-    private lateinit var viewModel: SearchViewModel
+    
     private lateinit var mContext: Context
     private var mSearchType : String? = null //This is so that we have 2 different search options on main screen. Can be removed later
     private var mUserResultsFound : Boolean? = null
@@ -46,7 +44,7 @@ class SearchFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private val mVolunteerOrganizationValuesListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             llPleaseWait?.visibility = View.GONE
             val map = dataSnapshot?.value
             if (map != null) {
@@ -88,7 +86,7 @@ class SearchFragment : Fragment() {
             }   */
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             llPleaseWait?.visibility = View.GONE
             val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
             alertDialog?.setTitle(mContext.getString(R.string.error))
@@ -99,7 +97,7 @@ class SearchFragment : Fragment() {
     }
 
     private val mEducatorValuesListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val map = dataSnapshot?.value
             if (map != null) {
                 val resultsArray = ArrayList<Parcelable>()
@@ -148,7 +146,7 @@ class SearchFragment : Fragment() {
             llPleaseWait?.visibility = View.GONE
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             llPleaseWait?.visibility = View.GONE
             if (mTagResultsFound == false) {
                 val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
@@ -167,7 +165,7 @@ class SearchFragment : Fragment() {
     }
 
     private val mTagValuesListener = object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
             val map = dataSnapshot?.value
             if (map != null) {
                 val resultsArray = ArrayList<Parcelable>()
@@ -211,7 +209,7 @@ class SearchFragment : Fragment() {
             llPleaseWait?.visibility = View.GONE
         }
 
-        override fun onCancelled(p0: DatabaseError?) {
+        override fun onCancelled(p0: DatabaseError) {
             llPleaseWait?.visibility = View.GONE
             if (mUserResultsFound == false) {
                 val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
@@ -245,7 +243,7 @@ class SearchFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
+        //viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
@@ -263,7 +261,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context
