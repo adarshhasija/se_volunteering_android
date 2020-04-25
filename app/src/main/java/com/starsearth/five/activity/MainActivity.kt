@@ -617,10 +617,10 @@ class MainActivity : AppCompatActivity(),
         }
 
         val extras = intent.extras
-        if (extras?.get("action") == SEOneListItem.Type.EDUCATOR_SEARCH.toString()) {
-            inputAction = extras.getString("action")
-            val searchFragment = SearchFragment.newInstance("EDUCATOR")
-            openFragment(searchFragment, SearchFragment.TAG)
+        if (extras?.getString("action") == "VIEW_HELP_REQUEST") {
+            //val helpRequest = extras.getParcelable<HelpRequest>("help_request")
+            //val coronaHelpRequestFormFragment = CoronaHelpRequestFormFragment.newInstance(helpRequest)
+            //openFragment(coronaHelpRequestFormFragment, CoronaHelpRequestFormFragment.TAG)
         }
         else {
             val seOneListFragment = SeOneListFragment.newInstance(SEOneListItem.Type.TAG)
