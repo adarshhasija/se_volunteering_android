@@ -76,7 +76,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
     private val mLocationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(p0: Location?) {
             p0?.let {
-                getAddressFromLocation(it).get(0)?.let {
+                getAddressFromLocation(it.latitude, it.longitude).get(0)?.let {
                     mAddressFromPhone = SEAddress(it)
                     val addressLine = it.getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                     val city = it.locality
@@ -107,7 +107,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             Log.d("TAG", " ********** LOCATION CALLBACK ***********"+ locationResult)
             val lastLocation = locationResult.lastLocation
             lastLocation?.let {
-                getAddressFromLocation(it).get(0)?.let {
+                getAddressFromLocation(it.latitude, it.longitude).get(0)?.let {
                     mAddressFromPhone = SEAddress(it)
                     val addressLine =   it.getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                     val city = it.locality
@@ -119,9 +119,9 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                     val subLocality = it.subLocality // This is the area
                     val premesis = it.premises
                     val subAdminArea = it.subAdminArea
-                    tvSublocality?.text = addressLine + "\n" + city + "\n" + state + "\n" + country + "\n" + postalCode
-                    tvSublocality?.visibility = View.VISIBLE
-                    tvLocationLbl?.visibility = View.VISIBLE
+                    //tvSublocality?.text = addressLine + "\n" + city + "\n" + state + "\n" + country + "\n" + postalCode
+                    //tvSublocality?.visibility = View.VISIBLE
+                    //tvLocationLbl?.visibility = View.VISIBLE
                 }
             }
         }
@@ -348,9 +348,9 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         }
 
         getLastLocation()
-        tvPhoneNumberLbl?.visibility = View.VISIBLE
+        //tvPhoneNumberLbl?.visibility = View.VISIBLE
         val phoneNumber = FirebaseAuth.getInstance().currentUser?.phoneNumber ?: ""
-        if (phoneNumber != null) {
+    /*    if (phoneNumber != null) {
             tvPhoneNumber?.visibility = View.VISIBLE
             tvPhoneNumber?.text = phoneNumber
         }
@@ -384,12 +384,16 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             etOrganization?.visibility = View.VISIBLE
         }
         btnOnBehalf?.visibility = View.VISIBLE
-        etLandmark?.visibility = View.VISIBLE
+        etLandmark?.visibility = View.VISIBLE   */
+        etPhoneNumber?.visibility = View.VISIBLE
+        etPhoneNumber?.hint = "Recipient Phone Number"
+        etName?.visibility = View.VISIBLE
+        etName?.hint = "Recipient Name"
         val spinnerList = ArrayList<String>()
         spinnerList.add("FOOD")
         spinnerList.add("GROCERIES")
         spinnerList.add("MEDICAL")
-        spinnerList.add("DISTRIBUTION")
+        //spinnerList.add("DISTRIBUTION")
 
         //Creating the ArrayAdapter instance having the country list
         val aa = ArrayAdapter(mContext,android.R.layout.simple_spinner_item,spinnerList.toArray())
@@ -635,12 +639,12 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         )
     }
 
-    private fun getAddressFromLocation(location : Location) : List<Address?> {
+    private fun getAddressFromLocation(latitude : Double, longitude : Double) : List<Address?> {
         val geocoder: Geocoder
         val addresses: List<Address>
         geocoder = Geocoder(mContext, Locale.getDefault())
 
-        addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1) // Here 1 represent max city result to returned, by documents it recommended 1 to 5
+        addresses = geocoder.getFromLocation(latitude, longitude, 1) // Here 1 represent max city result to returned, by documents it recommended 1 to 5
         //tvCity?.text = addresses.size.toString()
         return addresses
     }

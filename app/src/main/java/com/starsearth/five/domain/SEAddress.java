@@ -4,6 +4,8 @@ import android.location.Address;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.HashMap;
 
 public class SEAddress implements Parcelable {
@@ -19,6 +21,7 @@ public class SEAddress implements Parcelable {
     public String subAdminArea;
     public Double latitude;
     public Double longitude;
+    public String latLngString; //This is so that we can search for a particular help request using just latitude and longitude
 
     public SEAddress(Address address) {
         this.addressLine = address.getAddressLine(0);
@@ -32,6 +35,7 @@ public class SEAddress implements Parcelable {
         this.subAdminArea = address.getSubAdminArea();
         this.latitude = address.getLatitude();
         this.longitude = address.getLongitude();
+        this.latLngString = address.getLatitude() + "_" + address.getLongitude();
     }
 
     public SEAddress(HashMap<String, Object> map) {
@@ -46,6 +50,7 @@ public class SEAddress implements Parcelable {
         this.subAdminArea = map.containsKey("subAdminArea") ? (String) map.get("subAdminArea") : null;
         this.latitude = map.containsKey("latitude") ? (Double) map.get("latitude") : 0;
         this.longitude = map.containsKey("longitude") ? (Double) map.get("longitude") : 0;
+        this.latLngString = map.containsKey("latLngString") ? (String) map.get("latLngString") : null;
     }
 
 
@@ -69,6 +74,7 @@ public class SEAddress implements Parcelable {
         } else {
             longitude = in.readDouble();
         }
+        latLngString = in.readString();
     }
 
     public static final Creator<SEAddress> CREATOR = new Creator<SEAddress>() {
@@ -111,5 +117,6 @@ public class SEAddress implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeDouble(longitude);
         }
+        parcel.writeString(latLngString);
     }
 }

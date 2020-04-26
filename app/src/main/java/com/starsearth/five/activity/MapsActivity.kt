@@ -2,6 +2,7 @@ package com.starsearth.five.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,6 +16,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,17 +26,22 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.starsearth.five.R
 import com.starsearth.five.domain.HelpRequest
-import com.starsearth.five.domain.SEOneListItem
+import com.starsearth.five.domain.User
 import com.starsearth.five.managers.FirebaseManager
 import java.util.*
 import kotlin.collections.HashMap
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, PlaceSelectionListener {
 
     private lateinit var mMap: GoogleMap
     val TAG = "MAPS_ACTIVITY"
@@ -51,7 +58,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                 )   */
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-                getAddressFromLocation(it).get(0)?.let {
+                getAddressFromLocation(it.latitude, it.longitude).get(0)?.let {
                     loadHelpRequests(it.adminArea)
                 }
             }
@@ -97,13 +104,74 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
     }
 
+    private val mUserValueChangeListener = object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val key = dataSnapshot?.key
+            val value = dataSnapshot?.value as Map<String, Any?>
+            if (key != null && value != null) {
+                mUser = User(key, value)
+            }
+        }
+
+        override fun onCancelled(p0: DatabaseError) {
+
+        }
+
+    }
+
+    var mUser: User? = null //These act as global variables that any fragment can access
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val mHelpRequestsMap : HashMap<String, HelpRequest> = HashMap()
     val LOCATION_PERMISSION_ID = 100
-    val VIEW_HELP_REQUEST = 200
+    val HELP_REQUEST = 200
+    val NEW_HELP_REQUEST_NO_PHONE_NUMBER_FOUND = 300
+    val NEW_HELP_REQUEST = 400
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+
+        if (mUser == null) {
+            updatedUserProperties()
+        }
+
+        // Initialize the SDK
+        val apiKey = "AIzaSyBQcoAuwEbU_RsV3064XvKwpvD-xvF8RCM"
+        Places.initialize(getApplicationContext(), apiKey)
+
+        // Create a new Places client instance
+        val placesClient = Places.createClient(this)
+
+        // Initialize the AutocompleteSupportFragment.
+        val autocompleteFragment = getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+        autocompleteFragment.setOnPlaceSelectedListener(this)
+
+
+    /*    btnNewEntry?.setOnClickListener {
+            if (mUser != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString("action", "NEW_HELP_REQUEST")
+                intent.putExtras(bundle)
+                startActivityForResult(intent, NEW_HELP_REQUEST)
+            }
+            else {
+                val alertDialog = (application as StarsEarthApplication)?.createAlertDialog(this)
+                alertDialog.setTitle("Register Phone Number")
+                alertDialog.setMessage("You need to register a phone number to continue")
+                alertDialog.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
+                    val intent = Intent(this, AddEditPhoneNumberActivity::class.java)
+                    val bundle = Bundle()
+                    intent.putExtras(bundle)
+                    startActivityForResult(intent, NEW_HELP_REQUEST_NO_PHONE_NUMBER_FOUND)
+                })
+                alertDialog.setPositiveButton(android.R.string.cancel, DialogInterface.OnClickListener { dialog, which ->
+                    dialog.dismiss()
+                })
+                alertDialog.show()
+            }
+        }   */
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -150,6 +218,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Activity.RESULT_OK) {
+            if (resultCode == NEW_HELP_REQUEST_NO_PHONE_NUMBER_FOUND) {
+                updatedUserProperties()
+                val intent = Intent(this, MainActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString("action", "NEW_HELP_REQUEST")
+                intent.putExtras(bundle)
+                startActivityForResult(intent, NEW_HELP_REQUEST)
+            }
+        }
+    }
+
+    //This is called from any fragment whenever User object is updated
+    fun updatedUserProperties() {
+        Log.d("TAG", "*******MAPS ACTIVITY UPDATE USER PROPERTIES*********")
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let {
+            val firebaseManager = FirebaseManager("users")
+            val query = firebaseManager.getQueryForUserObject(it.uid)
+            query.addListenerForSingleValueEvent(mUserValueChangeListener)
+        }
+    }
+
     //adminArea = State
     fun loadHelpRequests(adminArea: String) {
         Log.d(TAG, "********* LOAD HELP REQUESTS CALLED ************" + adminArea)
@@ -159,11 +253,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
     }
 
-    private fun getAddressFromLocation(location : Location) : List<Address?> {
+    private fun getAddressFromLocation(latitude : Double, longitude : Double) : List<Address?> {
         val geocoder: Geocoder
         val addresses: List<Address>
         geocoder = Geocoder(this, Locale.getDefault())
-        addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1) // Here 1 represent max city result to returned, by documents it recommended 1 to 5
+        addresses = geocoder.getFromLocation(latitude, longitude, 1) // Here 1 represent max city result to returned, by documents it recommended 1 to 5
         //tvCity?.text = addresses.size.toString()
         return addresses
     }
@@ -222,14 +316,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     }
 
     override fun onInfoWindowClick(marker: Marker?) {
+        val intent = Intent(this, MainActivity::class.java)
+        val bundle = Bundle()
+        bundle.putString("action", "HELP_REQUEST")
         marker?.tag?.let {
-            val helpRequest = mHelpRequestsMap.get(it)
-            val intent = Intent(this, MainActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString("action", "VIEW_HELP_REQUEST")
-            bundle.putParcelable("help_request", helpRequest)
-            intent.putExtras(bundle)
-            startActivityForResult(intent, VIEW_HELP_REQUEST)
+            //it = uid of help request
+            val helpRequest = mHelpRequestsMap[it]
+            helpRequest?.let { bundle.putParcelable("help_request", it) }
         }
+        intent.putExtras(bundle)
+        startActivityForResult(intent, HELP_REQUEST)
     }
+
+    //OnPlaceSelectedListener
+    override fun onPlaceSelected(place: Place) {
+        Log.d(TAG, "**********place: "+place.latLng?.latitude + "************" + place.latLng?.longitude)
+        place.latLng?.let {
+            val marker = mMap.addMarker(MarkerOptions()
+                    .position(it)
+                    .title("Tap to create help request")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+            )
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(it))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+            getAddressFromLocation(it.latitude, it.longitude).get(0)?.let {
+                loadHelpRequests(it.adminArea)
+            }
+        }
+
+    }
+
+    //OnPlaceSelectedListener
+    override fun onError(status: Status) {
+        Log.d(TAG, "**********ERROR IS: " + status.statusMessage)
+    }
+
 }

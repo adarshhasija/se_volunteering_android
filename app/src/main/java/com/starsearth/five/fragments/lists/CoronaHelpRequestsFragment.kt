@@ -173,7 +173,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             Log.d(TAG, " ********** LOCATION CALLBACK ***********")
             val location = locationResult.lastLocation
             location?.let {
-                getAddressFromLocation(it).get(0)?.let {
+                getAddressFromLocation(it.latitude, it.longitude).get(0)?.let {
                     mSelectedSubLocality = it.subLocality
                     if (mSelectedSubLocality != null) {
                         mSubLocalities[mSelectedSubLocality!!] = mSubLocalities[mSelectedSubLocality!!] ?: 1
@@ -437,11 +437,11 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         )
     }
 
-    private fun getAddressFromLocation(location : Location) : List<Address?> {
+    private fun getAddressFromLocation(latitude : Double, longitude : Double) : List<Address?> {
         val geocoder: Geocoder
         val addresses: List<Address>
         geocoder = Geocoder(mContext, Locale.getDefault())
-        addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1) // Here 1 represent max city result to returned, by documents it recommended 1 to 5
+        addresses = geocoder.getFromLocation(latitude, longitude, 1) // Here 1 represent max city result to returned, by documents it recommended 1 to 5
         //tvCity?.text = addresses.size.toString()
         return addresses
     }
