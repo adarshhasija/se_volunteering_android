@@ -151,7 +151,7 @@
 
     <!-- Other actions: Like going to the tagging screen -->
     <Button
-        android:id="@+id/btnCTA"
+        android:id="@+id/btnDate"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

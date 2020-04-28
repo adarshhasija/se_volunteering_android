@@ -48,12 +48,12 @@ class CoronaHelpRequestsRecyclerViewAdapter(
                 if (!item.guestName.isNullOrBlank()) {
                     item.guestName
                 } else {
-                    item.name
+                    item.phone
                 }
         holder.mHelpNeededView.text = item.request
 
         if (item.status == "COMPLETE") {
-            holder.mView.setBackgroundColor(Color.parseColor("#008000"))
+            //holder.mView.setBackgroundColor(Color.parseColor("#008000"))
         }
 
         with(holder.mView) {

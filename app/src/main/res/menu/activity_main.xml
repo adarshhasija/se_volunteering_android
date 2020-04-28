@@ -6,7 +6,7 @@
         android:id="@+id/change_date"
         android:orderInCategory="100"
         android:title="Change Date"
-        android:visible="true"
+        android:visible="false"
         app:showAsAction="never" />
 
     <item

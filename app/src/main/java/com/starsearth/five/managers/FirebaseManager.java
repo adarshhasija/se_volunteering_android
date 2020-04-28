@@ -208,7 +208,7 @@ public class FirebaseManager {
     }
 
     // Search by volunteer org
-    public Query getQueryForRequestsBetweenDates(double startTimeMillis, double endTimeMillis) {
+    public Query getQueryForRequestsCompletedBetweenDates(double startTimeMillis, double endTimeMillis) {
         return databaseReference.orderByChild("timestamp_completion").startAt(startTimeMillis).endAt(endTimeMillis);
     }
 

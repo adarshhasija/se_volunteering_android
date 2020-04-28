@@ -32,26 +32,73 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/btnModeDateChange"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+    <LinearLayout
+        android:id="@+id/llRowButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="#FFFFFF"
-        android:background="#000000"
         android:text="DATE CHANGE MODE"
         android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/tvVolunteerOrg"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#AA008000"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/ivCalendar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/baseline_calendar_today_black_48" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="#008000"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/ivDelivery"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/baseline_local_shipping_black_48" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="#AA008000"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/ivReport"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/baseline_assignment_black_48" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnCTA"
+        android:id="@+id/btnDate"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textColor="#FFFFFF"
         android:background="#008000"
         android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/btnModeDateChange"
+        app:layout_constraintTop_toBottomOf="@id/llRowButtons"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -61,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="130dp"
-        app:layout_constraintTop_toBottomOf="@id/btnCTA" />
+        app:layout_constraintTop_toBottomOf="@id/btnDate" />
 
     <TextView
         android:id="@+id/tvEmptyList"

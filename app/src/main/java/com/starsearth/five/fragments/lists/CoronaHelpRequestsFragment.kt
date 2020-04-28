@@ -257,9 +257,10 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         spinnerLocality?.onItemSelectedListener = this
 
         if (mMode == MODE_CHANGE_DATE) {
-            btnModeDateChange?.visibility = View.GONE
-            btnCTA?.text = (activity as? MainActivity)?.getFormattedDate(mSelectedDateMillis)
-            btnCTA?.setOnClickListener {
+            llRowButtons?.visibility = View.GONE
+            btnDate?.visibility = View.VISIBLE
+            btnDate?.text = (activity as? MainActivity)?.getFormattedDate(mSelectedDateMillis)
+            btnDate?.setOnClickListener {
                 val calendar = Calendar.getInstance()
                 calendar.timeInMillis = mSelectedDateMillis
                 val day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -274,8 +275,8 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                             cal2.set(Calendar.YEAR, year)
                             mSelectedDateMillis = cal2.timeInMillis
                             val dateFormat = SimpleDateFormat("dd-MMM-yyyy")
-                            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
-                            btnCTA?.text = dateFormat.format(cal2.time)
+                            //dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
+                            btnDate?.text = dateFormat.format(cal2.time)
                             Log.d(TAG, "*******DATE PICKER*************")
                             mSelectedAdminArea?.let { loadHelpRequests(it) } //Need to reload the list for the same address to get entries for the new date
                         }, year, month, day);
@@ -283,10 +284,51 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             }
         }
         else {
-            btnModeDateChange?.visibility = View.VISIBLE
-            btnCTA?.text = "NEW DELIVERY"
-            btnCTA?.setOnClickListener {
+            llRowButtons?.visibility = View.VISIBLE
+            btnDate?.visibility = View.GONE
+            ivDelivery?.setOnClickListener {
                 listener?.onCoronaHelpListFragmentAddButtonTapped()
+            }
+            ivReport?.setOnClickListener {
+                llPleaseWait?.visibility = View.VISIBLE
+                val user = (activity?.application as? StarsEarthApplication)?.mUser
+                val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
+                val map = HashMap<String, Any>()
+                user?.let { map.put(SummaryFragment.ARG_USER, it) }
+                dateTime?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, it) }
+                map.put(SummaryFragment.ARG_COMPLETED, mNumberComplete)
+                mVolunteerOrg?.let { map.put(SummaryFragment.ARG_VOLUNTEER_ORG, it) }
+                val picUrl : String? = (activity?.application as? StarsEarthApplication)?.mUser?.pic
+                if (picUrl != null) {
+                    var profilePicRef = FirebaseStorage.getInstance().reference.child(picUrl)
+                    val ONE_MEGABYTE: Long = 1024 * 1024
+                    profilePicRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                        llPleaseWait?.visibility = View.GONE
+                        map.put(SummaryFragment.ARG_BYTE_ARRAY, it)
+                        listener?.onMenuItemSummaryTapped(map)
+                    }.addOnFailureListener {
+                        // Handle any errors
+                        llPleaseWait?.visibility = View.GONE
+                        listener?.onMenuItemSummaryTapped(map)
+                        /*   val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                           alertDialog?.setTitle(mContext.getString(R.string.error))
+                           alertDialog?.setMessage("Operation failed. Please try again later")
+                           alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
+                           alertDialog?.show() */
+                    }
+                }
+                else {
+                    llPleaseWait?.visibility = View.GONE
+                    listener?.onMenuItemSummaryTapped(map)
+                    /*   val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                       alertDialog?.setTitle(mContext.getString(R.string.error))
+                       alertDialog?.setMessage("You need a photo in order to produce a summary sheet. Please contact hasijaadarsh@gmail.com for more information")
+                       alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
+                       alertDialog?.show() */
+                }
+            }
+            ivCalendar?.setOnClickListener {
+                listener?.onModeDateChangeRequested()
             }
         }
 
@@ -330,12 +372,16 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
 
     //adminArea = State
     fun loadHelpRequestsForToday(todayMillis: Long) {
+        val calYesterday = Calendar.getInstance()
+        calYesterday.timeInMillis = todayMillis
+        calYesterday.add(Calendar.DATE, -1)
+        val yesterdayTimeMillis = calYesterday.timeInMillis
         val calTomorrow = Calendar.getInstance()
         calTomorrow.timeInMillis = todayMillis
         calTomorrow.add(Calendar.DATE, 1)
         val endTimeMillis = calTomorrow.timeInMillis
-        val firebaseManager = FirebaseManager("help_requests")
-        val query = firebaseManager.getQueryForRequestsBetweenDates(todayMillis.toDouble(), endTimeMillis.toDouble())
+        val firebaseManager = FirebaseManager("requests")
+        val query = firebaseManager.getQueryForRequestsCompletedBetweenDates(yesterdayTimeMillis.toDouble(), endTimeMillis.toDouble())
         query.addListenerForSingleValueEvent(mHelpRequestsListener)
     }
 

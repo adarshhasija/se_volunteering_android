@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.location.*
 import android.net.Uri
 import android.os.Bundle
@@ -69,38 +70,10 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
     private var mGuestName: String? = null
     private var mHelpRequest : HelpRequest? = null
     private var mAddressFromPhone : SEAddress? = null
+    private var mRequest : String? = null
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
 
     private var listener: OnFragmentInteractionListener? = null
-
-    private val mLocationListener: LocationListener = object : LocationListener {
-        override fun onLocationChanged(p0: Location?) {
-            p0?.let {
-                getAddressFromLocation(it.latitude, it.longitude).get(0)?.let {
-                    mAddressFromPhone = SEAddress(it)
-                    val addressLine = it.getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                    val city = it.locality
-                    val state = it.adminArea
-                    val country = it.countryName
-                    val postalCode = it.postalCode
-                    val knownName = it.featureName // Only if available else return NULL
-                    tvSublocality?.text = it.subLocality
-                }
-            }
-        }
-
-        override fun onProviderDisabled(p0: String?) {
-            Log.d(TAG, "******** ON PROVIDER DISABLED *************")
-        }
-
-        override fun onProviderEnabled(p0: String?) {
-            Log.d(TAG, "******** ON PROVIDER ENABLED **************")
-        }
-
-        override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
-            Log.d(TAG, "********* ON STATUS CHANGED ***************")
-        }
-    }
 
     private val mLocationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
@@ -169,23 +142,29 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                     tvDeliveredByNameNumber?.text = "Delivered by: " + textToShow
                 }
             }
-            tvPhoneNumberLbl?.visibility = View.VISIBLE
-            tvPhoneNumber?.text = mHelpRequest!!.phone
-            tvPhoneNumber?.visibility = View.VISIBLE
+            //tvPhoneNumberLbl?.visibility = View.VISIBLE
+            //tvPhoneNumber?.text = mHelpRequest!!.phone
+            //tvPhoneNumber?.visibility = View.VISIBLE
+            if (mHelpRequest!!.request == "GROCERIES") {
+                llGroceries?.setBackgroundColor(Color.YELLOW)
+            }
+            else if (mHelpRequest!!.request == "FOOD") {
+                llFood?.setBackgroundColor(Color.YELLOW)
+            }
             tvLocationLbl?.visibility = View.VISIBLE
-            tvSublocality?.text = mHelpRequest!!.address.addressLine + "\n" + mHelpRequest!!.address.locality + "\n" + mHelpRequest!!.address.adminArea + "\n" + mHelpRequest!!.address.countryName + "\n" + mHelpRequest!!.address.postalCode
+            tvSublocality?.text = mHelpRequest!!.address.addressLine //+ "\n" + mHelpRequest!!.address.locality + "\n" + mHelpRequest!!.address.adminArea + "\n" + mHelpRequest!!.address.countryName + "\n" + mHelpRequest!!.address.postalCode
             tvSublocality?.visibility = View.VISIBLE
-            etName?.visibility = View.GONE
-            tvNameLabel?.visibility = View.VISIBLE
-            tvName?.text =
+            //etName?.visibility = View.GONE
+            //tvNameLabel?.visibility = View.VISIBLE
+          /*  tvName?.text =
                     if (mHelpRequest!!.name.isNullOrEmpty()) {
                         "Not given"
                     }
                     else {
                         mHelpRequest!!.name
-                    }
-            tvName?.visibility = View.VISIBLE
-            if (mHelpRequest!!.guestPhone != null || mHelpRequest!!.guestName != null) {
+                    }   */
+            //tvName?.visibility = View.VISIBLE
+         /*   if (mHelpRequest!!.guestPhone != null || mHelpRequest!!.guestName != null) {
                 mGuestPhone = mHelpRequest!!.guestPhone
                 mGuestName = mHelpRequest!!.guestName
                 tvOnBehalfOf?.text = "ON BEHALF OF:\n" + mGuestPhone + "\n" + mGuestName
@@ -237,7 +216,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                     }
                     else {
                         View.GONE
-                    }
+                    }   */
 
 
             btnMap?.setOnClickListener {
@@ -246,7 +225,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                 mContext.startActivity(intent)
             }
 
-            if (mHelpRequest!!.status == "COMPLETE") {
+         /*   if (mHelpRequest!!.status == "COMPLETE") {
                 btnComplete?.visibility = View.GONE
             }
             else {
@@ -306,7 +285,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                     })
                     alertDialog.show()
                 }
-            }
+            }   */
 
 
             mHelpRequest!!.picCompleteUrl?.let {
@@ -348,9 +327,8 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         }
 
         getLastLocation()
-        //tvPhoneNumberLbl?.visibility = View.VISIBLE
-        val phoneNumber = FirebaseAuth.getInstance().currentUser?.phoneNumber ?: ""
-    /*    if (phoneNumber != null) {
+    /*    tvPhoneNumberLbl?.visibility = View.VISIBLE
+        if (phoneNumber != null) {
             tvPhoneNumber?.visibility = View.VISIBLE
             tvPhoneNumber?.text = phoneNumber
         }
@@ -384,12 +362,13 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             etOrganization?.visibility = View.VISIBLE
         }
         btnOnBehalf?.visibility = View.VISIBLE
-        etLandmark?.visibility = View.VISIBLE   */
+        etLandmark?.visibility = View.VISIBLE
         etPhoneNumber?.visibility = View.VISIBLE
         etPhoneNumber?.hint = "Recipient Phone Number"
         etName?.visibility = View.VISIBLE
         etName?.hint = "Recipient Name"
-        etLandmark?.visibility = View.VISIBLE
+        etLandmark?.visibility = View.VISIBLE   */
+        val phoneNumber = FirebaseAuth.getInstance().currentUser?.phoneNumber ?: ""
         val spinnerList = ArrayList<String>()
         spinnerList.add("FOOD")
         spinnerList.add("GROCERIES")
@@ -402,10 +381,46 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         //Setting the ArrayAdapter data on the Spinner
         spinnerRequest.setAdapter(aa);
         spinnerRequest.setSelection(0)
-        tvNeedHelpWithLbl?.visibility = View.VISIBLE
-        spinnerRequest?.visibility = View.VISIBLE
+        //tvNeedHelpWithLbl?.visibility = View.VISIBLE
+        //spinnerRequest?.visibility = View.VISIBLE
 
-        spinnerRequest?.onItemSelectedListener = this
+        //spinnerRequest?.onItemSelectedListener = this
+        llRequest?.visibility = View.VISIBLE
+        llGroceries?.setBackgroundColor(Color.YELLOW)
+        mRequest = "GROCERIES"
+        llGroceries?.setOnClickListener {
+            mRequest = "GROCERIES"
+            llGroceries?.setBackgroundColor(Color.YELLOW)
+            llFood?.setBackgroundColor(Color.WHITE)
+        }
+        llFood?.setOnClickListener {
+            mRequest = "FOOD"
+            llFood?.setBackgroundColor(Color.YELLOW)
+            llGroceries?.setBackgroundColor(Color.WHITE)
+        }
+        btnComplete?.visibility = View.VISIBLE
+        btnComplete?.setOnClickListener {
+            val alertDialog = (activity?.application as StarsEarthApplication)?.createAlertDialog(mContext)
+            alertDialog.setTitle("Open camera?")
+            alertDialog.setMessage("To declare this complete, you must click a selfie with the items you are delivering and the people you are delivering to. Shall we open the camera?")
+            alertDialog.setPositiveButton(android.R.string.yes, DialogInterface.OnClickListener { dialog, which ->
+                dialog.dismiss()
+
+                if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    // Permission is not granted
+                    listener?.requestCameraAccessToConfirmCompletionOfHelpRequest()
+                }
+                else {
+                    cameraPermissionReceived()
+                }
+            })
+            alertDialog.setNegativeButton(android.R.string.no, DialogInterface.OnClickListener { dialog, which ->
+                dialog.dismiss()
+            })
+            alertDialog.show()
+
+        }
 
         btnSubmit?.setOnClickListener {
             val userName = (activity?.application as? StarsEarthApplication)?.mUser?.name
@@ -504,7 +519,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                 alertDialog.show()
             }
         }
-        btnSubmit?.visibility = View.VISIBLE
+        //btnSubmit?.visibility = View.VISIBLE
     }
 
 
@@ -564,29 +579,40 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         ivPicOfCompletion?.visibility = View.VISIBLE
 
         llPleaseWait?.visibility = View.VISIBLE
-        val key = FirebaseDatabase.getInstance().getReference("help_requests").push().getKey();
-        val storageReference = FirebaseStorage.getInstance().reference.child("images/help_requests/"+key+".jpg")
+        val key = FirebaseDatabase.getInstance().getReference("requests").push().getKey();
+        val storageReference = FirebaseStorage.getInstance().reference.child("images/requests/"+key+".jpg")
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
         val data = baos.toByteArray()
         val uploadTask = storageReference.putBytes(data)
         uploadTask.addOnSuccessListener {
             val childUpdates: MutableMap<String, Any> = HashMap()
-            childUpdates["help_requests/" + key + "/status"] = "COMPLETE"
-            childUpdates["help_requests/" + key + "/guest_phone"] = etPhoneNumber.text
+            childUpdates["requests/" + key + "/status"] = "COMPLETE"
+            mRequest?.let { childUpdates["requests/" + key + "/request"] = it }
+            mAddressFromPhone?.let { childUpdates["requests/" + key + "/address"] = it }
+            //childUpdates["requests/" + key + "/guest_phone"] = etPhoneNumber.text
             (activity?.application as? StarsEarthApplication)?.mUser?.let {
-                it.uid?.let { childUpdates["help_requests/" + key + "/userId"] = it }
-                it.phone?.let { childUpdates["help_requests/" + key + "/phone"] = it }
-                it.name?.let { childUpdates["help_requests/" + key + "/name"] = it }
-                it.volunteerOrganization?.let { childUpdates["help_requests/" + key + "/volunteer_organization"] = it }
+                it.uid?.let { childUpdates["requests/" + key + "/userId"] = it }
+                childUpdates["requests/" + key + "/phone"] =
+                        if (it.phone.isNullOrEmpty() == false) {
+                            it.phone
+                        }
+                        else if (FirebaseAuth.getInstance().currentUser?.uid != null) {
+                            FirebaseAuth.getInstance().currentUser!!.uid
+                        }
+                        else {
+                            ""
+                        }
+                it.name?.let { childUpdates["requests/" + key + "/name"] = it }
+                it.volunteerOrganization?.let { childUpdates["requests/" + key + "/volunteer_organization"] = it }
 
-                it.uid?.let { childUpdates["help_requests/" + key + "/completed_user_id"] = it }
-                it.phone?.let { childUpdates["help_requests/" + key + "/completed_user_phone"] = it }
-                it.name?.let { childUpdates["help_requests/" + key + "/completed_user_name"] = it }
+                it.uid?.let { childUpdates["requests/" + key + "/completed_user_id"] = it }
+                it.phone?.let { childUpdates["requests/" + key + "/completed_user_phone"] = it }
+                it.name?.let { childUpdates["requests/" + key + "/completed_user_name"] = it }
             }
 
-            childUpdates["help_requests/" + mHelpRequest!!.uid + "/pic_complete_url"] = "images/help_requests/"+mHelpRequest!!.uid+".jpg"
-            childUpdates["help_requests/" + mHelpRequest!!.uid + "/timestamp_completion"] = ServerValue.TIMESTAMP
+            childUpdates["requests/" + key + "/pic_complete_url"] = "images/requests/"+key+".jpg"
+            childUpdates["requests/" + key + "/timestamp_completion"] = ServerValue.TIMESTAMP
             val mDatabase = FirebaseDatabase.getInstance().getReference()
             mDatabase.updateChildren(childUpdates).addOnSuccessListener {
                 llPleaseWait?.visibility = View.GONE
