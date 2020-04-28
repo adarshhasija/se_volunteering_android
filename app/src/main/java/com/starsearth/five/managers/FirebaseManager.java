@@ -202,6 +202,21 @@ public class FirebaseManager {
         return databaseReference.orderByChild("address/adminArea").equalTo(adminArea);
     }
 
+    // Search by volunteer org
+    public Query getQueryForVolunteerOrg(String volunteerOrg) {
+        return databaseReference.orderByChild("volunteer_organization").equalTo(volunteerOrg);
+    }
+
+    // Search by volunteer org
+    public Query getQueryForRequestsBetweenDates(double startTimeMillis, double endTimeMillis) {
+        return databaseReference.orderByChild("timestamp_completion").startAt(startTimeMillis).endAt(endTimeMillis);
+    }
+
+    // Google Place Id
+    public Query getQueryForGooglePlaceId(String google_place_id) {
+        return databaseReference.orderByChild("address/g_place_id").equalTo(google_place_id);
+    }
+
     public StorageReference getImageReference(String item, String type) {
         String fullPath = getImagePath(item, type);
         if (fullPath != null && !fullPath.isEmpty()) {

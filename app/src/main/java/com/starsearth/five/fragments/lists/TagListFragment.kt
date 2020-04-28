@@ -77,7 +77,7 @@ class TagListFragment : Fragment() {
                 //list?.layoutManager?.scrollToPosition(0)
 
                 //Now we look for the ones that were selected
-                (activity as? MainActivity)?.mUser?.uid?.let {
+                (activity?.application as? StarsEarthApplication)?.mUser?.uid?.let {
                     llPleaseWait?.visibility = View.VISIBLE
                     val firebaseManager = FirebaseManager("teachingcontent")
                     val query = firebaseManager.getQueryForTagsByUserId(mTeachingContent.uid.toString(), it)
@@ -166,7 +166,7 @@ class TagListFragment : Fragment() {
                 val tagListItems = (view?.list?.adapter as MyTagRecyclerViewAdapter).getAllItems()
                 val childUpdates = HashMap<String, Any?>()
                 for (tagListItem in tagListItems) {
-                    val userId = (activity as? MainActivity)?.mUser?.uid
+                    val userId = (activity?.application as? StarsEarthApplication)?.mUser?.uid
                     if (userId != null) {
                         llPleaseWait?.visibility = View.VISIBLE
                         childUpdates.put("teachingcontent" + "/" + mTeachingContent.uid.toString() + "/tags/" + tagListItem.name.toUpperCase(Locale.getDefault()) + "/" + userId, if (tagListItem.checked) {

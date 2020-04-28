@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
-import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
@@ -68,6 +67,8 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
     private var mNumberComplete : Int = 0
     private var listener: OnListFragmentInteractionListener? = null
 
+    private var mMode : String? = null
+
     private val mHelpRequestsListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             llPleaseWait?.visibility = View.GONE
@@ -96,7 +97,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                         continue
                     }
                     // Check if date is same as the selected date
-                    if (!isDateMatching(newHelpRequest.timestamp)) {
+                    if (mMode == MODE_CHANGE_DATE && !isDateMatching(newHelpRequest.timestamp)) {
                         Log.d("TAG", "********DATE NOT MATCHING************")
                         continue
                     }
@@ -213,13 +214,11 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
             mCopyOfUser = it.getParcelable(ARG_USER)
-            mVolunteerOrg = it.getString(ARG_ORG)
+            mVolunteerOrg = mCopyOfUser?.volunteerOrganization
+
+            mMode = it.getString(ARG_MODE)
         }
 
-        if (mCopyOfUser != null) {
-            //Currently Summary option is only available at user level
-            setHasOptionsMenu(true)
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -257,14 +256,17 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         spinnerLocality?.setAdapter(mSpinnerArrayAdapter)
         spinnerLocality?.onItemSelectedListener = this
 
-        btnDate?.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            calendar.timeInMillis = mSelectedDateMillis
-            val day = calendar.get(Calendar.DAY_OF_MONTH);
-            val month = calendar.get(Calendar.MONTH);
-            val year = calendar.get(Calendar.YEAR);
-            // date picker dialog
-            val picker = DatePickerDialog(mContext,
+        if (mMode == MODE_CHANGE_DATE) {
+            btnModeDateChange?.visibility = View.GONE
+            btnCTA?.text = (activity as? MainActivity)?.getFormattedDate(mSelectedDateMillis)
+            btnCTA?.setOnClickListener {
+                val calendar = Calendar.getInstance()
+                calendar.timeInMillis = mSelectedDateMillis
+                val day = calendar.get(Calendar.DAY_OF_MONTH);
+                val month = calendar.get(Calendar.MONTH);
+                val year = calendar.get(Calendar.YEAR);
+                // date picker dialog
+                val picker = DatePickerDialog(mContext,
                         DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                             val cal2 = Calendar.getInstance()
                             cal2.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -273,24 +275,34 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                             mSelectedDateMillis = cal2.timeInMillis
                             val dateFormat = SimpleDateFormat("dd-MMM-yyyy")
                             dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
-                            btnDate?.text = dateFormat.format(cal2.time)
+                            btnCTA?.text = dateFormat.format(cal2.time)
                             Log.d(TAG, "*******DATE PICKER*************")
                             mSelectedAdminArea?.let { loadHelpRequests(it) } //Need to reload the list for the same address to get entries for the new date
                         }, year, month, day);
                 picker.show();
+            }
+        }
+        else {
+            btnModeDateChange?.visibility = View.VISIBLE
+            btnCTA?.text = "NEW DELIVERY"
+            btnCTA?.setOnClickListener {
+                listener?.onCoronaHelpListFragmentAddButtonTapped()
+            }
         }
 
+
         list?.visibility = View.GONE
-        btnDate?.text = (activity as? MainActivity)?.getFormattedDate(mSelectedDateMillis)
+
         llPleaseWait?.visibility = View.VISIBLE
-        if (mSelectedSubLocality == null) {
+        loadHelpRequestsForToday(Calendar.getInstance().timeInMillis)
+      /*  if (mSelectedSubLocality == null) {
             getLastLocation()
         }
         else {
             mSubLocalities[mSelectedSubLocality!!] = mSubLocalities[mSelectedSubLocality!!] ?: 1
             mSpinnerArrayAdapter?.add(mSelectedSubLocality!!)
             mSpinnerArrayAdapter?.notifyDataSetChanged()
-        }
+        }   */
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
@@ -314,7 +326,17 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         val firebaseManager = FirebaseManager("help_requests")
         val query = firebaseManager.getQueryForState(adminArea)
         query.addListenerForSingleValueEvent(mHelpRequestsListener)
+    }
 
+    //adminArea = State
+    fun loadHelpRequestsForToday(todayMillis: Long) {
+        val calTomorrow = Calendar.getInstance()
+        calTomorrow.timeInMillis = todayMillis
+        calTomorrow.add(Calendar.DATE, 1)
+        val endTimeMillis = calTomorrow.timeInMillis
+        val firebaseManager = FirebaseManager("help_requests")
+        val query = firebaseManager.getQueryForRequestsBetweenDates(todayMillis.toDouble(), endTimeMillis.toDouble())
+        query.addListenerForSingleValueEvent(mHelpRequestsListener)
     }
 
     override fun onAttach(context: Context) {
@@ -345,16 +367,16 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                 listener?.onCoronaHelpListFragmentAddButtonTapped()
                 return true
             }
-            R.id.summary -> {
+            R.id.daily_report -> {
                 llPleaseWait?.visibility = View.VISIBLE
-                val user = (activity as? MainActivity)?.mUser
+                val user = (activity?.application as? StarsEarthApplication)?.mUser
                 val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
                 val map = HashMap<String, Any>()
                 user?.let { map.put(SummaryFragment.ARG_USER, it) }
                 dateTime?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, it) }
                 map.put(SummaryFragment.ARG_COMPLETED, mNumberComplete)
                 mVolunteerOrg?.let { map.put(SummaryFragment.ARG_VOLUNTEER_ORG, it) }
-                val picUrl : String? = (activity as? MainActivity)?.mUser?.pic
+                val picUrl : String? = (activity?.application as? StarsEarthApplication)?.mUser?.pic
                 if (picUrl != null) {
                     var profilePicRef = FirebaseStorage.getInstance().reference.child(picUrl)
                     val ONE_MEGABYTE: Long = 1024 * 1024
@@ -365,20 +387,22 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                     }.addOnFailureListener {
                         // Handle any errors
                         llPleaseWait?.visibility = View.GONE
-                        val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                        listener?.onMenuItemSummaryTapped(map)
+                     /*   val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
                         alertDialog?.setTitle(mContext.getString(R.string.error))
                         alertDialog?.setMessage("Operation failed. Please try again later")
                         alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
-                        alertDialog?.show()
+                        alertDialog?.show() */
                     }
                 }
                 else {
                     llPleaseWait?.visibility = View.GONE
-                    val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                    listener?.onMenuItemSummaryTapped(map)
+                 /*   val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
                     alertDialog?.setTitle(mContext.getString(R.string.error))
                     alertDialog?.setMessage("You need a photo in order to produce a summary sheet. Please contact hasijaadarsh@gmail.com for more information")
                     alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
-                    alertDialog?.show()
+                    alertDialog?.show() */
                 }
 
                 return true
@@ -492,6 +516,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         fun onCoronaHelpListFragmentAddButtonTapped()
         fun requestLocationToViewHelpRequests()
         fun onMenuItemSummaryTapped(hashMap: HashMap<String, Any>)
+        fun onModeDateChangeRequested()
     }
 
     companion object {
@@ -501,8 +526,14 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         const val ARG_COLUMN_COUNT = "column-count"
         const val ARG_USER = "user"
         const val ARG_ORG = "org"
+        const val ARG_MODE = "mode"
+        const val MODE_CHANGE_DATE = "mode_change_date"
 
         // TODO: Customize parameter initialization
+        @JvmStatic
+        fun newInstance() =
+                CoronaHelpRequestsFragment()
+
         @JvmStatic
         fun newInstance(columnCount: Int, user : User?) =
                 CoronaHelpRequestsFragment().apply {
@@ -512,11 +543,19 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                     }
                 }
 
-        @JvmStatic
+     /*   @JvmStatic
         fun newInstance(volunteerOrg: String) =
                 CoronaHelpRequestsFragment().apply {
                     arguments = Bundle().apply {
                         putString(ARG_ORG, volunteerOrg)
+                    }
+                }   */
+
+        @JvmStatic
+        fun newInstance(mode: String) =
+                CoronaHelpRequestsFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_MODE, mode)
                     }
                 }
     }

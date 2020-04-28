@@ -155,6 +155,7 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         }).start();
         Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+        //Intent intent = new Intent(WelcomeActivity.this, MapsActivity.class);
         startActivity(intent);
         finish();
     }

@@ -11,9 +11,9 @@
         app:showAsAction="always" />    -->
 
     <item
-        android:id="@+id/summary"
+        android:id="@+id/daily_report"
         android:orderInCategory="300"
-        android:title="Summary"
+        android:title="Daily Report"
         android:visible="true"
         app:showAsAction="never" />
 </menu>

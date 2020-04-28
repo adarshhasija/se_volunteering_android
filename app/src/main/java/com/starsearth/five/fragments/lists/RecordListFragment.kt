@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.starsearth.five.activity.MainActivity
+import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.comparator.ComparatorMainMenuItem
 import com.starsearth.five.domain.*
 import kotlinx.android.synthetic.main.fragment_records_list.*
@@ -74,7 +75,7 @@ class RecordListFragment : Fragment() {
                 if (tcList.size > 0) {
                     tvEmptyList?.visibility = View.GONE
                     list?.visibility = View.VISIBLE
-                    (mContext as? MainActivity)?.mUser?.let { setupResultsListener(it) }
+                    ((mContext as? MainActivity)?.application as? StarsEarthApplication)?.mUser?.let { setupResultsListener(it) }
                 }
                 else {
                     tvEmptyList?.visibility = View.VISIBLE
@@ -111,7 +112,7 @@ class RecordListFragment : Fragment() {
                 mExpentedTCs = null
                 (list?.adapter as? RecordItemRecyclerViewAdapter)?.notifyDataSetChanged()
                 list?.layoutManager?.scrollToPosition(0)
-                (mContext as? MainActivity)?.mUser?.let { setupResultsListener(it) }
+                ((mContext as? MainActivity)?.application as? StarsEarthApplication)?.mUser?.let { setupResultsListener(it) }
             }
 
         }
@@ -122,7 +123,7 @@ class RecordListFragment : Fragment() {
                 mExpentedTCs = null
                 (list?.adapter as? RecordItemRecyclerViewAdapter)?.notifyDataSetChanged()
                 list?.layoutManager?.scrollToPosition(0)
-                (mContext as? MainActivity)?.mUser?.let { setupResultsListener(it) }
+                ((mContext as? MainActivity) as? StarsEarthApplication)?.mUser?.let { setupResultsListener(it) }
             }
         }
 

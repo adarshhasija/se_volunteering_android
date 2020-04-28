@@ -61,6 +61,11 @@ class MainActivity : AppCompatActivity(),
         CoronaHelpRequestFormFragment.OnFragmentInteractionListener,
         SeOneListFragment.OnSeOneListFragmentInteractionListener {
 
+    override fun onModeDateChangeRequested() {
+        val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(CoronaHelpRequestsFragment.MODE_CHANGE_DATE)
+        openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)
+    }
+
     override fun onMenuItemSummaryTapped(hashmap: HashMap<String, Any>) {
         val intent = Intent(this@MainActivity, FullScreenActivity::class.java)
         val bundle = Bundle()
@@ -377,7 +382,7 @@ class MainActivity : AppCompatActivity(),
             val autismStoryFragment = AutismStoryFragment.newInstance(task)
             openFragment(autismStoryFragment, AutismStoryFragment.TAG)
         }
-        else if (mUser == null) {
+        else if ((application as? StarsEarthApplication)?.mUser == null) {
             //redirect to login
             val intent = Intent(this@MainActivity, AddEditPhoneNumberActivity::class.java)
             startActivityForResult(intent, LOGIN_REQUEST)
@@ -435,7 +440,7 @@ class MainActivity : AppCompatActivity(),
         (application as? StarsEarthApplication)?.analyticsManager?.sendAnalyticsForListItemTap(item.text1, index)
         val intent: Intent
         val type = item.type
-        if (mUser?.volunteerOrganization == null
+        if ((application as? StarsEarthApplication)?.mUser?.volunteerOrganization == null
                 && (type == SEOneListItem.Type.CORONA_ORG_HELP_REQUESTS || type == SEOneListItem.Type.CORONA_NEW_HELP_REQUEST)) {
             //Only if they are part of a volunteer organization can they make a new request or see the list of requests
             val alertDialog = (application as? StarsEarthApplication)?.createAlertDialog(this)
@@ -457,9 +462,9 @@ class MainActivity : AppCompatActivity(),
             //openFragmentWithSlideToLeftEffect(coronaCitiesListFragment, SeOneListFragment.TAG)
 
             //We are assuming there is a volunteer org in place
-            if (mUser?.volunteerOrganization != null) {
-                val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(mUser!!.volunteerOrganization)
-                openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)
+            if ((application as? StarsEarthApplication)?.mUser?.volunteerOrganization != null) {
+             /*   val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance((application as StarsEarthApplication).mUser!!.volunteerOrganization)
+                openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)   */
             }
             else {
                 val alertDialog = (application as? StarsEarthApplication)?.createAlertDialog(this)
@@ -474,7 +479,7 @@ class MainActivity : AppCompatActivity(),
             openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)
         }
         else if (type == SEOneListItem.Type.CORONA_MY_HELP_REQUESTS) {
-            val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(1, mUser)
+            val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance(1, (application as StarsEarthApplication).mUser)
             openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)
         }
         else if (type == SEOneListItem.Type.CORONA_NEW_HELP_REQUEST) {
@@ -542,7 +547,7 @@ class MainActivity : AppCompatActivity(),
             val key = dataSnapshot?.key
             val value = dataSnapshot?.value as Map<String, Any?>
             if (key != null && value != null) {
-                mUser = User(key, value)
+                (application as? StarsEarthApplication)?.mUser = User(key, value)
             }
         }
 
@@ -594,7 +599,6 @@ class MainActivity : AppCompatActivity(),
     }
 
 
-    var mUser: User? = null //These act as global variables that any fragment can access
     var mEducator : Educator? = null
     var inputAction : String? = null //If there was an inputAction passed into MainActivity
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -609,7 +613,7 @@ class MainActivity : AppCompatActivity(),
             Crashlytics.log("PHONE NUMBER: " + it.phoneNumber)
         }
 
-        if (mUser == null) {
+        if ((application as StarsEarthApplication).mUser == null) {
             updatedUserProperties()
         }
         if (mEducator == null) {
@@ -619,13 +623,25 @@ class MainActivity : AppCompatActivity(),
         val extras = intent.extras
         if (extras?.getString("action") == "HELP_REQUEST") {
             val helpRequest = extras.getParcelable<HelpRequest>("help_request")
-            val coronaHelpRequestFormFragment = CoronaHelpRequestFormFragment.newInstance(helpRequest)
-            openFragment(coronaHelpRequestFormFragment, CoronaHelpRequestFormFragment.TAG)
+            if (helpRequest != null) {
+                val coronaHelpRequestFormFragment = CoronaHelpRequestFormFragment.newInstance(helpRequest)
+                openFragment(coronaHelpRequestFormFragment, CoronaHelpRequestFormFragment.TAG)
+            }
+            else {
+                val coronaHelpRequestFormFragment = CoronaHelpRequestFormFragment.newInstance()
+                openFragment(coronaHelpRequestFormFragment, CoronaHelpRequestFormFragment.TAG)
+            }
+        }
+        if (extras?.getString("action") == "VIEW_PROFILE") {
+            val fragment = ProfileVolunteerFragment.newInstance()
+            openFragment(fragment, ProfileVolunteerFragment.TAG)
         }
         else {
-            val seOneListFragment = SeOneListFragment.newInstance(SEOneListItem.Type.TAG)
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container_main, seOneListFragment).commit()
+            //val seOneListFragment = SeOneListFragment.newInstance(SEOneListItem.Type.TAG)
+            //supportFragmentManager.beginTransaction()
+                    //.add(R.id.fragment_container_main, seOneListFragment).commit()
+            val coronaHelpRequestsFragment = CoronaHelpRequestsFragment.newInstance()
+            openFragmentWithSlideToLeftEffect(coronaHelpRequestsFragment, CoronaHelpRequestsFragment.TAG)
         }
 
     }
@@ -643,9 +659,23 @@ class MainActivity : AppCompatActivity(),
         val id = item.itemId
 
 
-        //if (id == R.id.action_settings) {
-        //    return true;
-        //}
+        if (id == R.id.profile) {
+            val profileEducatorFragment = ProfileVolunteerFragment.newInstance()
+            openFragment(profileEducatorFragment, ProfileVolunteerFragment.TAG)
+            return true
+        }
+        if (id == R.id.phone_number) {
+            val intent = Intent(this, PhoneNumberActivity::class.java)
+            startActivity(intent)
+            return true
+        }
+        if (id == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            finish()
+            intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
+            return true
+        }
 
         return super.onOptionsItemSelected(item)
     }
@@ -654,17 +684,7 @@ class MainActivity : AppCompatActivity(),
         super.onBackPressed()
 
         if (supportFragmentManager.backStackEntryCount < 1) {
-            //All fragments removed so screen will be blank. Close the activity itself
-            if (mUser == null) {
-                //No user logged in, close activity and back to login page
-                finish()
-            }
-            else if (mUser != null && inputAction == SEOneListItem.Type.EDUCATOR_SEARCH.toString()){
-                //User is logged in and the last fragment was search. That means we came from the search flow on the login screen
-                val seOneListFragment = SeOneListFragment.newInstance(SEOneListItem.Type.TAG)
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.fragment_container_main, seOneListFragment).commit()
-            }
+            finish()
         }
     }
 

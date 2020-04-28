@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import com.starsearth.five.R
 import com.starsearth.five.activity.MainActivity
 import com.starsearth.five.adapter.EducatorContentRecyclerViewAdapter
+import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.domain.Task
 
 import com.starsearth.five.managers.FirebaseManager
@@ -67,7 +68,7 @@ class EducatorContentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val firebaseManager = FirebaseManager("teachingcontent")
-        val currentUser = (activity as? MainActivity)?.mUser?.uid
+        val currentUser = (activity?.application as? StarsEarthApplication)?.mUser?.uid
         if (currentUser != null) {
             llPleaseWait?.visibility = View.VISIBLE
             val query = firebaseManager.getQueryForTeachingContentCreatedByUserId(currentUser)

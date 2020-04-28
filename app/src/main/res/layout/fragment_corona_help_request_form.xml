@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:textStyle="bold"
-                android:text="Locality from GPS" />
+                android:text="Address Taken from GPS" />
 
             <TextView
                 android:id="@+id/tvSublocality"

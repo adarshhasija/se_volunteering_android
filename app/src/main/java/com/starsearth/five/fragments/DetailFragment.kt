@@ -142,7 +142,7 @@ class DetailFragment : Fragment(), SeOnTouchListener.OnSeTouchListenerInterface 
 
         mDatabase = FirebaseDatabase.getInstance().getReference("results")
         mDatabase?.keepSynced(true)
-        (mContext as? MainActivity)?.mUser?.uid?.let {
+        ((mContext as? MainActivity) as? StarsEarthApplication)?.mUser?.uid?.let {
             val query = mDatabase?.orderByChild("userId")?.equalTo(it)
             //query?.addChildEventListener(mChildEventListener);
             query?.addListenerForSingleValueEvent(mResultValuesListener)
@@ -341,7 +341,7 @@ class DetailFragment : Fragment(), SeOnTouchListener.OnSeTouchListenerInterface 
                 }
 
         tvTapScreenToStart?.text =
-                if ((context as? MainActivity)?.mUser == null && (mTeachingContent as? Task)?.type != Task.Type.SLIDES) {
+                if (((context as? MainActivity)?.application as? StarsEarthApplication)?.mUser == null && (mTeachingContent as? Task)?.type != Task.Type.SLIDES) {
                     context?.resources?.getString(R.string.tap_screen_to_login)
                 }
                 else if ((activity?.application as StarsEarthApplication)?.accessibilityManager?.isTalkbackOn == true) {

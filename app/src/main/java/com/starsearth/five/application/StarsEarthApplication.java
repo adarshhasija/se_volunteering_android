@@ -26,7 +26,7 @@ public class StarsEarthApplication extends Application {
     private SeOneAccessibilityManager mSeOneAccessibilityManager;
     //private AdsManager mAdsManager;
 
-    private User user;
+    public User mUser;
 
     public FirebaseRemoteConfigWrapper getFirebaseRemoteConfigWrapper() {
         return mFirebaseRemoteConfigWrapper;
@@ -101,14 +101,6 @@ public class StarsEarthApplication extends Application {
 
     public String getRemoteConfigAnalytics() {
         return mFirebaseRemoteConfigWrapper.get("analytics");
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public AlertDialog.Builder createAlertDialog(Context context) {

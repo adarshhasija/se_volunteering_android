@@ -104,7 +104,7 @@ class ProfileVolunteerFragment : Fragment() {
             tvVolunteerNetworkLbl?.text = it
         }
 
-        (activity as? MainActivity)?.mUser?.name?.let {
+        (activity?.application as? StarsEarthApplication)?.mUser?.name?.let {
             var split = it.split("\\s".toRegex(), 0).toMutableList()
             for (i in 0 until split.size) {
                 split[i] = split[i].toLowerCase(Locale.getDefault()).capitalize()
@@ -116,7 +116,7 @@ class ProfileVolunteerFragment : Fragment() {
             tvName?.text = finalText.trim()
         }
 
-        (activity as? MainActivity)?.mUser?.volunteerOrganization?.let {
+        (activity?.application as? StarsEarthApplication)?.mUser?.volunteerOrganization?.let {
             var split = it.split("\\s".toRegex(), 0).toMutableList()
             for (i in 0 until split.size) {
                 split[i] = split[i].toLowerCase(Locale.getDefault()).capitalize()
@@ -128,7 +128,7 @@ class ProfileVolunteerFragment : Fragment() {
             tvVolunteerOrg?.text = finalText.trim()
         }
 
-        (activity as? MainActivity)?.mUser?.pic?.let {
+        (activity?.application as? StarsEarthApplication)?.mUser?.pic?.let {
             var profilePicRef = FirebaseStorage.getInstance().reference.child(it)
 
             val ONE_MEGABYTE: Long = 1024 * 1024

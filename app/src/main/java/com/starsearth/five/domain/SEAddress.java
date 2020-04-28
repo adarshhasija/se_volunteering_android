@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public class SEAddress implements Parcelable {
 
+    public String googlePlaceId;
     public String addressLine;
     public String locality; //city
     public String adminArea; //state
@@ -24,6 +25,7 @@ public class SEAddress implements Parcelable {
     public String latLngString; //This is so that we can search for a particular help request using just latitude and longitude
 
     public SEAddress(Address address) {
+        //This comes from an android address so not assigning Google Place Id here
         this.addressLine = address.getAddressLine(0);
         this.locality = address.getLocality();
         this.adminArea = address.getAdminArea();
@@ -39,6 +41,7 @@ public class SEAddress implements Parcelable {
     }
 
     public SEAddress(HashMap<String, Object> map) {
+        this.googlePlaceId = map.containsKey("g_place_id") ? (String) map.get("g_place_id") : null;
         this.addressLine = map.containsKey("addressLine") ? (String) map.get("addressLine") : null;
         this.locality = map.containsKey("locality") ? (String) map.get("locality") : null;
         this.adminArea = map.containsKey("adminArea") ? (String) map.get("adminArea") : null;
@@ -55,6 +58,7 @@ public class SEAddress implements Parcelable {
 
 
     protected SEAddress(Parcel in) {
+        googlePlaceId = in.readString();
         addressLine = in.readString();
         locality = in.readString();
         adminArea = in.readString();
@@ -96,6 +100,7 @@ public class SEAddress implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(googlePlaceId);
         parcel.writeString(addressLine);
         parcel.writeString(locality);
         parcel.writeString(adminArea);

@@ -2,6 +2,7 @@ package com.starsearth.five.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.HashMap;
 
@@ -68,7 +69,8 @@ public class HelpRequest implements Parcelable {
         request = in.readString();
         noOfFamilyMembers = in.readString();
         aidType = in.readString();
-        address = in.readParcelable(ClassLoader.getSystemClassLoader());
+        rationCard = in.readString();
+        address = in.readParcelable(SEAddress.class.getClassLoader());
         status = in.readString();
         picCompleteUrl = in.readString();
         completedByUserId = in.readString();

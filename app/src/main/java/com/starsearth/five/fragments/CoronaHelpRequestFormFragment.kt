@@ -119,9 +119,9 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                     val subLocality = it.subLocality // This is the area
                     val premesis = it.premises
                     val subAdminArea = it.subAdminArea
-                    //tvSublocality?.text = addressLine + "\n" + city + "\n" + state + "\n" + country + "\n" + postalCode
-                    //tvSublocality?.visibility = View.VISIBLE
-                    //tvLocationLbl?.visibility = View.VISIBLE
+                    tvSublocality?.text = addressLine //+ "\n" + city + "\n" + state + "\n" + country + "\n" + postalCode
+                    tvSublocality?.visibility = View.VISIBLE
+                    tvLocationLbl?.visibility = View.VISIBLE
                 }
             }
         }
@@ -225,7 +225,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             btnSubmit?.visibility = View.GONE
             btnMap?.visibility = View.VISIBLE
             btnComplete?.visibility =
-                    if ((activity as? MainActivity)?.mUser?.volunteerOrganization == mHelpRequest!!.volunteerOrganization) { //Only volunteers from the same organization can declare it complete
+                    if ((activity?.application as? StarsEarthApplication)?.mUser?.volunteerOrganization == mHelpRequest!!.volunteerOrganization) { //Only volunteers from the same organization can declare it complete
                         View.VISIBLE
                     }
                     else {
@@ -389,6 +389,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         etPhoneNumber?.hint = "Recipient Phone Number"
         etName?.visibility = View.VISIBLE
         etName?.hint = "Recipient Name"
+        etLandmark?.visibility = View.VISIBLE
         val spinnerList = ArrayList<String>()
         spinnerList.add("FOOD")
         spinnerList.add("GROCERIES")
@@ -407,8 +408,8 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         spinnerRequest?.onItemSelectedListener = this
 
         btnSubmit?.setOnClickListener {
-            val userName = (activity as? MainActivity)?.mUser?.name
-            val volunteerOrganization = (activity as? MainActivity)?.mUser?.volunteerOrganization
+            val userName = (activity?.application as? StarsEarthApplication)?.mUser?.name
+            val volunteerOrganization = (activity?.application as? StarsEarthApplication)?.mUser?.volunteerOrganization
             val name = if (userName.isNullOrEmpty()) {
                 etName?.text.toString().toUpperCase()
                 }
@@ -433,7 +434,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
 
             val mDatabase = FirebaseDatabase.getInstance().getReference()
             val key: String? = mDatabase.push().getKey()
-            val userId = (activity as? MainActivity)?.mUser?.uid
+            val userId = (activity?.application as? StarsEarthApplication)?.mUser?.uid
             val map = HashMap<String, Any>()
             //map.put("uid", key)
             map.put("userId", userId!!)
@@ -486,7 +487,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                 //childUpdates["organizations/"+newlyEnteredOrganization+"/people/"+userId+"/phone"] = phoneNumber
             }
             mAddressFromPhone?.let {
-                childUpdates["help_request_locations/"+it.countryName.toUpperCase()+"/"+it.adminArea] = true
+                //childUpdates["help_request_locations/"+it.countryName.toUpperCase()+"/"+it.adminArea] = true
             }
 
             llPleaseWait?.visibility = View.VISIBLE
@@ -562,42 +563,62 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
         llPicOfCompletion?.visibility = View.VISIBLE
         ivPicOfCompletion?.visibility = View.VISIBLE
 
-        mHelpRequest?.let {
-            llPleaseWait?.visibility = View.VISIBLE
-            val storageReference = FirebaseStorage.getInstance().reference.child("images/help_requests/"+it.uid+".jpg")
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
-            val data = baos.toByteArray()
-            val uploadTask = storageReference.putBytes(data)
-            uploadTask.addOnSuccessListener {
-                val childUpdates: MutableMap<String, Any> = HashMap()
-                childUpdates["help_requests/" + mHelpRequest!!.uid + "/status"] = "COMPLETE"
-                (activity as? MainActivity)?.mUser?.uid?.let { childUpdates["help_requests/" + mHelpRequest!!.uid + "/completed_user_id"] = it }
-                (activity as? MainActivity)?.mUser?.phone?.let { childUpdates["help_requests/" + mHelpRequest!!.uid + "/completed_user_phone"] = it }
-                (activity as? MainActivity)?.mUser?.name?.let { childUpdates["help_requests/" + mHelpRequest!!.uid + "/completed_user_name"] = it }
-                childUpdates["help_requests/" + mHelpRequest!!.uid + "/pic_complete_url"] = "images/help_requests/"+mHelpRequest!!.uid+".jpg"
-                childUpdates["help_requests/" + mHelpRequest!!.uid + "/timestamp_completion"] = ServerValue.TIMESTAMP
-                val mDatabase = FirebaseDatabase.getInstance().getReference()
-                mDatabase.updateChildren(childUpdates).addOnSuccessListener {
-                    llPleaseWait?.visibility = View.GONE
-                    btnComplete?.visibility = View.GONE
-                    btnCancel?.visibility = View.GONE
-                    llDeliveryStatus?.visibility = View.VISIBLE //We do not want to exit once the save is complete. We will just show that the delivery successfully completed
-                    tvDeliveryDate?.visibility = View.VISIBLE
-                    tvDeliveryDate?.text = (activity as? MainActivity)?.getFormattedDateAndTime(Calendar.getInstance().timeInMillis) //This is just to display now as the real timestamp will only be processed at the server side
-                    (activity as? MainActivity)?.mUser?.let {
-                        if (it.phone != null) {
-                            var finalText = "Delivered by: " + it.phone
-                            if (it.name != null) {
-                                finalText += " - " + it.name
-                            }
-                            tvDeliveredByNameNumber?.visibility = View.VISIBLE
-                            tvDeliveredByNameNumber?.text = finalText
+        llPleaseWait?.visibility = View.VISIBLE
+        val key = FirebaseDatabase.getInstance().getReference("help_requests").push().getKey();
+        val storageReference = FirebaseStorage.getInstance().reference.child("images/help_requests/"+key+".jpg")
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        val data = baos.toByteArray()
+        val uploadTask = storageReference.putBytes(data)
+        uploadTask.addOnSuccessListener {
+            val childUpdates: MutableMap<String, Any> = HashMap()
+            childUpdates["help_requests/" + key + "/status"] = "COMPLETE"
+            childUpdates["help_requests/" + key + "/guest_phone"] = etPhoneNumber.text
+            (activity?.application as? StarsEarthApplication)?.mUser?.let {
+                it.uid?.let { childUpdates["help_requests/" + key + "/userId"] = it }
+                it.phone?.let { childUpdates["help_requests/" + key + "/phone"] = it }
+                it.name?.let { childUpdates["help_requests/" + key + "/name"] = it }
+                it.volunteerOrganization?.let { childUpdates["help_requests/" + key + "/volunteer_organization"] = it }
+
+                it.uid?.let { childUpdates["help_requests/" + key + "/completed_user_id"] = it }
+                it.phone?.let { childUpdates["help_requests/" + key + "/completed_user_phone"] = it }
+                it.name?.let { childUpdates["help_requests/" + key + "/completed_user_name"] = it }
+            }
+
+            childUpdates["help_requests/" + mHelpRequest!!.uid + "/pic_complete_url"] = "images/help_requests/"+mHelpRequest!!.uid+".jpg"
+            childUpdates["help_requests/" + mHelpRequest!!.uid + "/timestamp_completion"] = ServerValue.TIMESTAMP
+            val mDatabase = FirebaseDatabase.getInstance().getReference()
+            mDatabase.updateChildren(childUpdates).addOnSuccessListener {
+                llPleaseWait?.visibility = View.GONE
+                btnComplete?.visibility = View.GONE
+                btnCancel?.visibility = View.GONE
+                llDeliveryStatus?.visibility = View.VISIBLE //We do not want to exit once the save is complete. We will just show that the delivery successfully completed
+                tvDeliveryDate?.visibility = View.VISIBLE
+                tvDeliveryDate?.text = (activity as? MainActivity)?.getFormattedDateAndTime(Calendar.getInstance().timeInMillis) //This is just to display now as the real timestamp will only be processed at the server side
+                (activity?.application as? StarsEarthApplication)?.mUser?.let {
+                    if (it.phone != null) {
+                        var finalText = "Delivered by: " + it.phone
+                        if (it.name != null) {
+                            finalText += " - " + it.name
                         }
+                        tvDeliveredByNameNumber?.visibility = View.VISIBLE
+                        tvDeliveredByNameNumber?.text = finalText
                     }
-                    svMain?.scrollTo(0,0) //Scroll back to the top
-                    //listener?.requestCompleted()
-                }.addOnFailureListener {
+                }
+                svMain?.scrollTo(0,0) //Scroll back to the top
+                //listener?.requestCompleted()
+            }.addOnFailureListener {
+                llPleaseWait?.visibility = View.GONE
+                val alertDialog2 = (activity?.application as StarsEarthApplication)?.createAlertDialog(mContext)
+                alertDialog2.setTitle("Error")
+                alertDialog2.setMessage("Failed to save. Please try again")
+                alertDialog2.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
+                    dialog.dismiss()
+                })
+                alertDialog2.show()
+            }
+        }
+                .addOnFailureListener {
                     llPleaseWait?.visibility = View.GONE
                     val alertDialog2 = (activity?.application as StarsEarthApplication)?.createAlertDialog(mContext)
                     alertDialog2.setTitle("Error")
@@ -607,18 +628,6 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                     })
                     alertDialog2.show()
                 }
-            }
-                    .addOnFailureListener {
-                        llPleaseWait?.visibility = View.GONE
-                        val alertDialog2 = (activity?.application as StarsEarthApplication)?.createAlertDialog(mContext)
-                        alertDialog2.setTitle("Error")
-                        alertDialog2.setMessage("Failed to save. Please try again")
-                        alertDialog2.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
-                            dialog.dismiss()
-                        })
-                        alertDialog2.show()
-                    }
-        }
 
 
 

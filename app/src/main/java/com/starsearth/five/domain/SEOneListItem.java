@@ -64,13 +64,14 @@ public class SEOneListItem implements Parcelable {
 
     public static List<SEOneListItem> populateCoronaMenuList(Context context) {
         List<SEOneListItem> list = new ArrayList<>();
-        list.add(new SEOneListItem(context.getResources().getString(R.string.corona_my_help_requests), Type.CORONA_MY_HELP_REQUESTS));
-        list.add(new SEOneListItem(context.getResources().getString(R.string.corona_org_help_requests), Type.CORONA_ORG_HELP_REQUESTS));
-        list.add(new SEOneListItem(context.getResources().getString(R.string.search_by_organization), Type.CORONA_ORGANIZATION_SEARCH));
+        //list.add(new SEOneListItem(context.getResources().getString(R.string.corona_my_help_requests), Type.CORONA_MY_HELP_REQUESTS));
+        //list.add(new SEOneListItem(context.getResources().getString(R.string.corona_org_help_requests), Type.CORONA_ORG_HELP_REQUESTS));
         list.add(new SEOneListItem(context.getResources().getString(R.string.corona_make_new_help_request), Type.CORONA_NEW_HELP_REQUEST));
-        list.add(new SEOneListItem(context.getResources().getString(R.string.volunteer_profile), Type.VOLUNTEER_PROFILE));
-        list.add(new SEOneListItem(context.getResources().getString(R.string.phone_number), Type.PHONE_NUMBER));
-        list.add(new SEOneListItem(context.getResources().getString(R.string.logout), Type.LOGOUT));
+        list.add(new SEOneListItem(context.getResources().getString(R.string.corona_all_requests), Type.CORONA_ORG_HELP_REQUESTS));
+        //list.add(new SEOneListItem(context.getResources().getString(R.string.search_by_organization), Type.CORONA_ORGANIZATION_SEARCH));
+        //list.add(new SEOneListItem(context.getResources().getString(R.string.volunteer_profile), Type.VOLUNTEER_PROFILE));
+        //list.add(new SEOneListItem(context.getResources().getString(R.string.phone_number), Type.PHONE_NUMBER));
+        //list.add(new SEOneListItem(context.getResources().getString(R.string.logout), Type.LOGOUT));
 
         return list;
     }
