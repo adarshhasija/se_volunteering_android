@@ -2,6 +2,7 @@ package com.starsearth.five.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.Map;
 
@@ -13,7 +14,6 @@ public class User implements Parcelable {
 
     public String uid;
     public String phone;
-    public Educator.Status educator;
     public String name;
     public String pic;
     public String volunteerOrganization;
@@ -29,7 +29,6 @@ public class User implements Parcelable {
     public User(String key, Map<String, Object> map) {
         this.uid = key;
         this.phone = map.containsKey("phone") ? (String) map.get("phone") : null;
-        this.educator = map.containsKey("educator") ? Educator.Status.fromString((String) map.get("educator")) : null;
         this.name = map.containsKey("name") ? (String) map.get("name") : null;
         this.pic = map.containsKey("pic") ? (String) map.get("pic") : null;
         this.volunteerOrganization = map.containsKey("volunteer_organization") ? (String) map.get("volunteer_organization") : null;
@@ -39,7 +38,6 @@ public class User implements Parcelable {
     protected User(Parcel in) {
         uid = in.readString();
         phone = in.readString();
-        educator = Educator.Status.fromString(in.readString());
         name = in.readString();
         pic = in.readString();
         volunteerOrganization = in.readString();
@@ -66,7 +64,6 @@ public class User implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(uid);
         dest.writeString(phone);
-        dest.writeString(educator.toString());
         dest.writeString(name);
         dest.writeString(pic);
         dest.writeString(volunteerOrganization);

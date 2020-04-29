@@ -78,7 +78,10 @@ class SummaryFragment : Fragment() {
             ivPic?.setImageBitmap(bitmap)
             ivPic?.visibility = View.VISIBLE
         }
-        tvProcessed?.text = mCompleted.toString()
+
+        if (mCompleted != null) {
+            tvProcessed?.text = mCompleted.toString()
+        }
 
         if (mVolunteersNum != null) {
             llVolunteersNumber?.visibility = View.VISIBLE
