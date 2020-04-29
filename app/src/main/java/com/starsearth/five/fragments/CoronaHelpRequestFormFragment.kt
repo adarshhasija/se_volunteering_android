@@ -38,6 +38,7 @@ import com.starsearth.five.activity.MainActivity
 import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.domain.HelpRequest
 import com.starsearth.five.domain.SEAddress
+import com.starsearth.five.domain.User
 import kotlinx.android.synthetic.main.fragment_corona_help_request_form.*
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -590,24 +591,49 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
             childUpdates["requests/" + key + "/status"] = "COMPLETE"
             mRequest?.let { childUpdates["requests/" + key + "/request"] = it }
             mAddressFromPhone?.let { childUpdates["requests/" + key + "/address"] = it }
-            //childUpdates["requests/" + key + "/guest_phone"] = etPhoneNumber.text
+            childUpdates["requests/" + key + "/userId"] =
+                    if ((activity?.application as? StarsEarthApplication)?.mUser != null) {
+                        ((activity?.application as? StarsEarthApplication)?.mUser as User).uid
+                    }
+                    else if (FirebaseAuth.getInstance().currentUser != null) {
+                        FirebaseAuth.getInstance().currentUser!!.uid
+                    }
+                    else {
+                        ""
+                    }
+            childUpdates["requests/" + key + "/phone"] =
+                    if ((activity?.application as? StarsEarthApplication)?.mUser != null) {
+                        ((activity?.application as? StarsEarthApplication)?.mUser as User).phone
+                    }
+                    else if (FirebaseAuth.getInstance().currentUser?.phoneNumber != null) {
+                        FirebaseAuth.getInstance().currentUser!!.phoneNumber!!
+                    }
+                    else {
+                        ""
+                    }
+            childUpdates["requests/" + key + "/completed_user_id"] =
+                    if ((activity?.application as? StarsEarthApplication)?.mUser != null) {
+                        ((activity?.application as? StarsEarthApplication)?.mUser as User).uid
+                    }
+                    else if (FirebaseAuth.getInstance().currentUser != null) {
+                        FirebaseAuth.getInstance().currentUser!!.uid
+                    }
+                    else {
+                        ""
+                    }
+            childUpdates["requests/" + key + "/completed_user_phone"] =
+                    if ((activity?.application as? StarsEarthApplication)?.mUser != null) {
+                        ((activity?.application as? StarsEarthApplication)?.mUser as User).uid
+                    }
+                    else if (FirebaseAuth.getInstance().currentUser?.uid != null) {
+                        FirebaseAuth.getInstance().currentUser!!.uid
+                    }
+                    else {
+                        ""
+                    }
             (activity?.application as? StarsEarthApplication)?.mUser?.let {
-                it.uid?.let { childUpdates["requests/" + key + "/userId"] = it }
-                childUpdates["requests/" + key + "/phone"] =
-                        if (it.phone.isNullOrEmpty() == false) {
-                            it.phone
-                        }
-                        else if (FirebaseAuth.getInstance().currentUser?.uid != null) {
-                            FirebaseAuth.getInstance().currentUser!!.uid
-                        }
-                        else {
-                            ""
-                        }
                 it.name?.let { childUpdates["requests/" + key + "/name"] = it }
                 it.volunteerOrganization?.let { childUpdates["requests/" + key + "/volunteer_organization"] = it }
-
-                it.uid?.let { childUpdates["requests/" + key + "/completed_user_id"] = it }
-                it.phone?.let { childUpdates["requests/" + key + "/completed_user_phone"] = it }
                 it.name?.let { childUpdates["requests/" + key + "/completed_user_name"] = it }
             }
 
@@ -618,19 +644,33 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                 llPleaseWait?.visibility = View.GONE
                 btnComplete?.visibility = View.GONE
                 btnCancel?.visibility = View.GONE
+                llLogoTitle?.visibility = View.VISIBLE
+                (activity?.application as StarsEarthApplication).getFirebaseRemoteConfigWrapper().volunteerNetworkName?.let {
+                    tvVolunteerNetworkLbl?.text = it
+                }
                 llDeliveryStatus?.visibility = View.VISIBLE //We do not want to exit once the save is complete. We will just show that the delivery successfully completed
                 tvDeliveryDate?.visibility = View.VISIBLE
                 tvDeliveryDate?.text = (activity as? MainActivity)?.getFormattedDateAndTime(Calendar.getInstance().timeInMillis) //This is just to display now as the real timestamp will only be processed at the server side
-                (activity?.application as? StarsEarthApplication)?.mUser?.let {
-                    if (it.phone != null) {
-                        var finalText = "Delivered by: " + it.phone
-                        if (it.name != null) {
-                            finalText += " - " + it.name
+                val userPhoneNumber =
+                        if ((activity?.application as? StarsEarthApplication)?.mUser != null) {
+                            ((activity?.application as? StarsEarthApplication)?.mUser as User).phone
                         }
-                        tvDeliveredByNameNumber?.visibility = View.VISIBLE
-                        tvDeliveredByNameNumber?.text = finalText
-                    }
+                        else {
+                            FirebaseAuth.getInstance().currentUser?.phoneNumber
+                        }
+                val name =
+                        if ((activity?.application as? StarsEarthApplication)?.mUser != null) {
+                            ((activity?.application as? StarsEarthApplication)?.mUser as User).name
+                        }
+                        else {
+                            null
+                        }
+                var finalText = "Delivered by: " + userPhoneNumber
+                if (name != null) {
+                    finalText += " - " + name
                 }
+                tvDeliveredByNameNumber?.visibility = View.VISIBLE
+                tvDeliveredByNameNumber?.text = finalText
                 svMain?.scrollTo(0,0) //Scroll back to the top
                 //listener?.requestCompleted()
             }.addOnFailureListener {
