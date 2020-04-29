@@ -863,4 +863,20 @@ class MainActivity : AppCompatActivity(),
         return convertedTime;
     }
 
+    fun convertTimeToIST(d : Date) : String {
+        //You are getting server date as argument, parse your server response and then pass date to this method
+        val sdf = SimpleDateFormat("hh:mm a");
+
+        val actualTime = sdf.format(d);
+        //Changed timezone
+        val tzInCurrentLocation = TimeZone.getDefault()
+        sdf.setTimeZone(tzInCurrentLocation);
+
+        val convertedTime = sdf.format(d);
+
+        System.out.println("actual : " + actualTime + "  converted " + convertedTime);
+
+        return convertedTime;
+    }
+
 }

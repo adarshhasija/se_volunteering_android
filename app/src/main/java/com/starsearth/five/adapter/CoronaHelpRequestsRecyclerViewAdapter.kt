@@ -1,5 +1,6 @@
 package com.starsearth.five.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.starsearth.five.R
+import com.starsearth.five.activity.MainActivity
 import com.starsearth.five.domain.HelpRequest
 
 
@@ -14,6 +16,8 @@ import com.starsearth.five.fragments.lists.CoronaHelpRequestsFragment.OnListFrag
 import com.starsearth.five.fragments.lists.dummy.DummyContent.DummyItem
 
 import kotlinx.android.synthetic.main.fragment_coronahelprequests.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -21,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_coronahelprequests.view.*
  * TODO: Replace the implementation with code for your data type.
  */
 class CoronaHelpRequestsRecyclerViewAdapter(
+        private val mContext: Context,
         private val mValues: ArrayList<HelpRequest>,
         private val mListener: OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<CoronaHelpRequestsRecyclerViewAdapter.ViewHolder>() {
@@ -44,6 +49,7 @@ class CoronaHelpRequestsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
+        holder.mTimeView.text = (mContext as? MainActivity)?.convertTimeToIST(Date(item.timestampCompletion))
         holder.mNameView.text =
                 if (!item.guestName.isNullOrBlank()) {
                     item.guestName
@@ -77,6 +83,7 @@ class CoronaHelpRequestsRecyclerViewAdapter(
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+        val mTimeView: TextView = mView.time
         val mNameView: TextView = mView.name
         val mHelpNeededView: TextView = mView.helpNeeded
 

@@ -65,6 +65,8 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
     private var mHostPhoneNumber : String? = FirebaseAuth.getInstance().currentUser?.phoneNumber
     private var mSubLocalities : LinkedHashMap<String, Int> = LinkedHashMap()
     private var mNumberComplete : Int = 0
+    private val mVolunteers : HashMap<String, Boolean> = HashMap()
+    private val mPostalCodes : HashMap<String?, Boolean> = HashMap()
     private var listener: OnListFragmentInteractionListener? = null
 
     private var mMode : String? = null
@@ -73,7 +75,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             llPleaseWait?.visibility = View.GONE
             var isListEmpty = true
-            val map = dataSnapshot?.value
+            val map = dataSnapshot.value
             if (map != null) {
                 //First clear the list so we can repopulate
                 (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.removeAllItems()
@@ -104,7 +106,9 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                     if (newHelpRequest.status == "COMPLETE") {
                         mNumberComplete++
                     }
-                    Log.d(TAG, "*********SUBLOCALITY of new request: " + newHelpRequest.address.subLocality)
+                    mVolunteers.put(newHelpRequest.completedByUserId, true)
+                    mPostalCodes.put(newHelpRequest.address?.postalCode, true)
+                    Log.d(TAG, "*********SUBLOCALITY of new request: " + newHelpRequest.address?.subLocality)
                     // Keep a record of the admin area. Will be needed to pupulate the dropdown
                     newHelpRequest?.address?.subLocality?.let {
                         var currentCount : Int = mSubLocalities[it] ?: 0
@@ -236,7 +240,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                 view.list.addItemDecoration(DividerItemDecoration(context,
                         DividerItemDecoration.VERTICAL))
                 val mainList : ArrayList<HelpRequest> = ArrayList()
-                (view.list as RecyclerView).adapter = CoronaHelpRequestsRecyclerViewAdapter(mainList, listener)
+                (view.list as RecyclerView).adapter = CoronaHelpRequestsRecyclerViewAdapter(mContext, mainList, listener)
             }
         }
         return view
@@ -290,14 +294,17 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                 listener?.onCoronaHelpListFragmentAddButtonTapped()
             }
             ivReport?.setOnClickListener {
-                llPleaseWait?.visibility = View.VISIBLE
                 val user = (activity?.application as? StarsEarthApplication)?.mUser
                 val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
                 val map = HashMap<String, Any>()
                 user?.let { map.put(SummaryFragment.ARG_USER, it) }
                 dateTime?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, it) }
                 map.put(SummaryFragment.ARG_COMPLETED, mNumberComplete)
+                map.put(SummaryFragment.ARG_NUM_VOLUNTEERS, mVolunteers.size)
+                map.put(SummaryFragment.ARG_NUM_AREAS, mPostalCodes.size)
                 mVolunteerOrg?.let { map.put(SummaryFragment.ARG_VOLUNTEER_ORG, it) }
+                listener?.onMenuItemSummaryTapped(map)
+             /*   llPleaseWait?.visibility = View.VISIBLE
                 val picUrl : String? = (activity?.application as? StarsEarthApplication)?.mUser?.pic
                 if (picUrl != null) {
                     var profilePicRef = FirebaseStorage.getInstance().reference.child(picUrl)
@@ -325,7 +332,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                        alertDialog?.setMessage("You need a photo in order to produce a summary sheet. Please contact hasijaadarsh@gmail.com for more information")
                        alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
                        alertDialog?.show() */
-                }
+                }   */
             }
             ivCalendar?.setOnClickListener {
                 listener?.onModeDateChangeRequested()
@@ -411,46 +418,6 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         when (item!!.itemId) {
             R.id.add -> {
                 listener?.onCoronaHelpListFragmentAddButtonTapped()
-                return true
-            }
-            R.id.daily_report -> {
-                llPleaseWait?.visibility = View.VISIBLE
-                val user = (activity?.application as? StarsEarthApplication)?.mUser
-                val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
-                val map = HashMap<String, Any>()
-                user?.let { map.put(SummaryFragment.ARG_USER, it) }
-                dateTime?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, it) }
-                map.put(SummaryFragment.ARG_COMPLETED, mNumberComplete)
-                mVolunteerOrg?.let { map.put(SummaryFragment.ARG_VOLUNTEER_ORG, it) }
-                val picUrl : String? = (activity?.application as? StarsEarthApplication)?.mUser?.pic
-                if (picUrl != null) {
-                    var profilePicRef = FirebaseStorage.getInstance().reference.child(picUrl)
-                    val ONE_MEGABYTE: Long = 1024 * 1024
-                    profilePicRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                        llPleaseWait?.visibility = View.GONE
-                        map.put(SummaryFragment.ARG_BYTE_ARRAY, it)
-                        listener?.onMenuItemSummaryTapped(map)
-                    }.addOnFailureListener {
-                        // Handle any errors
-                        llPleaseWait?.visibility = View.GONE
-                        listener?.onMenuItemSummaryTapped(map)
-                     /*   val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
-                        alertDialog?.setTitle(mContext.getString(R.string.error))
-                        alertDialog?.setMessage("Operation failed. Please try again later")
-                        alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
-                        alertDialog?.show() */
-                    }
-                }
-                else {
-                    llPleaseWait?.visibility = View.GONE
-                    listener?.onMenuItemSummaryTapped(map)
-                 /*   val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
-                    alertDialog?.setTitle(mContext.getString(R.string.error))
-                    alertDialog?.setMessage("You need a photo in order to produce a summary sheet. Please contact hasijaadarsh@gmail.com for more information")
-                    alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
-                    alertDialog?.show() */
-                }
-
                 return true
             }
         }

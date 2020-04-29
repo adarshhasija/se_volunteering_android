@@ -29,6 +29,8 @@ class SummaryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var mUser: User
     private var mCompleted: Int? = null
+    private var mVolunteersNum: Int? = null
+    private var mNumAreas: Int? = null
     private var mVolunteerOrg: String? = null
     private lateinit var mFormattedDateTime: String
     private var mByteArray: ByteArray? = null
@@ -39,6 +41,8 @@ class SummaryFragment : Fragment() {
         arguments?.let {
             mUser = it.getParcelable(ARG_USER) as User
             mCompleted = it.getInt(ARG_COMPLETED)
+            mVolunteersNum = it.getInt(ARG_NUM_VOLUNTEERS)
+            mNumAreas = it.getInt(ARG_NUM_AREAS)
             mVolunteerOrg = it.getString(ARG_VOLUNTEER_ORG)
             mFormattedDateTime = it.getString(ARG_FORMATTED_DATE_TIME) as String
             mByteArray = it.getByteArray(ARG_BYTE_ARRAY)
@@ -58,7 +62,7 @@ class SummaryFragment : Fragment() {
             tvAppName?.text = it
         }
         tvDateTimeCurrent?.text = mFormattedDateTime
-        if (mVolunteerOrg != null) {
+     /*   if (mVolunteerOrg != null) {
             //This should be from the volunteer org POV
             tvVolunteerOrg?.text = mVolunteerOrg
             tvVolunteerOrg?.visibility = View.VISIBLE
@@ -67,13 +71,23 @@ class SummaryFragment : Fragment() {
             //This should be from the individual's POV
             tvName?.text = mUser.name
             tvName?.visibility = View.VISIBLE
-        }
+        }   */
 
         mByteArray?.let {
             val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
             ivPic?.setImageBitmap(bitmap)
+            ivPic?.visibility = View.VISIBLE
         }
         tvProcessed?.text = mCompleted.toString()
+
+        if (mVolunteersNum != null) {
+            llVolunteersNumber?.visibility = View.VISIBLE
+            tvVolunteers?.text = mVolunteersNum?.toString()
+        }
+        if (mNumAreas != null) {
+            llAreasCovered?.visibility = View.VISIBLE
+            tvAreasCovered?.text = mNumAreas.toString()
+        }
 
     }
 
@@ -111,6 +125,8 @@ class SummaryFragment : Fragment() {
         val TAG = "SUMMARY_FRAGMENT"
         const val ARG_USER = "user"
         const val ARG_COMPLETED = "completed"
+        const val ARG_NUM_VOLUNTEERS = "num_volunteers"
+        const val ARG_NUM_AREAS = "num_areas"
         const val ARG_VOLUNTEER_ORG = "volunteer_org"
         const val ARG_FORMATTED_DATE_TIME = "formatted_date_time"
         const val ARG_BYTE_ARRAY = "byte_array"
@@ -130,6 +146,8 @@ class SummaryFragment : Fragment() {
                         putParcelable(ARG_USER, map.get(ARG_USER) as Parcelable)
                         putString(ARG_FORMATTED_DATE_TIME, map.get(ARG_FORMATTED_DATE_TIME) as String)
                         putInt(ARG_COMPLETED, map.get(ARG_COMPLETED) as Int)
+                        putInt(ARG_NUM_VOLUNTEERS, map.get(ARG_NUM_VOLUNTEERS) as Int)
+                        putInt(ARG_NUM_AREAS, map.get(ARG_NUM_AREAS) as Int)
                         putString(ARG_VOLUNTEER_ORG, map.get(ARG_VOLUNTEER_ORG) as? String)
                         putByteArray(ARG_BYTE_ARRAY, map.get(ARG_BYTE_ARRAY) as? ByteArray)
                     }
