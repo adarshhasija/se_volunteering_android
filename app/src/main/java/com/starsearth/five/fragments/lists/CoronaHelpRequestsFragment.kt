@@ -64,9 +64,6 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
     private var mCopyOfUser : User? = null
     private var mHostPhoneNumber : String? = FirebaseAuth.getInstance().currentUser?.phoneNumber
     private var mSubLocalities : LinkedHashMap<String, Int> = LinkedHashMap()
-    private var mNumberComplete : Int = 0
-    private val mVolunteers : HashMap<String, Boolean> = HashMap()
-    private val mPostalCodes : HashMap<String?, Boolean> = HashMap()
     private var listener: OnListFragmentInteractionListener? = null
 
     private var mMode : String? = null
@@ -103,11 +100,6 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                         Log.d("TAG", "********DATE NOT MATCHING************")
                         continue
                     }
-                  /*  if (newHelpRequest.status == "COMPLETE") {
-                        mNumberComplete++
-                    }
-                    mVolunteers.put(newHelpRequest.completedByUserId, true)
-                    mPostalCodes.put(newHelpRequest.address?.postalCode, true)  */ //We are doing this in the other listener now
                     Log.d(TAG, "*********SUBLOCALITY of new request: " + newHelpRequest.address?.subLocality)
                     // Keep a record of the admin area. Will be needed to pupulate the dropdown
                     newHelpRequest?.address?.subLocality?.let {
@@ -173,25 +165,25 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             llPleaseWait?.visibility = View.GONE
             val valueMap = dataSnapshot.value
             if (valueMap != null) {
-                mNumberComplete = 0
-                mVolunteers.clear()
-                mPostalCodes.clear()
+                var numberComplete = 0
+                val volunteers : HashMap<String, Boolean> = HashMap()
+                val postalCodes : HashMap<String?, Boolean> = HashMap()
                 for (entry in (valueMap as HashMap<*, *>).entries) {
                     val key = entry.key as String
                     val value = entry.value as HashMap<String, Any>
                     var newHelpRequest = HelpRequest(key, value)
-                    mNumberComplete++
-                    mVolunteers.put(newHelpRequest.completedByUserId, true)
-                    mPostalCodes.put(newHelpRequest.address?.postalCode, true)
+                    numberComplete++
+                    volunteers.put(newHelpRequest.completedByUserId, true)
+                    postalCodes.put(newHelpRequest.address?.postalCode, true)
                 }
                 val user = (activity?.application as? StarsEarthApplication)?.mUser
                 val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
                 val map = HashMap<String, Any>()
                 user?.let { map.put(SummaryFragment.ARG_USER, it) }
                 dateTime?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, it) }
-                map.put(SummaryFragment.ARG_COMPLETED, mNumberComplete)
-                map.put(SummaryFragment.ARG_NUM_VOLUNTEERS, mVolunteers.size)
-                map.put(SummaryFragment.ARG_NUM_AREAS, mPostalCodes.size)
+                map.put(SummaryFragment.ARG_COMPLETED, numberComplete)
+                map.put(SummaryFragment.ARG_NUM_VOLUNTEERS, volunteers.size)
+                map.put(SummaryFragment.ARG_NUM_AREAS, postalCodes.size)
                 mVolunteerOrg?.let { map.put(SummaryFragment.ARG_VOLUNTEER_ORG, it) }
                 listener?.onMenuItemSummaryTapped(map)
             }
