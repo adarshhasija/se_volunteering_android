@@ -103,11 +103,11 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                         Log.d("TAG", "********DATE NOT MATCHING************")
                         continue
                     }
-                    if (newHelpRequest.status == "COMPLETE") {
+                  /*  if (newHelpRequest.status == "COMPLETE") {
                         mNumberComplete++
                     }
                     mVolunteers.put(newHelpRequest.completedByUserId, true)
-                    mPostalCodes.put(newHelpRequest.address?.postalCode, true)
+                    mPostalCodes.put(newHelpRequest.address?.postalCode, true)  */ //We are doing this in the other listener now
                     Log.d(TAG, "*********SUBLOCALITY of new request: " + newHelpRequest.address?.subLocality)
                     // Keep a record of the admin area. Will be needed to pupulate the dropdown
                     newHelpRequest?.address?.subLocality?.let {
@@ -164,6 +164,53 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
 
         override fun onCancelled(p0: DatabaseError) {
             llPleaseWait?.visibility = View.GONE
+        }
+
+    }
+
+    private val mValuesForDailySummaryListener = object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            llPleaseWait?.visibility = View.GONE
+            val valueMap = dataSnapshot.value
+            if (valueMap != null) {
+                mNumberComplete = 0
+                mVolunteers.clear()
+                mPostalCodes.clear()
+                for (entry in (valueMap as HashMap<*, *>).entries) {
+                    val key = entry.key as String
+                    val value = entry.value as HashMap<String, Any>
+                    var newHelpRequest = HelpRequest(key, value)
+                    mNumberComplete++
+                    mVolunteers.put(newHelpRequest.completedByUserId, true)
+                    mPostalCodes.put(newHelpRequest.address?.postalCode, true)
+                }
+                val user = (activity?.application as? StarsEarthApplication)?.mUser
+                val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
+                val map = HashMap<String, Any>()
+                user?.let { map.put(SummaryFragment.ARG_USER, it) }
+                dateTime?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, it) }
+                map.put(SummaryFragment.ARG_COMPLETED, mNumberComplete)
+                map.put(SummaryFragment.ARG_NUM_VOLUNTEERS, mVolunteers.size)
+                map.put(SummaryFragment.ARG_NUM_AREAS, mPostalCodes.size)
+                mVolunteerOrg?.let { map.put(SummaryFragment.ARG_VOLUNTEER_ORG, it) }
+                listener?.onMenuItemSummaryTapped(map)
+            }
+            else {
+                val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                alertDialog?.setTitle(mContext.getString(R.string.error))
+                alertDialog?.setMessage("There was an issue. Please try again later")
+                alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
+                alertDialog?.show()
+            }
+        }
+
+        override fun onCancelled(p0: DatabaseError) {
+            llPleaseWait?.visibility = View.GONE
+            val alertDialog = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+            alertDialog?.setTitle(mContext.getString(R.string.error))
+            alertDialog?.setMessage("There was an issue. Please try again later")
+            alertDialog?.setPositiveButton(getString(android.R.string.ok), null)
+            alertDialog?.show()
         }
 
     }
@@ -294,7 +341,9 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                 listener?.onCoronaHelpListFragmentAddButtonTapped()
             }
             ivReport?.setOnClickListener {
-                val user = (activity?.application as? StarsEarthApplication)?.mUser
+                llPleaseWait?.visibility = View.VISIBLE
+                loadHelpRequestsForDailySummary(Calendar.getInstance().timeInMillis)
+              /*  val user = (activity?.application as? StarsEarthApplication)?.mUser
                 val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
                 val map = HashMap<String, Any>()
                 user?.let { map.put(SummaryFragment.ARG_USER, it) }
@@ -303,7 +352,10 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                 map.put(SummaryFragment.ARG_NUM_VOLUNTEERS, mVolunteers.size)
                 map.put(SummaryFragment.ARG_NUM_AREAS, mPostalCodes.size)
                 mVolunteerOrg?.let { map.put(SummaryFragment.ARG_VOLUNTEER_ORG, it) }
-                listener?.onMenuItemSummaryTapped(map)
+                listener?.onMenuItemSummaryTapped(map)  */
+
+
+
              /*   llPleaseWait?.visibility = View.VISIBLE
                 val picUrl : String? = (activity?.application as? StarsEarthApplication)?.mUser?.pic
                 if (picUrl != null) {
@@ -377,7 +429,6 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         query.addListenerForSingleValueEvent(mHelpRequestsListener)
     }
 
-    //adminArea = State
     fun loadHelpRequestsForToday(todayMillis: Long) {
         val calYesterday = Calendar.getInstance()
         calYesterday.timeInMillis = todayMillis
@@ -391,6 +442,23 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
         val query = firebaseManager.getQueryForRequestsCompletedBetweenDates(yesterdayTimeMillis.toDouble(), endTimeMillis.toDouble())
         query.addListenerForSingleValueEvent(mHelpRequestsListener)
     }
+
+    // We obtain all the help requests in the day but not to store them. We need them to just calculate values for the daily summary
+    fun loadHelpRequestsForDailySummary(todayMillis: Long) {
+        val calYesterday = Calendar.getInstance()
+        calYesterday.timeInMillis = todayMillis
+        calYesterday.add(Calendar.DATE, -1)
+        val yesterdayTimeMillis = calYesterday.timeInMillis
+        val calTomorrow = Calendar.getInstance()
+        calTomorrow.timeInMillis = todayMillis
+        calTomorrow.add(Calendar.DATE, 1)
+        val endTimeMillis = calTomorrow.timeInMillis
+        val firebaseManager = FirebaseManager("requests")
+        val query = firebaseManager.getQueryForRequestsCompletedBetweenDates(yesterdayTimeMillis.toDouble(), endTimeMillis.toDouble())
+        query.addListenerForSingleValueEvent(mValuesForDailySummaryListener)
+    }
+
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
