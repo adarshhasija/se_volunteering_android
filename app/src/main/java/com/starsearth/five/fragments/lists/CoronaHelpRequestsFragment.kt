@@ -27,13 +27,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.FirebaseStorage
 import com.starsearth.five.R
 import com.starsearth.five.activity.MainActivity
 import com.starsearth.five.adapter.CoronaHelpRequestsRecyclerViewAdapter
 import com.starsearth.five.application.StarsEarthApplication
 import com.starsearth.five.domain.HelpRequest
 import com.starsearth.five.domain.User
+import com.starsearth.five.domain.datastructures.RequestComparator
 import com.starsearth.five.fragments.SummaryFragment
 import com.starsearth.five.managers.FirebaseManager
 
@@ -62,8 +62,8 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
     private var mSelectedDateMillis : Long = -1
     private var mSpinnerArrayAdapter : ArrayAdapter<Any>? = null
     private var mCopyOfUser : User? = null
-    private var mHostPhoneNumber : String? = FirebaseAuth.getInstance().currentUser?.phoneNumber
     private var mSubLocalities : LinkedHashMap<String, Int> = LinkedHashMap()
+    private var mLastTimeStampForPagination : Long? = null
     private var listener: OnListFragmentInteractionListener? = null
 
     private var mMode : String? = null
@@ -75,83 +75,27 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             val map = dataSnapshot.value
             if (map != null) {
                 //First clear the list so we can repopulate
-                (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.removeAllItems()
-                for ((key, value) in mSubLocalities) {
-                    mSubLocalities[key] = 0 //Resettings all counts to 0
-                }
+                if (mLastTimeStampForPagination == null) (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.removeAllItems() //It means it is a first load, not a pagination load so remove all items
+                val helpRequestList : ArrayList<HelpRequest> = ArrayList()
                 for (entry in (map as HashMap<*, *>).entries) {
                     val key = entry.key as String
                     val value = entry.value as HashMap<String, Any>
                     var newHelpRequest = HelpRequest(key, value)
                     Log.d(TAG, "*******NEW REQUEST IS: "+newHelpRequest.uid)
-                    if (mCopyOfUser != null && mHostPhoneNumber != newHelpRequest.phone) {
-                        //Currently mCopyOfUser decides if we are in the right CONTEXT of viewing our own data only
-                        //We are in the context of viewing only our own requests and if the request was not created by us we should ignore it.
-                        Log.d(TAG, "*********PHONE NUMBER NOT A MATCH************")
-                        continue
-                    }
-                    if (mVolunteerOrg != null && mVolunteerOrg != newHelpRequest.volunteerOrganization) {
-                        //Volunteer org is a condition and the help request was not posted by a member of this volunteer org
-                        Log.d(TAG, "***********VOLUNTEER ORG NOT A MATCH************")
-                        continue
-                    }
-                    // Check if date is same as the selected date
-                    if (mMode == MODE_CHANGE_DATE && !isDateMatching(newHelpRequest.timestamp)) {
-                        Log.d("TAG", "********DATE NOT MATCHING************")
-                        continue
-                    }
-                    Log.d(TAG, "*********SUBLOCALITY of new request: " + newHelpRequest.address?.subLocality)
-                    // Keep a record of the admin area. Will be needed to pupulate the dropdown
-                    newHelpRequest?.address?.subLocality?.let {
-                        var currentCount : Int = mSubLocalities[it] ?: 0
-                        currentCount = currentCount + 1
-                        mSubLocalities.put(it, currentCount)
-                    }
-
-
-                    if (mSelectedSubLocality == null) {
-                        mSelectedSubLocality = newHelpRequest.address.subLocality
-                    } //If it has no value, we will give it the first value
-                    if (mSelectedSubLocality != newHelpRequest.address.subLocality) {
-                        Log.d("TAG", "********NOT SAME LOCALITY************"+mSelectedSubLocality)
-                        //Not the same locality. We do not want to save the HelpRequest in a local data structure
-                        continue
-                    }
-
+                    helpRequestList.add(newHelpRequest)
                     isListEmpty = false
-                    (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.addItem(newHelpRequest)
-                    Log.d(TAG, "***********NEW HELP REQUEST ADDED TO LIST: "+newHelpRequest)
                 }
+                Collections.sort(helpRequestList, RequestComparator())
+                (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.addItems(helpRequestList)
                 (view?.list?.adapter as? CoronaHelpRequestsRecyclerViewAdapter)?.notifyDataSetChanged()
-                view?.list?.layoutManager?.scrollToPosition(0)
-                if (isListEmpty) {
-                    list?.visibility = View.GONE
-                    tvEmptyList?.visibility = View.VISIBLE
-                    getLastLocation() //As we do not have any requests to display, just use the user's default location
-                }
-                else {
+                if (mLastTimeStampForPagination == null) view?.list?.layoutManager?.scrollToPosition(0) //It means its the first load. So we can scroll to the top
+                if (isListEmpty == false) {
+                    mLastTimeStampForPagination = helpRequestList.last().timestampCompletion
                     list?.visibility = View.VISIBLE
                     tvEmptyList?.visibility = View.GONE
                 }
 
             }
-            else {
-                list?.visibility = View.GONE
-                tvEmptyList?.visibility = View.VISIBLE
-                getLastLocation() //As we do not have any requests to display, just use the user's default location
-            }
-
-            mSpinnerArrayAdapter?.clear()
-            var indexOfSelected = -1
-            for ((key, value) in mSubLocalities) {
-                println("$key = $value")
-                val str = key + "(" + value + ")"
-                mSpinnerArrayAdapter?.add(str)
-                indexOfSelected++
-                Log.d(TAG, "*******SELECTED SUBLOCALITY IS: "+mSelectedSubLocality)
-                if (key == mSelectedSubLocality) spinnerLocality?.setSelection(indexOfSelected) //The selected sub locality does not change. Therefore we need to find its position in the list and set it as selected
-            }
-            mSpinnerArrayAdapter?.notifyDataSetChanged()
         }
 
         override fun onCancelled(p0: DatabaseError) {
@@ -177,10 +121,12 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                     postalCodes.put(newHelpRequest.address?.postalCode, true)
                 }
                 val user = (activity?.application as? StarsEarthApplication)?.mUser
-                val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
+                val date = (activity as? MainActivity)?.convertDateToIST(Date(Calendar.getInstance().timeInMillis))
+                val time = (activity as? MainActivity)?.convertTimeToIST(Date(Calendar.getInstance().timeInMillis))
                 val map = HashMap<String, Any>()
                 user?.let { map.put(SummaryFragment.ARG_USER, it) }
-                dateTime?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE_TIME, it) }
+                date?.let { map.put(SummaryFragment.ARG_FORMATTED_DATE, it) }
+                time?.let { map.put(SummaryFragment.ARG_FORMATTED_TIME, it) }
                 map.put(SummaryFragment.ARG_COMPLETED, numberComplete)
                 map.put(SummaryFragment.ARG_NUM_VOLUNTEERS, volunteers.size)
                 map.put(SummaryFragment.ARG_NUM_AREAS, postalCodes.size)
@@ -321,7 +267,8 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                             //dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
                             btnDate?.text = dateFormat.format(cal2.time)
                             Log.d(TAG, "*******DATE PICKER*************")
-                            mSelectedAdminArea?.let { loadHelpRequests(it) } //Need to reload the list for the same address to get entries for the new date
+                            loadHelpRequestsForToday(mSelectedDateMillis)
+                            //mSelectedAdminArea?.let { loadHelpRequests(it) } //Need to reload the list for the same address to get entries for the new date
                         }, year, month, day);
                 picker.show();
             }
@@ -334,7 +281,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             }
             ivReport?.setOnClickListener {
                 llPleaseWait?.visibility = View.VISIBLE
-                loadHelpRequestsForDailySummary(Calendar.getInstance().timeInMillis)
+                loadHelpRequestsForDailySummary(mSelectedDateMillis)
               /*  val user = (activity?.application as? StarsEarthApplication)?.mUser
                 val dateTime = (activity as? MainActivity)?.convertDateTimeToIST(Date(Calendar.getInstance().timeInMillis))
                 val map = HashMap<String, Any>()
@@ -383,11 +330,26 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             }
         }
 
+        list?.addOnScrollListener(object : RecyclerView.OnScrollListener(){
 
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                val layoutManager = (view.list as RecyclerView).layoutManager as LinearLayoutManager
+
+                if(layoutManager.findLastVisibleItemPosition() == layoutManager.itemCount-1 && !recyclerView.canScrollVertically(1)){
+                    // We have reached the end of the recycler view.
+                    llPleaseWait?.visibility = View.VISIBLE
+                    Log.d("TAG", "*********** PAGINATION POINT DETECTED *************")
+                    loadHelpRequestsForToday(mSelectedDateMillis)
+                }
+
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
         list?.visibility = View.GONE
 
         llPleaseWait?.visibility = View.VISIBLE
-        loadHelpRequestsForToday(Calendar.getInstance().timeInMillis)
+        loadHelpRequestsForToday(mSelectedDateMillis)
       /*  if (mSelectedSubLocality == null) {
             getLastLocation()
         }
@@ -422,31 +384,60 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
     }
 
     fun loadHelpRequestsForToday(todayMillis: Long) {
-        val calYesterday = Calendar.getInstance()
-        calYesterday.timeInMillis = todayMillis
-        calYesterday.add(Calendar.DATE, -1)
-        val yesterdayTimeMillis = calYesterday.timeInMillis
-        val calTomorrow = Calendar.getInstance()
-        calTomorrow.timeInMillis = todayMillis
-        calTomorrow.add(Calendar.DATE, 1)
-        val endTimeMillis = calTomorrow.timeInMillis
+        val calToday = Calendar.getInstance()
+        calToday.timeInMillis = todayMillis
+        calToday.set(Calendar.HOUR, 0)
+        calToday.set(Calendar.MINUTE, 0)
+        calToday.set(Calendar.SECOND, 0)
+        calToday.set(Calendar.MILLISECOND, 0)
+        val todayTimeMillis = calToday.timeInMillis
         val firebaseManager = FirebaseManager("requests")
-        val query = firebaseManager.getQueryForRequestsCompletedBetweenDates(yesterdayTimeMillis.toDouble(), endTimeMillis.toDouble())
-        query.addListenerForSingleValueEvent(mHelpRequestsListener)
+
+        if (mLastTimeStampForPagination != null) {
+            //This becomes our start time
+            Log.d(TAG, "*********** PAGINATED *************")
+            val tsMinusOneMS = Calendar.getInstance()
+            tsMinusOneMS.timeInMillis = mLastTimeStampForPagination!!
+            tsMinusOneMS.add(Calendar.MILLISECOND, -1) //We add -1 so that we do not get a repeat of the last time in the list
+            val query = firebaseManager.getQueryForRequestsCompletedBetweenDatesWithPagination(todayTimeMillis, tsMinusOneMS.timeInMillis)
+            query.addListenerForSingleValueEvent(mHelpRequestsListener)
+        }
+        else {
+            //Take yerterday as our date
+            Log.d(TAG, "************** NOT PAGINATED ***************")
+            val calTomorrow = Calendar.getInstance()
+            calTomorrow.timeInMillis = todayMillis
+            calTomorrow.add(Calendar.DATE, 1)
+            calTomorrow.set(Calendar.HOUR, 0)
+            calTomorrow.set(Calendar.MINUTE, 0)
+            calTomorrow.set(Calendar.SECOND, 0)
+            calTomorrow.set(Calendar.MILLISECOND, 0)
+            val endTimeMillis = calTomorrow.timeInMillis
+
+            val query = firebaseManager.getQueryForRequestsCompletedBetweenDatesWithPagination(todayTimeMillis, endTimeMillis)
+            query.addListenerForSingleValueEvent(mHelpRequestsListener)
+        }
     }
 
     // We obtain all the help requests in the day but not to store them. We need them to just calculate values for the daily summary
     fun loadHelpRequestsForDailySummary(todayMillis: Long) {
-        val calYesterday = Calendar.getInstance()
-        calYesterday.timeInMillis = todayMillis
-        calYesterday.add(Calendar.DATE, -1)
-        val yesterdayTimeMillis = calYesterday.timeInMillis
+        val calToday = Calendar.getInstance()
+        calToday.timeInMillis = todayMillis
+        calToday.set(Calendar.HOUR, 0)
+        calToday.set(Calendar.MINUTE, 0)
+        calToday.set(Calendar.SECOND, 0)
+        calToday.set(Calendar.MILLISECOND, 0)
+        val yesterdayTimeMillis = calToday.timeInMillis
         val calTomorrow = Calendar.getInstance()
         calTomorrow.timeInMillis = todayMillis
         calTomorrow.add(Calendar.DATE, 1)
+        calTomorrow.set(Calendar.HOUR, 0)
+        calTomorrow.set(Calendar.MINUTE, 0)
+        calTomorrow.set(Calendar.SECOND, 0)
+        calTomorrow.set(Calendar.MILLISECOND, 0)
         val endTimeMillis = calTomorrow.timeInMillis
         val firebaseManager = FirebaseManager("requests")
-        val query = firebaseManager.getQueryForRequestsCompletedBetweenDates(yesterdayTimeMillis.toDouble(), endTimeMillis.toDouble())
+        val query = firebaseManager.getQueryForRequestsCompletedBetweenDates(yesterdayTimeMillis, endTimeMillis)
         query.addListenerForSingleValueEvent(mValuesForDailySummaryListener)
     }
 

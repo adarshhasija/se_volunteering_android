@@ -74,6 +74,10 @@ class CoronaHelpRequestsRecyclerViewAdapter(
         mValues.add(helpRequestItem)
     }
 
+    fun addItems(items: ArrayList<HelpRequest>) {
+        mValues.addAll(items)
+    }
+
     fun removeItem(helpRequestItem: HelpRequest) {
         mValues.remove(helpRequestItem)
     }

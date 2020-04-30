@@ -30,9 +30,17 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:text="SE Volunteer Network" />
         <TextView
-            android:id="@+id/tvDateTimeCurrent"
+            android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp" />
+        <TextView
+            android:id="@+id/tvTimeCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="5dp" />
 
         <TextView

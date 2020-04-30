@@ -207,8 +207,13 @@ public class FirebaseManager {
         return databaseReference.orderByChild("volunteer_organization").equalTo(volunteerOrg);
     }
 
-    // Search by volunteer org
-    public Query getQueryForRequestsCompletedBetweenDates(double startTimeMillis, double endTimeMillis) {
+
+    public Query getQueryForRequestsCompletedBetweenDatesWithPagination(long startTimeMillis, long endTimeMillis) {
+        Log.d("TAG", "************START IS: "+startTimeMillis);
+        return databaseReference.orderByChild("timestamp_completion").startAt(startTimeMillis).endAt(endTimeMillis).limitToLast(10);
+    }
+
+    public Query getQueryForRequestsCompletedBetweenDates(long startTimeMillis, long endTimeMillis) {
         return databaseReference.orderByChild("timestamp_completion").startAt(startTimeMillis).endAt(endTimeMillis);
     }
 
