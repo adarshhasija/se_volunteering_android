@@ -267,8 +267,8 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
                             //dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
                             btnDate?.text = dateFormat.format(cal2.time)
                             Log.d(TAG, "*******DATE PICKER*************")
+                            mLastTimeStampForPagination = null //We do this so that the list can be populated for the new date
                             loadHelpRequestsForToday(mSelectedDateMillis)
-                            //mSelectedAdminArea?.let { loadHelpRequests(it) } //Need to reload the list for the same address to get entries for the new date
                         }, year, month, day);
                 picker.show();
             }
