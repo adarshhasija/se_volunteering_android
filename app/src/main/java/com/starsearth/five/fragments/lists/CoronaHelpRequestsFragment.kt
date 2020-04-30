@@ -336,19 +336,29 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
 
                 val layoutManager = (view.list as RecyclerView).layoutManager as LinearLayoutManager
 
-                if(layoutManager.findLastVisibleItemPosition() == layoutManager.itemCount-1 && !recyclerView.canScrollVertically(1)){
+                if(recyclerView.canScrollVertically(-1) == false && dy != 0) { //dy != 0 means user was scrolling rather than the first load of the page happening
+                    // We have reached the end of the recycler view.
+                    Log.d("TAG", "*********** REFRESH POINT DETECTED *************")
+                    //llPleaseWait?.visibility = View.VISIBLE
+                    //mLastTimeStampForPagination = null
+                    //loadHelpRequestsForToday(mSelectedDateMillis)
+                }
+                else if(layoutManager.findLastVisibleItemPosition() == layoutManager.itemCount-1 && !recyclerView.canScrollVertically(1)){ //1 = down
                     // We have reached the end of the recycler view.
                     llPleaseWait?.visibility = View.VISIBLE
                     Log.d("TAG", "*********** PAGINATION POINT DETECTED *************")
+                    (activity?.application as StarsEarthApplication)?.analyticsManager?.sendAnalyticsForPagination()
                     loadHelpRequestsForToday(mSelectedDateMillis)
                 }
 
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
-        list?.visibility = View.GONE
 
+        list?.visibility = View.GONE
+        tvEmptyList?.visibility = View.VISIBLE
         llPleaseWait?.visibility = View.VISIBLE
+        mLastTimeStampForPagination = null
         loadHelpRequestsForToday(mSelectedDateMillis)
       /*  if (mSelectedSubLocality == null) {
             getLastLocation()
@@ -384,6 +394,12 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
     }
 
     fun loadHelpRequestsForToday(todayMillis: Long) {
+        var paginationLimit = 10
+        (activity?.application as StarsEarthApplication).getFirebaseRemoteConfigWrapper().paginationLimit?.let {
+            Log.d(TAG, "*******PAGINATION LIMIT IS: "+it)
+            paginationLimit = it.toInt()
+        }
+
         val calToday = Calendar.getInstance()
         calToday.timeInMillis = todayMillis
         calToday.set(Calendar.HOUR, 0)
@@ -399,7 +415,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             val tsMinusOneMS = Calendar.getInstance()
             tsMinusOneMS.timeInMillis = mLastTimeStampForPagination!!
             tsMinusOneMS.add(Calendar.MILLISECOND, -1) //We add -1 so that we do not get a repeat of the last time in the list
-            val query = firebaseManager.getQueryForRequestsCompletedBetweenDatesWithPagination(todayTimeMillis, tsMinusOneMS.timeInMillis)
+            val query = firebaseManager.getQueryForRequestsCompletedBetweenDatesWithPagination(todayTimeMillis, tsMinusOneMS.timeInMillis, paginationLimit)
             query.addListenerForSingleValueEvent(mHelpRequestsListener)
         }
         else {
@@ -414,7 +430,7 @@ class CoronaHelpRequestsFragment : Fragment(), AdapterView.OnItemSelectedListene
             calTomorrow.set(Calendar.MILLISECOND, 0)
             val endTimeMillis = calTomorrow.timeInMillis
 
-            val query = firebaseManager.getQueryForRequestsCompletedBetweenDatesWithPagination(todayTimeMillis, endTimeMillis)
+            val query = firebaseManager.getQueryForRequestsCompletedBetweenDatesWithPagination(todayTimeMillis, endTimeMillis, paginationLimit)
             query.addListenerForSingleValueEvent(mHelpRequestsListener)
         }
     }

@@ -25,6 +25,10 @@
         <key>volunteer_network_label</key>
         <value>Volunteer Network</value>
     </entry>
+    <entry>
+        <key>requests_pagination_limit</key>
+        <value>10</value>
+    </entry>
 
 </defaultsMap>
     <!-- END xml_defaults -->

@@ -265,5 +265,10 @@ class AnalyticsManager(private val mContext: Context) {
         logActionEvent("se1_advertisement_event", bundle)
     }
 
+    fun sendAnalyticsForPagination() {
+        val bundle = Bundle()
+        logActionEvent("se5_pagination", bundle)
+    }
+
 
 }

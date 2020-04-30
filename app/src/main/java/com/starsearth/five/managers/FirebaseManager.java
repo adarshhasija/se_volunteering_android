@@ -208,9 +208,8 @@ public class FirebaseManager {
     }
 
 
-    public Query getQueryForRequestsCompletedBetweenDatesWithPagination(long startTimeMillis, long endTimeMillis) {
-        Log.d("TAG", "************START IS: "+startTimeMillis);
-        return databaseReference.orderByChild("timestamp_completion").startAt(startTimeMillis).endAt(endTimeMillis).limitToLast(10);
+    public Query getQueryForRequestsCompletedBetweenDatesWithPagination(long startTimeMillis, long endTimeMillis, int paginationLimit) {
+        return databaseReference.orderByChild("timestamp_completion").startAt(startTimeMillis).endAt(endTimeMillis).limitToLast(paginationLimit);
     }
 
     public Query getQueryForRequestsCompletedBetweenDates(long startTimeMillis, long endTimeMillis) {

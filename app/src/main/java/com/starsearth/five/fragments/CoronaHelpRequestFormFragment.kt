@@ -153,7 +153,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                 llFood?.setBackgroundColor(Color.YELLOW)
             }
             tvLocationLbl?.visibility = View.VISIBLE
-            tvSublocality?.text = mHelpRequest!!.address.addressLine //+ "\n" + mHelpRequest!!.address.locality + "\n" + mHelpRequest!!.address.adminArea + "\n" + mHelpRequest!!.address.countryName + "\n" + mHelpRequest!!.address.postalCode
+            tvSublocality?.text = mHelpRequest!!.address?.addressLine //+ "\n" + mHelpRequest!!.address.locality + "\n" + mHelpRequest!!.address.adminArea + "\n" + mHelpRequest!!.address.countryName + "\n" + mHelpRequest!!.address.postalCode
             tvSublocality?.visibility = View.VISIBLE
             //etName?.visibility = View.GONE
             //tvNameLabel?.visibility = View.VISIBLE
@@ -623,10 +623,10 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                     }
             childUpdates["requests/" + key + "/completed_user_phone"] =
                     if ((activity?.application as? StarsEarthApplication)?.mUser != null) {
-                        ((activity?.application as? StarsEarthApplication)?.mUser as User).uid
+                        ((activity?.application as? StarsEarthApplication)?.mUser as User).phone
                     }
-                    else if (FirebaseAuth.getInstance().currentUser?.uid != null) {
-                        FirebaseAuth.getInstance().currentUser!!.uid
+                    else if (FirebaseAuth.getInstance().currentUser?.phoneNumber != null) {
+                        FirebaseAuth.getInstance().currentUser!!.phoneNumber!!
                     }
                     else {
                         ""
