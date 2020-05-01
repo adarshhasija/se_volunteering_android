@@ -143,11 +143,11 @@ class MapsActivity :
         }
 
         // Initialize the SDK
-        val apiKey = "AIzaSyBQcoAuwEbU_RsV3064XvKwpvD-xvF8RCM"
+    /*    val apiKey = "AIzaSyBQcoAuwEbU_RsV3064XvKwpvD-xvF8RCM"
         Places.initialize(getApplicationContext(), apiKey)
 
         // Create a new Places client instance
-        val placesClient = Places.createClient(this)
+        val placesClient = Places.createClient(this)    */ //Temporarily removing this because of security issues
 
         // Initialize the AutocompleteSupportFragment.
         //val autocompleteFragment = getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
