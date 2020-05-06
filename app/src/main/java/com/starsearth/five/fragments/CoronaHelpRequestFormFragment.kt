@@ -645,7 +645,7 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                 btnComplete?.visibility = View.GONE
                 btnCancel?.visibility = View.GONE
                 llLogoTitle?.visibility = View.VISIBLE
-                (activity?.application as StarsEarthApplication).getFirebaseRemoteConfigWrapper().volunteerNetworkName?.let {
+                (activity?.application as? StarsEarthApplication)?.getFirebaseRemoteConfigWrapper()?.volunteerNetworkName?.let {
                     tvVolunteerNetworkLbl?.text = it
                 }
                 llDeliveryStatus?.visibility = View.VISIBLE //We do not want to exit once the save is complete. We will just show that the delivery successfully completed
@@ -675,24 +675,24 @@ class CoronaHelpRequestFormFragment : Fragment(), AdapterView.OnItemSelectedList
                 //listener?.requestCompleted()
             }.addOnFailureListener {
                 llPleaseWait?.visibility = View.GONE
-                val alertDialog2 = (activity?.application as StarsEarthApplication)?.createAlertDialog(mContext)
-                alertDialog2.setTitle("Error")
-                alertDialog2.setMessage("Failed to save. Please try again")
-                alertDialog2.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
+                val alertDialog2 = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                alertDialog2?.setTitle("Error")
+                alertDialog2?.setMessage("Failed to save. Please try again")
+                alertDialog2?.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
                     dialog.dismiss()
                 })
-                alertDialog2.show()
+                alertDialog2?.show()
             }
         }
                 .addOnFailureListener {
                     llPleaseWait?.visibility = View.GONE
-                    val alertDialog2 = (activity?.application as StarsEarthApplication)?.createAlertDialog(mContext)
-                    alertDialog2.setTitle("Error")
-                    alertDialog2.setMessage("Failed to save. Please try again")
-                    alertDialog2.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
+                    val alertDialog2 = (activity?.application as? StarsEarthApplication)?.createAlertDialog(mContext)
+                    alertDialog2?.setTitle("Error")
+                    alertDialog2?.setMessage("Failed to save. Please try again")
+                    alertDialog2?.setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
                         dialog.dismiss()
                     })
-                    alertDialog2.show()
+                    alertDialog2?.show()
                 }
 
 
